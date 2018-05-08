@@ -1,0 +1,24 @@
+$gray-deep: #525a66;
+
+.el-header {
+  padding: 0;
+  color: $gray-deep;
+  text-align: center;
+  line-height: 60px;
+}
+
+.el-main {
+  background-color: #fff;
+  color: $gray-deep;
+  height: 100%;
+}
+
+body > .el-container {
+  margin-bottom: 40px;
+}
+.el-footer {
+  color: $gray-deep;
+  text-align: center;
+  line-height: 60px;
+  font-size: 14px;
+}

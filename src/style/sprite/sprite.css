@@ -1,0 +1,6 @@
+.ico-weibo { background-image: url(~sprite.png); background-size: 60px 331px ;width: 26px; height: 26px; background-position: 0px 0px; background-repeat: no-repeat;}
+.ico-weixin { background-image: url(~sprite.png); background-size: 60px 331px ;width: 26px; height: 26px; background-position: 0px -36px; background-repeat: no-repeat;}
+.ico-edit-selected { background-image: url(~sprite.png); background-size: 60px 331px ;width: 56px; height: 56px; background-position: 0px -72px; background-repeat: no-repeat;}
+.ico-edit { background-image: url(~sprite.png); background-size: 60px 331px ;width: 56px; height: 56px; background-position: 0px -138px; background-repeat: no-repeat;}
+.ico-delete { background-image: url(~sprite.png); background-size: 60px 331px ;width: 54px; height: 57px; background-position: 0px -204px; background-repeat: no-repeat;}
+.ico-select { background-image: url(~sprite.png); background-size: 60px 331px ;width: 60px; height: 60px; background-position: 0px -271px; background-repeat: no-repeat;}

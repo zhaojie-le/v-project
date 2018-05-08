@@ -1,0 +1,125 @@
+// 列表请求参数表格
+.content-line{
+  border-top: 1px solid #b2b8c2;
+}
+p{
+  font-weight: bolder;
+  line-height: 40px;
+  font-size: 14px;
+}
+.table {
+  display: table;
+  width: 600px;
+  margin: 0 20px;
+  border: 1px solid #b2b8c2;
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  input{
+    background: none;
+    height: 25px;
+    line-height: 25px;
+  }
+  textarea{
+    width: 100%;
+    display: table-cell;
+    // vertical-align: middle;
+    box-sizing: border-box;
+  }
+}
+.bg{
+  background: #fff;
+}
+.thead{
+  padding-left: 20px;
+  background: #F2F5F9;
+  height: 32px;
+}
+.row {
+  display: table-row;
+  border: 1px solid #b2b8c2;
+  height: 32px;
+  position: relative;
+}
+.row-delete{
+  display: inline-block;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  // left: -25px;
+  right: -30px;
+  top: 7px;
+  cursor: pointer;
+  // background: url("../../../assets/icons/delete.png");
+  // background: url("data:image/png;base64,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");
+  // background-size: cover;
+}
+.rl{
+  position: relative;
+}
+.cell {
+  width: 25%;
+  display: table-cell;
+  font-size: 14px;
+  color:#525a66;
+  vertical-align: middle;
+  text-align: left;
+  padding-left: 10px;
+  word-wrap: break-word;
+  border: 1px solid #ebeef5;
+  input{
+    width: 200px;
+  }
+  .input-name{
+    width: 150px;
+  }
+}
+.cell-datatype{
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 8px;
+    height: 8px;
+    border-left: 1px solid #7a8899;
+    border-bottom: 1px solid #7a8899;
+    transform:rotate(-45deg);
+    z-index: 10;
+  }
+}
+.arrow{
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  border-left: 1px solid #7a8899;
+  border-bottom: 1px solid #7a8899;
+  transform:rotate(-45deg);
+  z-index: 10;
+}
+.s-dtattype{
+  height: 20px;
+  line-height: 20px;
+  background: rgb(166, 202, 238);
+  margin: 3px;
+  cursor: pointer;
+  color: #fff;
+  padding-left: 15px;
+}
+.s-selected{
+  background: rgb(166, 202, 238);;
+}
+.content-btn{
+  display: block;
+  margin: 10px 0 10px 20px;
+  height: 20px;
+  width: 70px;
+}
+.special-bg{
+  background: #F2F5F9;
+  // cursor: pointer;
+}
