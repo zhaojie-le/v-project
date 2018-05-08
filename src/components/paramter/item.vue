@@ -65,7 +65,7 @@
       </template>
     </div>
   </div>
-  <new-object-dialog :show="showObjDialog" v-if="showObjDialog"></new-object-dialog>
+  <new-object-dialog :show="showObjDialog" v-if="showObjDialog" @closed="closeDialog"></new-object-dialog>
 </div>
 </template>
 <script>
@@ -150,6 +150,9 @@ export default {
     ...mapActions('list', [
       'objectList'
     ]),
+    closeDialog () {
+      this.showObjDialog = false
+    },
     // 点击新建对象icon
     newIcon () {
       this.showObjDialog = true

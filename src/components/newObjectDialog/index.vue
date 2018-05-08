@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="收货地址" :visible.sync="dialogShow">
+  <el-dialog title="新建对象" :visible.sync="dialogShow">
     <el-form :model="form" label-width="80px" size="mini">
       <el-form-item label="实体名称" :label-width="formLabelWidth">
         <el-input v-model="form.name" auto-complete="off" size="mini"></el-input>
@@ -16,7 +16,7 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button>取 消</el-button>
+      <el-button @click="closeDialog">取 消</el-button>
       <el-button type="primary">下一步</el-button>
     </div>
   </el-dialog>
@@ -44,6 +44,15 @@ export default {
   created () {
     this.clusterList = lstorage.get('infoData') ? lstorage.get('infoData').serverClusterList : null
     this.dialogShow = this.show
+  },
+  methods: {
+    closeDialog () {
+      this.dialogShow = false
+      this.$emit('closed')
+    }
+  },
+  watch: {
+
   }
 }
 </script>
