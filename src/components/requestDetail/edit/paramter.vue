@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import Paramter from '../../paramter/index'
+// import Paramter from '../../paramter/index'
 import Arguments from '../../paramter/arguments'
 export default {
   props: {
@@ -39,7 +39,7 @@ export default {
     }
   },
   components: {
-    Paramter,
+    // Paramter,
     Arguments
   },
   watch: {

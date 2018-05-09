@@ -13,7 +13,6 @@ export default {
   },
   // 创建新的集群
   async newCluster ({ dispatch, commit }, { parame, callback }) {
-    alert(0)
     let url = API.NEWCLUSTER
     let method = 'POST'
     let data = await dispatch('fetchData', { url, method, parame }, { root: true })

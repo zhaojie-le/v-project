@@ -7,7 +7,7 @@
     <el-container>
       <el-main style="padding: 20px 50px">
         <!-- 接口详情模块 -->
-        <request-content :requestid="parseInt(requestId)"></request-content>
+        <request-content :requestid="parseInt(id)"></request-content>
       </el-main>
     </el-container>
   </el-main>
@@ -15,17 +15,19 @@
 <script>
 import { Message } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
+import { lstorage } from '../utils/storage'
 import RequestContent from '../components/requestDetail/index'
 export default {
   data () {
     return {
       isDetail: 1,             // 展示接口列表或对象列表
-      requestId: 0             // 接口id
+      id: 0             // 接口id
     }
   },
   created () {
-    this.requestId = this.$route.params.requestId || ''
-    this.getRequestDetail(this.requestid)
+    this.id = this.$route.params.id || lstorage.get('id')
+    this.getRequestDetail(this.id)
+    lstorage.set('id', this.id)
   },
   computed: {
     ...mapState('detail', [
@@ -43,7 +45,7 @@ export default {
      */
     getRequestDetail (id) {
       let parame = {
-        requestId: id
+        id: id
       }
       let callback = (data) => {
         if (data) {

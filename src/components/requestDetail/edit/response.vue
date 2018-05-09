@@ -1,17 +1,11 @@
 <template>
   <div class="content-item">
     <p class="title-head">返回参数</p>
-    <paramter
-      style="padding: 0 20px" 
-      :is-generic="1"  
-      v-model="responseParameterList" 
-      :list="responseParameterList"
-      >
-    </paramter>
-  </div> 
+    <div>返回参数</div>
+  </div>
 </template>
 <script>
-import Paramter from '../../paramter/index'
+// import Paramter from '../../paramter/index'
 export default {
   props: {
     rlist: {
@@ -36,7 +30,7 @@ export default {
     }
   },
   components: {
-    Paramter
+    // Paramter
   },
   watch: {
     responseParameterList: {

@@ -5,7 +5,7 @@
       <el-breadcrumb-item>列表页</el-breadcrumb-item>
       <el-button type="primary" size="small" style="float: right"><router-link :to="'new'">新建接口</router-link></el-button>
     </el-breadcrumb>
-    <search :list="infoData.serverClusterList" v-if="infoData"></search>
+    <search :list="clusterList" v-if="clusterList"></search>
     <product-list></product-list>
   </el-main>
 </template>
@@ -17,29 +17,27 @@ import ProductList from '../components/requestList/productList'
 import { mapState, mapActions } from 'vuex'
 export default {
   created () {
-    this.getInfoData()
+    this.clusterListAjax()
   },
   computed: {
     ...mapState('list', [
-      'infoData'
+      'clusterList'
     ])
   },
   methods: {
     ...mapActions('list', [
-      'getInfo'
+      'getInfo',
+      'getClusterList'
     ]),
-    storageInfo (mes) {
-      lstorage.set('infoData', mes)
-    },
-    getInfoData () {
-      let parame = {}
+    clusterListAjax () {
+      let parame = {name: ''}
       let callback = (data) => {
         if (data.code === 0) {
-          this.storageInfo(data.data)
-          console.log('ll', data.data.serverClusterList)
+          console.log('ll', data.data.clusterList)
+          lstorage.set('clusterList', data.data.clusterList)
         }
       }
-      this.getInfo({parame, callback})
+      this.getClusterList({parame, callback})
     }
   },
   components: {

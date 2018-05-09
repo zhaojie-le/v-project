@@ -77,9 +77,8 @@ export default {
      * @param {object} item 接口信息
      */
     toDetail (item) {
-      let requestId = item.id
       // 跳转详情页
-      this.$router.push({name: 'detail', params: { requestId: requestId }})
+      this.$router.push({name: 'detail', params: { id: item.id }})
     },
     handleCurrentChange (val) {
       this.toDetail(val)

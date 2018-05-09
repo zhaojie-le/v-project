@@ -14,17 +14,19 @@
 </template>
 <script>
 import { Message } from 'element-ui'
+import { lstorage } from '../utils/storage'
 import { mapActions, mapState } from 'vuex'
 import ObjectContent from '../components/objectDetail/index'
 export default {
   data () {
     return {
-      objectId: ''
+      id: ''
     }
   },
   created () {
-    this.objectId = this.$route.params.objectId || ''
-    this.getObjectDetail(this.objectId)
+    this.id = this.$route.params.id || lstorage.get('id')
+    lstorage.set('id', this.id)
+    this.getObjectDetail(this.id)
   },
   computed: {
     ...mapState('detail', [

@@ -5,7 +5,7 @@
       <el-breadcrumb-item>对象列表页</el-breadcrumb-item>
       <el-button type="primary" size="small" style="float: right"><router-link :to="'newobject'">新建对象</router-link></el-button>
     </el-breadcrumb>
-    <search :list="infoData.serverClusterList" v-if="infoData"></search>
+    <search :list="clusterList" v-if="clusterList"></search>
     <object-list :object-data="objData" v-if="objData"></object-list>
   </el-main>
 </template>
@@ -18,7 +18,8 @@ import { mapState, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      infoData: null
+      infoData: null,
+      clusterList: null
     }
   },
   computed: {
@@ -27,7 +28,7 @@ export default {
     ])
   },
   created () {
-    this.infoData = lstorage.get('infoData') ? lstorage.get('infoData') : null
+    this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
     console.log('objjjj', this.infoData)
     this.getObject()
   },

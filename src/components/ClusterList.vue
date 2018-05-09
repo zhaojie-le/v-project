@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     ...mapActions('list', [
-      'clusterList'
+      'getClusterList'
     ]),
     getCluster () {
       let parame = {}
@@ -70,7 +70,7 @@ export default {
           this.list = data.data.clusterList
         }
       }
-      this.clusterList({parame, callback})
+      this.getClusterList({parame, callback})
     }
   }
 }

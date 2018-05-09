@@ -14,7 +14,7 @@
             :key="item.id"
             :label="item.name"
             :value="item.id"
-            v-for="item in infoData.serverClusterlist">
+            v-for="item in clusterList">
           </el-option>
         </el-select>
       </el-form-item>
@@ -47,7 +47,7 @@ export default {
         projectName: '',
         clusterId: ''
       },
-      infoData: null,
+      clusterList: null,
       rules: {
         clusterId: [
           { required: true, message: '请选择所属集群', trigger: 'change' }
@@ -59,7 +59,7 @@ export default {
     }
   },
   created () {
-    this.infoData = lstorage.get('infoData') ? lstorage.get('infoData') : null
+    this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
   },
   methods: {
     ...mapActions('detail', [

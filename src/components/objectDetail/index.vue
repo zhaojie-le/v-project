@@ -38,11 +38,12 @@ export default {
   },
   data () {
     return {
-      edit: true
+      edit: true,
+      clusterList: null
     }
   },
   created () {
-    this.infoData = lstorage.get('infoData') ? lstorage.get('infoData') : null
+    this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
   },
   computed: {
     ...mapState('detail', [

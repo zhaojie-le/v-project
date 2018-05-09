@@ -28,15 +28,23 @@
             v-model="form.header"
             ></el-input>
         </el-form-item>
+        <el-form-item label="集群模版" prop="responseTemplate">
+          <el-input
+            type="textarea"
+            :rows="2"
+            placeholder="如：{code:0,data:{},message:''}"
+            v-model="form.responseTemplate"
+            ></el-input>
+        </el-form-item>
       </el-form>
-      <response :is-generic="1" v-model="responseTemplate"></response>
+      <!-- <response :is-generic="1" v-model="responseTemplate"></response> -->
       <el-button type="primary" size="medium" style="float: right"  @click="submitForm('form')">立即创建</el-button>
     </div>
   </el-main>
 </template>
 
 <script>
-import Response from './paramter/index'
+// import Response from './paramter/index'
 import { mapActions } from 'vuex'
 export default {
   data () {
@@ -46,15 +54,13 @@ export default {
         host: '',
         name: '',
         header: '',
-        cookie: ''
+        cookie: '',
+        responseTemplate: ''
       },
       responseTemplate: null,
       rules: {
         name: [
           { required: true, message: '请输入集群名称', trigger: 'change' }
-        ],
-        host: [
-          { required: true, message: '请输入集群域名', trigger: 'change' }
         ]
       }
     }
@@ -63,7 +69,7 @@ export default {
     ...mapActions('list', [
       'getInfo'
     ]),
-    ...mapActions('new', [
+    ...mapActions('create', [
       'newCluster'
     ]),
     submitForm (formName) {
@@ -77,17 +83,18 @@ export default {
       })
     },
     submitAjax () {
-      let parame = Object.assign({}, this.form, this.responseTemplate)
+      let parame = this.form
       let callback = (data) => {
         if (data.code === 0) {
-          // 提交成功
+          // 提交成功-回到集群列表页
+          this.$router.push({name: 'clulist'})
         }
       }
       this.newCluster({parame, callback})
     }
   },
   components: {
-    Response
+    // Response
   }
 }
 </script>

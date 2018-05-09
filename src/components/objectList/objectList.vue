@@ -87,9 +87,8 @@ export default {
      * @param {object} item 接口信息
      */
     toDetail (item) {
-      console.log('iii', item.id)
       // 跳转详情页
-      this.$router.push({name: 'objdel', params: { objectId: item.id }})
+      this.$router.push({name: 'objdel', params: { id: item.id }})
     },
     handleCurrentChange (val) {
       this.toDetail(val)

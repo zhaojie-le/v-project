@@ -1,8 +1,9 @@
-var hoss = 'http://yapi.demo.qunar.com/mock/7178'
+// var hoss = 'http://yapi.demo.qunar.com/mock/7178'
+var hoss = 'http://localhost:3000'
 
 module.exports = {
   // 页面初始信息
-  INFO: hoss + '/info',
+  INFO: hoss + '/cluster/list',
   // 页面字段类型接口
   DATATYPE: hoss + '/dataType/list',
   // 列表页－接口列表

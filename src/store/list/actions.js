@@ -47,11 +47,12 @@ export default {
     }
   },
   // 请求集群列表
-  async clusterList ({ dispatch, commit }, { parame, callback }) {
+  async getClusterList ({ dispatch, commit }, { parame, callback }) {
     let url = API.CLUSTERLIST
     let method = 'GET'
     let data = await dispatch('fetchData', { url, method, parame }, { root: true })
     if (data) {
+      commit('clusterList', data)
       callback && callback(data)
     }
   }

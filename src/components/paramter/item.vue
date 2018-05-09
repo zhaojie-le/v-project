@@ -12,12 +12,12 @@
           <el-col :span="5">
             <div class="grid-content">
               <!-- <el-input size="mini" placeholder="类型" v-model="item.dataType"></el-input> -->
-              <el-select  v-model="item.dataType" placeholder="选择字段类型" filterable size="mini" style="width: 100%">
+              <el-select  v-model="item.dataType" placeholder="选择字段类型" filterable size="mini" style="width: 100%" v-if="dataTypeList">
                 <el-option
                   :key="item.name"
                   :label="item.name"
                   :value="item.name"
-                  v-for="item in type">
+                  v-for="item in dataTypeList">
                 </el-option>
               </el-select>
             </div>
@@ -27,12 +27,12 @@
               <!-- 正常参数 -->
               <el-input size="mini" placeholder="mock规则" v-model="item.restriction" v-if="item.dataType !== 'object'"></el-input>
             <!-- 关联对象 -->
-              <el-select  v-model="item.refEntityId" placeholder="关联对象" filterable size="mini" style="width: 94%" v-if="item.dataType === 'object' && objData">
+              <el-select  v-model="item.refEntityId" placeholder="关联对象" filterable size="mini" style="width: 94%" v-if="item.dataType === 'object' && clusterList">
                 <el-option
                   :key="item.id"
                   :label="item.name"
                   :value="item.id"
-                  v-for="item in objData.list">
+                  v-for="item in clusterList">
                 </el-option>
               </el-select>
               <el-tooltip effect="dark" content="新建对象" placement="bottom-start" v-show="item.dataType === 'object'" >
@@ -69,32 +69,33 @@
 </div>
 </template>
 <script>
-var type = [
-  {
-    name: 'string',
-    id: '1'
-  },
-  {
-    name: 'number',
-    id: '2'
-  },
-  {
-    name: 'boolean',
-    id: '3'
-  },
-  {
-    name: 'array',
-    id: '4'
-  },
-  {
-    name: 'object',
-    id: '5'
-  },
-  {
-    name: 'generic', // 范型
-    id: '9'
-  }
-]
+// var type = [
+//   {
+//     name: 'string',
+//     id: '1'
+//   },
+//   {
+//     name: 'number',
+//     id: '2'
+//   },
+//   {
+//     name: 'boolean',
+//     id: '3'
+//   },
+//   {
+//     name: 'array',
+//     id: '4'
+//   },
+//   {
+//     name: 'object',
+//     id: '5'
+//   },
+//   {
+//     name: 'generic', // 范型
+//     id: '9'
+//   }
+// ]
+import { Message } from 'element-ui'
 import NewObjectDialog from '../newObjectDialog/index'
 import { mapActions, mapState } from 'vuex'
 export default {
@@ -116,7 +117,7 @@ export default {
   },
   data () {
     return {
-      type: type,
+      // type: type,
       nitem: null,
       additem: {
         "dataType": "",
@@ -140,16 +141,36 @@ export default {
   created () {
     this.getObject()
     this.nitem = this.item
+    this.dataTypeAjax()
   },
   computed: {
     ...mapState('list', [
-      'objData'
+      'clusterList'
+    ]),
+    ...mapState('detail', [
+      'dataTypeList'
     ])
   },
   methods: {
     ...mapActions('list', [
       'objectList'
     ]),
+    ...mapActions('detail', [
+      'getDataType'
+    ]),
+    // 获取字段类型
+    dataTypeAjax () {
+      let parame = {
+        isGeneric: 0
+      }
+      let callback = (data) => {
+        if (data.code !==0) {
+          Message.warning(data.message)
+        }
+      }
+      this.getDataType({parame, callback})
+    },
+    // 关闭弹层
     closeDialog () {
       this.showObjDialog = false
     },

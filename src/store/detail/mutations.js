@@ -2,7 +2,7 @@
 export default {
   // 获取字段类型
   getDataType (state, val) {
-    state.dataTypeList = val.data.dataType
+    state.dataTypeList = val.data
   },
   // 获取接口数据
   getRequestMes (state, val) {

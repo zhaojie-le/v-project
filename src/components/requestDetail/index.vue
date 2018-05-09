@@ -5,22 +5,22 @@
     <template>
       <el-button type="primary" size="medium" style="float: right" v-if="edit" @click="editEvent">编辑</el-button>
       <el-button type="success" size="medium" style="float: right" v-if="!edit" @click="saveEvent">保存</el-button>
-      <r-message 
+      <r-message
         :edit="edit"
         :request-mes="requestMes"
-        :requestid="requestid" 
-        :server-cluster="infoData.serverClusterlist"
+        :requestid="requestid"
+        :server-cluster="clusterList"
         v-if="requestMes"
         >
       </r-message>
       <r-paramter
         :edit="edit"
-        :plist="requestMes.requestParameterList" 
+        :plist="requestMes.requestParameterList"
         v-if="requestMes"
         >
-      </r-paramter>                                                                                                                                                                                                                                                                                           
+      </r-paramter>
       <r-response
-        :edit="edit"  
+        :edit="edit"
         :rlist="requestMes.responseParameterList"
         v-if="requestMes"
         >
@@ -50,11 +50,11 @@ export default {
     return {
       edit: true,
       callback: 'callback',
-      infoData: null
+      clusterList: null
     }
   },
   created () {
-    this.infoData = lstorage.get('infoData') ? lstorage.get('infoData') : null
+    this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
   },
   computed: {
     ...mapState('detail', [

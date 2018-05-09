@@ -7,22 +7,22 @@
     <el-form :model="form" label-width="90px" size="mini" class="form-s" :rules="rules" ref="form">
       <el-form-item
         label="所属集群"
-        prop="serverClusterId"
+        prop="clusterId"
       >
-        <el-select  v-model="form.serverClusterId" placeholder="请选择对象所属集群" filterable size="mini" style="width: 100%">
+        <el-select  v-model="form.clusterId" placeholder="请选择对象所属集群" filterable size="mini" style="width: 100%" v-if="clusterList">
           <el-option
             :key="item.id"
             :label="item.name"
             :value="item.id"
-            v-for="item in infoData.serverClusterlist">
+            v-for="item in clusterList">
           </el-option>
         </el-select>
       </el-form-item>
       <el-form-item
         label="对象名称"
-        prop="objectName"
+        prop="name"
       >
-        <el-input v-model="form.objectName" placeholder="输入对象名称"></el-input>
+        <el-input v-model="form.name" placeholder="输入对象名称"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('form')" style="width: 420px">下一步</el-button>
@@ -39,22 +39,22 @@ export default {
   data () {
     return {
       form: {
-        objectName: '',
-        serverClusterId: ''
+        name: '',
+        clusterId: ''
       },
-      infoData: null,
+      clusterList: null,
       rules: {
-        serverClusterId: [
+        clusterId: [
           { required: true, message: '请选择集群', trigger: 'change' }
         ],
-        objectName: [
+        name: [
           { required: true, message: '对象名称不能为空', trigger: 'change' }
         ]
       }
     }
   },
   created () {
-    this.infoData = lstorage.get('infoData') ? lstorage.get('infoData') : null
+    this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
   },
   methods: {
     ...mapActions('detail', [

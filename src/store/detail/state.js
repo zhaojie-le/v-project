@@ -4,6 +4,7 @@ export default {
   requestMes: null,             // 接口详情，请求方式等
   requestEdit: null,            // 接口编辑时，发送的body
   objectEdit: null,             // 对象编辑时，发送的body
-  objectData: null              // 对象详情
+  objectData: null,             // 对象详情
+  dataTypeList: null            // 字段类型列表
 }
 
