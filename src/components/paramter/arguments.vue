@@ -1,19 +1,12 @@
 <template>
   <div class="table-wrap">
-    <!-- <items
-      :item="item"
-      v-for="(item, index) in nlist"
-      :key="index"
-      :index="index"
-      @delete="deleteChange"
-    ></items> -->
-    <items :list="nlist"></items>
-    <el-button size="mini" @click="addParamter" style="margin-top: 10px">添加参数</el-button>
+    <items :list="list" v-model="list" :edit="edit" :entity="entity"></items>
+    <el-button size="mini" @click="addParamter" style="margin-top: 10px" v-if="edit">添加参数</el-button>
   </div>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex'
 import Items from './item'
+import { mapActions, mapState } from 'vuex'
 export default {
   props: {
     list: {
@@ -33,14 +26,23 @@ export default {
           "values": ""
         }]
       }
+    },
+    edit: {
+      type: Boolean,
+      default: false
+    },
+    entity: {  // 是否是新建实体，新建实体时只是简单类型
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      nlist: this.list
+      // nlist: this.list
     }
   },
   created () {
+    console.log('argumentsssssssssss', this.list)
   },
   computed: {
     ...mapState('list', [
@@ -54,7 +56,7 @@ export default {
     // 子组件触发删除事件
     deleteChange (index) {
       console.log('index', index)
-      let nowArr = this.deleteArray(this.nlist, index)
+      let nowArr = this.deleteArray(this.list, index)
       console.log('arr', nowArr)
     },
     // 删除数组下标为inx的项
@@ -85,7 +87,7 @@ export default {
     },
     // 数组增加行
     addParamter () {
-      let nowArr = this.addArray(this.nlist)
+      let nowArr = this.addArray(this.list)
       console.log('nowArr', nowArr)
     },
     // 增加子节点按钮
@@ -115,6 +117,15 @@ export default {
   },
   components: {
     Items
+  },
+  watch: {
+    // nlist: {
+    //   handler: function (newVal, oldVal) {
+    //     this.$emit('input', this.nlist)
+    //     console.log('999999', this.nlist)
+    //   },
+    //   deep: true
+    // }
   }
 }
 </script>

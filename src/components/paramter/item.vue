@@ -6,28 +6,55 @@
         <el-row type="flex" justify="space-around" :class="[isItem ? 'row-item-bg':'row-bg']">
           <el-col :span="5">
             <div class="grid-content">
-              <el-input size="mini" placeholder="名称" v-model="item.identifier"></el-input>
+              <el-input size="mini" placeholder="名称" v-model="item.identifier" :disabled="!edit"></el-input>
             </div>
           </el-col>
           <el-col :span="5">
             <div class="grid-content">
               <!-- <el-input size="mini" placeholder="类型" v-model="item.dataType"></el-input> -->
-              <el-select  v-model="item.dataType" placeholder="选择字段类型" filterable size="mini" style="width: 100%" v-if="dataTypeList">
+              <el-select
+                :disabled="!edit"
+                v-model="item.dataType"
+                placeholder="选择字段类型"
+                filterable
+                size="mini"
+                style="width: 100%"
+                v-if="dataTypeList"
+              >
+              <div v-if="entity">
+                <el-option
+                  :key="item.name"
+                  :label="item.name"
+                  :value="item.name"
+                  :disabled="item.name ==='object' || item.name === 'array'"
+                  v-for="item in dataTypeList">
+                </el-option>
+              </div>
+              <div v-else>
                 <el-option
                   :key="item.name"
                   :label="item.name"
                   :value="item.name"
                   v-for="item in dataTypeList">
                 </el-option>
+              </div>
               </el-select>
             </div>
           </el-col>
           <el-col :span="5">
             <div class="grid-content">
               <!-- 正常参数 -->
-              <el-input size="mini" placeholder="mock规则" v-model="item.restriction" v-if="item.dataType !== 'object'"></el-input>
+              <el-input size="mini" placeholder="mock规则" v-model="item.restriction" v-if="item.dataType !== 'object'" :disabled="!edit"></el-input>
             <!-- 关联对象 -->
-              <el-select  v-model="item.refEntityId" placeholder="关联对象" filterable size="mini" style="width: 94%" v-if="item.dataType === 'object' && clusterList">
+              <el-select
+                v-model="item.id"
+                placeholder="关联对象"
+                filterable
+                size="mini"
+                style="width: 94%"
+                :disabled="!edit"
+                v-if="item.dataType === 'object' && clusterList"
+              >
                 <el-option
                   :key="item.id"
                   :label="item.name"
@@ -35,17 +62,17 @@
                   v-for="item in clusterList">
                 </el-option>
               </el-select>
-              <el-tooltip effect="dark" content="新建对象" placement="bottom-start" v-show="item.dataType === 'object'" >
+              <el-tooltip effect="dark" content="新建对象" placement="bottom-start" v-show="item.dataType === 'object' && edit" >
                 <i class="el-icon-circle-plus-outline icon-position" @click="newIcon"></i>
               </el-tooltip>
             </div>
           </el-col>
           <el-col :span="5">
             <div class="grid-content">
-              <el-input size="mini" placeholder="备注" v-model="item.remark"></el-input>
+              <el-input size="mini" placeholder="备注" v-model="item.remark" :disabled="!edit"></el-input>
             </div>
           </el-col>
-          <el-col :span="1" style="line-height: 28px">
+          <el-col :span="1" style="line-height: 28px" v-show="edit">
             <!-- 删除节点 -->
             <i class="el-icon-remove-outline" style="margin-right: 10px" @click="deleteClick(list, item, index)"></i>
             <!-- 复杂数据增加子节点按钮 -->
@@ -56,12 +83,13 @@
         </el-row>
       </div>
       <!-- 复杂类型 -->
-      <!-- <template v-if="item.refEntity">
+      <template v-if="item.refEntity">
         <items :list="item.refEntity.propertyList" :is-item="true"></items>
-      </template> -->
+      </template>
       <!-- 简单类型 -->
       <template v-if="item.refProperty">
-        <items :list="item.refProperty" :is-item="true"></items>
+        <!-- <items :list="item.refProperty" :is-item="true" :edit="edit"></items> -->
+        <obj-item :item="item.refProperty"></obj-item>
       </template>
     </div>
   </div>
@@ -96,8 +124,9 @@
 //   }
 // ]
 import { Message } from 'element-ui'
-import NewObjectDialog from '../newObjectDialog/index'
 import { mapActions, mapState } from 'vuex'
+import NewObjectDialog from '../newObjectDialog/index'
+import ObjItem from './objitem'
 export default {
   name: 'items',
   props: {
@@ -113,12 +142,19 @@ export default {
     },
     isGeneric: {
       type: Number
+    },
+    edit: {
+      type: Boolean,
+      default: false
+    },
+    entity: {  // 是否是新建实体，新建实体时只是简单类型
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
       // type: type,
-      nitem: null,
       additem: {
         "dataType": "",
         "dataTypeId": "",
@@ -140,7 +176,6 @@ export default {
   },
   created () {
     this.getObject()
-    this.nitem = this.item
     this.dataTypeAjax()
   },
   computed: {
@@ -148,6 +183,7 @@ export default {
       'clusterList'
     ]),
     ...mapState('detail', [
+      'objectP',
       'dataTypeList'
     ])
   },
@@ -156,7 +192,8 @@ export default {
       'objectList'
     ]),
     ...mapActions('detail', [
-      'getDataType'
+      'getDataType',
+      'resetObjectP'
     ]),
     // 获取字段类型
     dataTypeAjax () {
@@ -214,12 +251,14 @@ export default {
     }
   },
   components: {
+    ObjItem,
     NewObjectDialog
   },
   watch: {
-    item: {
+    list: {
       handler: function (newVal, oldVal) {
-        this.$emit('input', this.item)
+        // this.$emit('input', this.list)
+        this.resetObjectP(this.list)
       },
       deep: true
     }

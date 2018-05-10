@@ -91,9 +91,8 @@ export default {
       let callback = (data) => {
         if (data) {
           if (data.code === 0) {
-            let objectId = data.data.objectId
-            console.log('obj', objectId)
-            // this.$router.push({name: 'detail', params: { objectId: objectId }})
+            let id = data.data.id
+            this.$router.push({name: 'objdel', params: { id: id }})
           } else {
             Message.warning(data.msg)
           }

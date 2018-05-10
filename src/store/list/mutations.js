@@ -3,7 +3,6 @@ export default {
   // 获取初始信息
   getInfo (state, val) {
     state.infoData = val.data
-    console.log('infodata', state.infoData)
   },
   // 改变项目列表值
   getRequestList (state, val) {
@@ -19,7 +18,6 @@ export default {
   },
   objectListInfo (state, val) {
     state.objData = val.data
-    console.log('objData', state.objData)
   },
   // 获取集群列表
   clusterList (state, val) {

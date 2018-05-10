@@ -6,7 +6,7 @@ export default {
   },
   // 获取接口数据
   getRequestMes (state, val) {
-    state.requestMes = val.data                              // 接口信息
+    state.requestMes = val.data
     state.requestEdit = val.data
   },
   // 初始对象列表
@@ -15,12 +15,18 @@ export default {
   },
   // 对象详情
   changeObjectDetail (state, val) {
-    state.objectData = val.data
+    state.objectData = val.data,
+    state.objectP = val.data.propertyList
   },
   // 新建对象数据
   newObject (state, val) {
     state.objectData = val
     state.objectParamterList = val.objectParameterList
+  },
+  // 重置对象参数数组
+  resetObjectP (state, val) {
+    state.objectP = val
+    console.log('stateObjectP', state.objectP)
   }
 }
 

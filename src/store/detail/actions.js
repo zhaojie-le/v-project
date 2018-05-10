@@ -10,6 +10,10 @@ export default {
   getRequestMes ({commit}, val) {
     commit('getRequestMes', val)
   },
+  // 重置对象数据
+  resetObjectP ({commit}, val) {
+    commit('resetObjectP', val)
+  },
   // 获取字段类型
   async getDataType ({ dispatch, commit }, { parame, callback }) {
     let url = API.DATATYPE
@@ -67,7 +71,7 @@ export default {
       callback && callback(data)
     }
   },
-  // 对象数据编辑及新建接口
+  // 对象数据编辑
   async editObjectDetail ({ dispatch, commit }, { parame, callback }) {
     let url = API.EDITOBJECT
     let method = 'POST'
