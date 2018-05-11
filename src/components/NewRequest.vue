@@ -63,10 +63,10 @@ export default {
   },
   methods: {
     ...mapActions('detail', [
-      'newRequest',
-      'changeShowStatus',      // 重置展示列表或对象参数
-      'newRequestParame',      // 新建时重置参数
-      'changeRequestId'
+      'changeShowStatus'      // 重置展示列表或对象参数
+    ]),
+    ...mapActions('create', [
+      'newRequest'
     ]),
     onSubmit (formName) {
       this.$refs[formName].validate((valid) => {
@@ -82,31 +82,18 @@ export default {
      * 提交请求
      */
     submitAjax () {
-      let parame = Object.assign({}, this.form)
+      let parame = this.form
       let callback = (data) => {
         if (data) {
           if (data.code === 0) {
-            let requestId = data.data.requestId
-            this.resetRequestParame()
-            this.changeShowStatus(1)
-            this.changeRequestId(requestId)
-            this.$router.push({name: 'detail', params: { requestId: requestId }})
+            let id = data.data.id
+            this.$router.push({name: 'detail', params: { id: id }})
           } else {
-            Message.warning(data.msg)
+            Message.warning(data.message)
           }
         }
       }
       this.newRequest({parame, callback})
-    },
-    /**
-     * @event newRequestParame vuex
-     * 新建项目时，重置详情接口数据为空
-     */
-    resetRequestParame () {
-      // 重新定义数据
-      let val = cfg.resetRequestData
-      // 重置接口参数
-      this.newRequestParame(val)
     }
   },
   component: {

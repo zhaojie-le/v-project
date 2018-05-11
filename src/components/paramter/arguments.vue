@@ -119,17 +119,20 @@ export default {
     Items
   },
   watch: {
-    // nlist: {
-    //   handler: function (newVal, oldVal) {
-    //     this.$emit('input', this.nlist)
-    //     console.log('999999', this.nlist)
-    //   },
-    //   deep: true
-    // }
+    list: {
+      handler: function (newVal, oldVal) {
+        this.$emit('input', this.list)
+        console.log('999999', this.list)
+      },
+      deep: true
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
+  .table-wrap{
+    margin: 20px;
+  }
   .row-bg {
     padding: 5px 0;
     background-color: #f9fafc;

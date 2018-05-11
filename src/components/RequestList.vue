@@ -6,14 +6,14 @@
       <el-button type="primary" size="small" style="float: right"><router-link :to="'new'">新建接口</router-link></el-button>
     </el-breadcrumb>
     <search :list="clusterList" v-if="clusterList"></search>
-    <product-list></product-list>
+    <list></list>
   </el-main>
 </template>
 
 <script>
 import { lstorage } from '../utils/storage.js'
 import Search from '../components/requestList/search'
-import ProductList from '../components/requestList/productList'
+import List from '../components/requestList/list'
 import { mapState, mapActions } from 'vuex'
 export default {
   created () {
@@ -42,7 +42,7 @@ export default {
   },
   components: {
     Search,
-    ProductList
+    List
   }
 }
 </script>

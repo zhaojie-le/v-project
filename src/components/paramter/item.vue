@@ -257,7 +257,7 @@ export default {
   watch: {
     list: {
       handler: function (newVal, oldVal) {
-        // this.$emit('input', this.list)
+        this.$emit('input', this.list)
         this.resetObjectP(this.list)
       },
       deep: true

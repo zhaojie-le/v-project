@@ -77,6 +77,7 @@ export default {
   },
   methods: {
     ...mapActions('detail', [
+      'deleteObject'
     ]),
     ...mapActions('list', [
       'changePage',
@@ -112,12 +113,11 @@ export default {
       this.getList(val)
     },
     handleDeleteClick (item) {
-      console.log(item.id)
-      this.openMessage()
+      this.openMessage(item.id)
     },
     deleteEvent (id) {
       let parame = {
-        requestId: id
+        id: id
       }
       let callback = (data) => {
         if (data.code !== 0) {
@@ -127,7 +127,7 @@ export default {
           this.getList(this.page)
         }
       }
-      this.deleteRequest({parame, callback})
+      this.deleteObject({parame, callback})
     },
     openMessage (id) {
       MessageBox.confirm('此操作将永久删除该对象, 是否继续?', '提示', {

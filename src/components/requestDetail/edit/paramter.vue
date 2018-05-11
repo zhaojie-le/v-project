@@ -1,15 +1,7 @@
 <template>
   <div class="content-item">
-    <p class="title-head" @click="getP">请求参数</p>
-    <!-- <paramter
-      style="padding: 0 20px"
-      :is-generic="1"
-      v-model="requestParameterList"
-      :list="requestParameterList"
-      v-if="requestParameterList"
-      >
-    </paramter> -->
-    <arguments :list="requestParameterList" v-if="requestParameterList"></arguments>
+    <p class="title-head">请求参数</p>
+    <arguments :list="requestParameterList" v-if="requestParameterList" :edit="edit" v-model="requestParameterList"></arguments>
   </div>
 </template>
 <script>
@@ -34,9 +26,6 @@ export default {
     this.requestParameterList = this.plist
   },
   methods: {
-    getP () {
-      console.log('par', this.requestParameterList)
-    }
   },
   components: {
     // Paramter,
@@ -45,7 +34,7 @@ export default {
   watch: {
     requestParameterList: {
       handler: function (newVal, oldVal) {
-        this.getP()
+        this.$emit('input', this.requestParameterList)
       },
       deep: true
     }

@@ -4,45 +4,45 @@
     <p class="title-head">接口详情</p>
     <el-form label-width="80px" size="mini" style="min-width: 800px;padding: 0 20px">
       <el-form-item label="请求方式">
-        <el-radio v-model="requestMes.requestMethod" label="GET" :disabled="edit">GET</el-radio>
-        <el-radio v-model="requestMes.requestMethod" label="POST" :disabled="edit">POST</el-radio>
+        <el-radio v-model="requestMes.requestMethod" label="GET" :disabled="!edit">GET</el-radio>
+        <el-radio v-model="requestMes.requestMethod" label="POST" :disabled="!edit">POST</el-radio>
       </el-form-item>
       <el-form-item label="请求类型">
-        <el-radio v-model="requestMes.responseType" label="AJAX" :disabled="edit">AJAX</el-radio>
-        <el-radio v-model="requestMes.responseType" label="JSONP" :disabled="edit">JSONP</el-radio>
+        <el-radio v-model="requestMes.responseType" label="AJAX" :disabled="!edit">AJAX</el-radio>
+        <el-radio v-model="requestMes.responseType" label="JSONP" :disabled="!edit">JSONP</el-radio>
       </el-form-item>
       <el-form-item label="回调函数">
-        <el-input v-model="requestMes.callback" @change="limitCallback" :disabled="edit"></el-input>
+        <el-input v-model="requestMes.callback" @change="limitCallback" :disabled="!edit"></el-input>
       </el-form-item>
       <el-form-item label="接口名称">
-        <el-input v-model="requestMes.name" :disabled="edit"></el-input>
+        <el-input v-model="requestMes.name" :disabled="!edit"></el-input>
       </el-form-item>
       <el-form-item label="请求路径">
-        <el-input v-model="requestMes.requestUrl" @change="limitRequestUrl" placeholder="路径必须以／开头" :disabled="edit"></el-input>
+        <el-input v-model="requestMes.requestUrl" @change="limitRequestUrl" placeholder="路径必须以／开头" :disabled="!edit"></el-input>
       </el-form-item>
       <el-form-item label="所属集群">
         <!-- <el-input v-model="requestMes.serverCluster" @change="limitServerCluster" :readonly="true"></el-input> -->
-        <el-select  
-          v-model="requestMes.clusterName" 
-          placeholder="请选择接口所属集群" 
-          filterable 
-          size="mini" 
+        <el-select
+          v-model="requestMes.clusterId"
+          placeholder="请选择接口所属集群"
+          filterable
+          size="mini"
           style="width: 100%"
-          :disabled="edit"
+          :disabled="!edit"
           >
           <el-option
             :key="item.id"
             :label="item.name"
-            :value="item.id" 
+            :value="item.id"
             v-for="item in serverCluster">
           </el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="header">
-        <el-input v-model="requestMes.header" :disabled="edit" type="textarea" :rows="2"></el-input>
+        <el-input v-model="requestMes.header" :disabled="!edit" type="textarea" :rows="2"></el-input>
       </el-form-item>
       <el-form-item label="cookie">
-        <el-input v-model="requestMes.cookie" :disabled="edit" type="textarea" :rows="2"></el-input>
+        <el-input v-model="requestMes.cookie" :disabled="!edit" type="textarea" :rows="2"></el-input>
       </el-form-item>
     </el-form>
   </div>
@@ -61,7 +61,11 @@ export default {
     serverCluster: {
       type: Array
     },
-    edit: Boolean
+    edit: {
+      type: Boolean,
+      default: false
+    }
+
   },
   data () {
     return {
@@ -177,6 +181,14 @@ export default {
         }
       }
       this.getRequest({parame, callback})
+    }
+  },
+  watch: {
+    requestMes: {
+      handler: function(newVal, oldVal) {
+        this.$emit('input', this.requestMes)
+      },
+      deep: true
     }
   }
 }

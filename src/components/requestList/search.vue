@@ -6,7 +6,7 @@
           <el-option
             :key="item.id"
             :label="item.name"
-            :value="item.id" 
+            :value="item.id"
             v-for="item in list">
           </el-option>
         </el-select>
@@ -27,7 +27,6 @@
 <script>
 import { Message } from 'element-ui'
 import { mapState, mapActions } from 'vuex'
-import ProductList from '../../components/requestList/productList'
 export default {
   name: 'list',
   data () {
@@ -96,8 +95,7 @@ export default {
     }
   },
   components: {
-    Message,
-    ProductList
+    Message
   }
 }
 </script>

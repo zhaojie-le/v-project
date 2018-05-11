@@ -66,11 +66,11 @@ export default {
   },
   methods: {
     ...mapActions('detail', [
-      'deleteRequest',
-      'changeRequestId'
+      'deleteRequest'
     ]),
     ...mapActions('list', [
-      'changePage'
+      'changePage',
+      'getRequestList'
     ]),
     /**
      * 点击接口列表，跳转接口详情页
@@ -102,18 +102,18 @@ export default {
       this.getList(val)
     },
     handleDeleteClick (item) {
-      console.log(item.id)
-      this.openMessage()
+      this.openMessage(item.id)
     },
+    // 删除接口请求
     deleteEvent (id) {
       let parame = {
-        requestId: id
+        id: id
       }
       let callback = (data) => {
         if (data.code !== 0) {
           Message.warning(data.msg)
         } else {
-          // 重新请求
+          // 重新请求列表数据
           this.getList(this.page)
         }
       }

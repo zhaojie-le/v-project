@@ -37,7 +37,7 @@ export default {
   // 删除接口
   async deleteRequest ({ dispatch, commit }, { parame, callback }) {
     let url = API.DELETEREQUEST
-    let method = 'GET'
+    let method = 'POST'
     let data = await dispatch('fetchData', { url, method, parame }, { root: true })
     if (data) {
       callback && callback(data)
@@ -46,15 +46,6 @@ export default {
   // 接口编辑修改提交
   async editRequest ({ dispatch, commit }, { parame, callback }) {
     let url = API.SUBMITREQUEST
-    let method = 'POST'
-    let data = await dispatch('fetchData', { url, method, parame }, { root: true })
-    if (data) {
-      callback && callback(data)
-    }
-  },
-  // 新建接口
-  async newRequest ({ dispatch, commit }, { parame, callback }) {
-    let url = API.NEWREQUEST
     let method = 'POST'
     let data = await dispatch('fetchData', { url, method, parame }, { root: true })
     if (data) {

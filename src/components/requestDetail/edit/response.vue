@@ -1,11 +1,11 @@
 <template>
   <div class="content-item">
     <p class="title-head">返回参数</p>
-    <div>返回参数</div>
+    <arguments :list="responseParameterList" v-if="responseParameterList" :edit="edit" v-model="responseParameterList"></arguments>
   </div>
 </template>
 <script>
-// import Paramter from '../../paramter/index'
+import Arguments from '../../paramter/arguments'
 export default {
   props: {
     rlist: {
@@ -22,20 +22,17 @@ export default {
     }
   },
   created () {
-    this.responseParameterList = this.list
+    this.responseParameterList = this.rlist
   },
   methods: {
-    getP () {
-      console.log('res', this.responseParameterList)
-    }
   },
   components: {
-    // Paramter
+    Arguments
   },
   watch: {
     responseParameterList: {
       handler: function (newVal, oldVal) {
-        this.getP()
+        this.$emit('input', this.responseParameterList)
       },
       deep: true
     }
