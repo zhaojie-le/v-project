@@ -26,7 +26,7 @@
                   :key="item.name"
                   :label="item.name"
                   :value="item.name"
-                  :disabled="item.name ==='object' || item.name === 'array'"
+                  :disabled="item.name === 'array'"
                   v-for="item in dataTypeList">
                 </el-option>
               </div>
@@ -47,19 +47,19 @@
               <el-input size="mini" placeholder="mock规则" v-model="item.restriction" v-if="item.dataType !== 'object'" :disabled="!edit"></el-input>
             <!-- 关联对象 -->
               <el-select
-                v-model="item.id"
+                v-model="item.refEntityId"
                 placeholder="关联对象"
                 filterable
                 size="mini"
                 style="width: 94%"
                 :disabled="!edit"
-                v-if="item.dataType === 'object' && clusterList"
+                v-if="item.dataType === 'object' && objData.list"
               >
                 <el-option
                   :key="item.id"
                   :label="item.name"
                   :value="item.id"
-                  v-for="item in clusterList">
+                  v-for="item in objData.list">
                 </el-option>
               </el-select>
               <el-tooltip effect="dark" content="新建对象" placement="bottom-start" v-show="item.dataType === 'object' && edit" >
@@ -157,12 +157,12 @@ export default {
       // type: type,
       additem: {
         "dataType": "",
-        "dataTypeId": "",
+        "dataTypeId": 0,
         "extra": "",
         "id": "",
         "identifier": "",
-        "refEntityId": "",
-        "refPropertyId": "",
+        "refEntityId": 0,
+        "refPropertyId": 0,
         "remark": "",
         "restriction": "",
         "values": "",
@@ -177,10 +177,12 @@ export default {
   created () {
     this.getObject()
     this.dataTypeAjax()
+    console.log('clusterList', this.clusterList)
   },
   computed: {
     ...mapState('list', [
-      'clusterList'
+      'clusterList',
+      'objData'
     ]),
     ...mapState('detail', [
       'objectP',

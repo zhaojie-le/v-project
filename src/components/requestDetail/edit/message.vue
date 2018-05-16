@@ -11,7 +11,7 @@
         <el-radio v-model="requestMes.responseType" label="AJAX" :disabled="!edit">AJAX</el-radio>
         <el-radio v-model="requestMes.responseType" label="JSONP" :disabled="!edit">JSONP</el-radio>
       </el-form-item>
-      <el-form-item label="回调函数">
+      <el-form-item label="回调函数" v-show="requestMes.responseType === 'JSONP'">
         <el-input v-model="requestMes.callback" @change="limitCallback" :disabled="!edit"></el-input>
       </el-form-item>
       <el-form-item label="接口名称">

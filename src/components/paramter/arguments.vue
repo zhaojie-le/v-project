@@ -14,13 +14,13 @@ export default {
       default: function () {
         return [{
           "dataType": "",
-          "dataTypeId": "",
+          "dataTypeId": 0,
           "extra": "",
           "id": "",
           "identifier": "",
           "refEntity": {},
-          "refEntityId": "",
-          "refPropertyId": "",
+          "refEntityId": 0,
+          "refPropertyId": 0,
           "remark": "",
           "restriction": "",
           "values": ""
@@ -71,13 +71,13 @@ export default {
     addArray (arr) {
       let item = {
         "dataType": "",
-        "dataTypeId": "",
+        "dataTypeId": 0,
         "extra": "",
         "id": "",
         "identifier": "",
         "refEntity": {},
-        "refEntityId": "",
-        "refPropertyId": "",
+        "refEntityId": 0,
+        "refPropertyId": 0,
         "remark": "",
         "restriction": "",
         "values": ""
@@ -103,8 +103,9 @@ export default {
         value: '',             // 模拟数据
         remark: '',            // 备注
         dataType: '',
+        dataTypeId: 0,
         id: '',
-        refEntityId: '',
+        refEntityId: 0,
         restriction: '',
         values: '',
         action: 0,

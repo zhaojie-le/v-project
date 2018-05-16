@@ -9,11 +9,22 @@
         <el-form-item label="对象名称">
           <el-input v-model="objectData.name" :disabled="!edit"></el-input>
         </el-form-item>
+        <el-form-item label="所属集群" v-if="clusterList" prop="clusterId">
+          <el-select  v-model="objectData.clusterId" placeholder="对象所属集群" filterable size="mini" style="width: 100%" :disabled="!edit">
+            <el-option
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+              v-for="item in clusterList">
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="对象说明">
           <el-input v-model="objectData.remark" type="textarea" :rows="2" :disabled="!edit"></el-input>
         </el-form-item>
       </el-form>
       <div class="table-box">
+        <p>参数编辑</p>
         <arguments
           :edit="edit"
           :entity="true"
@@ -26,7 +37,7 @@
   </div>
 </template>
 <script>
-// import { Message } from 'element-ui'
+import { Message } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../../utils/storage'
 import Arguments from '../paramter/arguments'
@@ -68,6 +79,8 @@ export default {
       let callback = (data) => {
         if (data.code === 0) {
           // success
+        } else {
+          Message.error(data.message)
         }
       }
       this.editObjectDetail({parame, callback})
@@ -101,6 +114,10 @@ export default {
   }
   .table-box{
     padding-top: 50px;
+    p{
+      font-size: 14px;
+      margin-left: 20px;
+    }
   }
 </style>
 

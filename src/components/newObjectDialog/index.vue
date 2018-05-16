@@ -5,7 +5,7 @@
         <el-input v-model="form.name" auto-complete="off" size="mini"></el-input>
       </el-form-item>
       <el-form-item label="所属集群" :label-width="formLabelWidth" v-if="clusterList" prop="clusterId">
-        <el-select  v-model="form.clusterId" placeholder="请选择接口所属集群" filterable size="mini" style="width: 100%">
+        <el-select  v-model="form.clusterId" placeholder="请选择对象所属集群" filterable size="mini" style="width: 100%">
           <el-option
             :key="item.id"
             :label="item.name"
@@ -17,7 +17,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="closeDialog">取 消</el-button>
-      <el-button type="primary" @click="nextEvent('form')">下一步</el-button>
+      <el-button type="primary" @click="nextEvent('form')">提交</el-button>
     </div>
   </el-dialog>
 </template>
@@ -48,26 +48,39 @@ export default {
         clusterId: [
           { required: true, message: '请选择所属集群', trigger: 'change' }
         ]
-      }
+      },
+      propertyList: null
     }
   },
   created () {
-    this.clusterList = lstorage.get('infoData') ? lstorage.get('infoData').serverClusterList : null
+    this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
     this.dialogShow = this.show
   },
   methods: {
     ...mapActions('create',[
       'newObject'
     ]),
+    ...mapActions('list', [
+      'objectList'
+    ]),
+    // 请求对象列表
+    getObject () {
+      let parame = {}
+      let callback = (data) => {}
+      this.objectList({parame, callback})
+    },
+    // 新建对象提交
     newObjectAjax (form) {
       this.$refs[form].validate((valid) => {
         if (valid) {
           let parame = this.form
           let callback = (data) => {
             if (data.code === 0) {
-              // success
+              // success--重新请求接口
+              this.getObject()
+              this.closeDialog()
             } else {
-              this.$message.error(data.success);
+              Message.error(data.message);
             }
           }
           this.newObject({parame, callback})

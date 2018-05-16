@@ -18,23 +18,25 @@
         :edit="edit"
         :plist="requestMes.requestParameterList"
         v-if="requestMes"
+        v-model="requestParameterList"
         >
       </r-paramter>
       <r-response
         :edit="edit"
         :rlist="requestMes.responseParameterList"
         v-if="requestMes"
+        v-model="responseParameterList"
         >
       </r-response>
       <div class="content-item">
         <p class="title-head">接口说明</p>
-        <el-input v-model="requestMes.remark" :disabled="edit" type="textarea" :rows="3" style="width: 970px; margin-left: 31px;"></el-input>
+        <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="3" style="width: 970px; margin-left: 31px;"></el-input>
       </div>
     </template>
   </div>
 </template>
 <script>
-// import { Message } from 'element-ui'
+import { Message } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../../utils/storage'
 import RMessage from './edit/message'
@@ -54,12 +56,18 @@ export default {
       edit: false,
       callback: 'callback',
       clusterList: null,
-      nowMes: null
+      nowMes: this.requestMes,
+      requestParameterList: null,
+      responseParameterList: null
     }
   },
   created () {
     this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
     this.nowMes = this.requestMes
+    if (this.requestMes) {
+      this.requestParameterList = this.requestMes.requestParameterList
+      this.responseParameterList = this.requestMes.responseParameterList
+    }
   },
   computed: {
     ...mapState('detail', [
@@ -75,12 +83,26 @@ export default {
     }
   },
   methods: {
-    ...mapActions('detail', []),
+    ...mapActions('detail', [
+      'editRequest'
+    ]),
     editEvent () {
       this.edit = !this.edit
     },
     saveEvent () {
-      this.edit = !this.edit
+      this.editAjax()
+    },
+    editAjax () {
+      let parame = Object.assign(this.requestMes, {requestParameterList: this.requestParameterList}, {responseParameterList: this.responseParameterList})
+      let callback = (data) => {
+        if (data.code !== 0) {
+          Message.error(data.message)
+        } else {
+          this.edit = !this.edit
+        }
+      }
+      console.log('parame------------', parame)
+      this.editRequest({parame, callback})
     }
   },
   components: {
