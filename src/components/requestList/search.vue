@@ -1,8 +1,8 @@
 <template>
   <div class="form-box">
     <el-form :model="form" ref="form" label-width="80px" size="mini">
-      <el-form-item label="所属集群" prop="serverClusterId">
-        <el-select  v-model="form.serverClusterId" placeholder="请选择接口所属集群" filterable size="mini" style="width: 100%">
+      <el-form-item label="所属集群" prop="clusterId">
+        <el-select  v-model="form.clusterId" placeholder="请选择接口所属集群" filterable size="mini" style="width: 100%">
           <el-option
             :key="item.id"
             :label="item.name"
@@ -14,8 +14,8 @@
       <el-form-item label="所属项目" prop="project">
         <el-input v-model="form.project"></el-input>
       </el-form-item>
-      <el-form-item label="接口名称" prop="requestName">
-        <el-input v-model="form.requestName"></el-input>
+      <el-form-item label="接口名称" prop="name">
+        <el-input v-model="form.name"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">搜索</el-button>
@@ -34,8 +34,8 @@ export default {
       _params: null,      // 列表切换请求参数
       form: {
         project: '',
-        requestName: '',
-        serverClusterId: ''
+        name: '',
+        clusterId: ''
       },
       info: this.infoData
     }
@@ -84,7 +84,7 @@ export default {
     },
     onSubmit () {
       let v = this.form
-      if (v.project || v.requestName || v.serverClusterId) {
+      if (v.project || v.name || v.clusterId) {
         this.requestList()
       } else {
         Message.warning('搜索项不能为空')
@@ -92,6 +92,7 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+      this.requestList()
     }
   },
   components: {

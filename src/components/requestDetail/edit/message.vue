@@ -44,6 +44,9 @@
       <el-form-item label="cookie">
         <el-input v-model="requestMes.cookie" :disabled="!edit" type="textarea" :rows="2"></el-input>
       </el-form-item>
+      <el-form-item label="备注">
+        <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="2"></el-input>
+      </el-form-item>
     </el-form>
   </div>
 </template>

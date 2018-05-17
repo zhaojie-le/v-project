@@ -28,10 +28,10 @@
         v-model="responseParameterList"
         >
       </r-response>
-      <div class="content-item">
+      <!-- <div class="content-item">
         <p class="title-head">接口说明</p>
         <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="3" style="width: 970px; margin-left: 31px;"></el-input>
-      </div>
+      </div> -->
     </template>
   </div>
 </template>

@@ -39,7 +39,8 @@
     <el-pagination
       background
       layout="prev, pager, next"
-      :total="allListNum"
+      :total="pageData.rowCount"
+      :page-size="20"
       :current-page="page"
       class="pagination-box"
       @current-change="currentChange"
@@ -57,10 +58,7 @@ export default {
   },
   computed: {
     ...mapState('list', [
-      'page',
-      'pageNum',
-      'listParam',
-      'allListNum',
+      'pageData',             // 接口页码
       'requestList'           // 项目列表
     ])
   },
@@ -86,7 +84,7 @@ export default {
     getList (num) {
       let page = {
         page: num,
-        pageNum: this.pageNum
+        pageSize: 20
       }
       let parame = Object.assign({}, this.form, page)
       let callback = (data) => {
@@ -96,7 +94,7 @@ export default {
       }
       this.getRequestList({parame, callback})
     },
-    // 页码切换
+    // 页码切换后
     currentChange (val) {
       this.changePage(val)
       this.getList(val)

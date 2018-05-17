@@ -30,19 +30,20 @@
         </template>
       </el-table-column>
       <el-table-column type="expand">
-      <template slot-scope="props" v-if="props.row.propertyList">
-        <el-form label-position="left" inline class="demo-table-expand" label="内部属性">
-          <el-form-item v-for="(item, index) in props.row.propertyList" :key="index">
-            <span>{{ item.identifier }}</span>
-          </el-form-item>
-        </el-form>
-      </template>
-    </el-table-column>
+        <template slot-scope="props" v-if="props.row.propertyList">
+          <el-form label-position="left" inline class="demo-table-expand" label="内部属性">
+            <el-form-item v-for="(item, index) in props.row.propertyList" :key="index">
+              <span>{{ item.identifier }}</span>
+            </el-form-item>
+          </el-form>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       background
       layout="prev, pager, next"
       :total="objectData.pagination.rowCount"
+      :page-size="20"
       :current-page="page"
       class="pagination-box"
       @current-change="currentChange"
@@ -66,9 +67,6 @@ export default {
   },
   computed: {
     ...mapState('list', [
-      'page',
-      'pageNum',
-      'listParam',
       'allListNum'
     ])
   },
@@ -97,7 +95,7 @@ export default {
     getList (num) {
       let page = {
         page: num,
-        pageNum: this.pageNum
+        pageSize: 20
       }
       let parame = Object.assign({}, this.form, page)
       let callback = (data) => {
@@ -107,7 +105,7 @@ export default {
       }
       this.objectList({parame, callback})
     },
-    // 页码切换
+    // 页码切换后
     currentChange (val) {
       this.changePage(val)
       this.getList(val)

@@ -32,7 +32,7 @@
           <el-input
             type="textarea"
             :rows="2"
-            placeholder="如：{code:0,data:{},message:''}"
+            placeholder="如：{'code':0,'data':{},'message':''}"
             v-model="form.responseTemplate"
             ></el-input>
         </el-form-item>

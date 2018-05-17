@@ -7,7 +7,7 @@ export default {
   // 改变项目列表值
   getRequestList (state, val) {
     state.requestList = val.data.list
-    state.allListNum = val.data.allListNum
+    state.pageData = val.data.pagination
   },
   // 重置列表请求参数
   changeListParam (state, val) {
