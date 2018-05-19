@@ -1,6 +1,6 @@
 <template>
   <div class="table-wrap">
-    <items :list="list" v-model="list" :edit="edit" :entity="entity"></items>
+    <items :list="list" v-model="list" :edit="edit" :entity="entity" @changeItem="changeItem"></items>
     <el-button size="mini" @click="addParamter" style="margin-top: 10px" v-if="edit">添加参数</el-button>
   </div>
 </template>
@@ -21,6 +21,7 @@ export default {
           "refEntity": {},
           "refEntityId": 0,
           "refPropertyId": 0,
+          "refProperty": {},
           "remark": "",
           "restriction": "",
           "values": ""
@@ -39,10 +40,21 @@ export default {
   data () {
     return {
       // nlist: this.list
+      item: {
+        id: '',
+        identifier: '',        // 变量名
+        value: '',             // 模拟数据
+        remark: '',            // 备注
+        dataType: '',
+        dataTypeId: 0,
+        refEntityId: 0,
+        restriction: '',
+        refProperty: null,
+        values: '',
+        action: 0,
+        extra: null
+      }
     }
-  },
-  created () {
-    console.log('argumentsssssssssss', this.list)
   },
   computed: {
     ...mapState('list', [
@@ -55,9 +67,7 @@ export default {
     ]),
     // 子组件触发删除事件
     deleteChange (index) {
-      console.log('index', index)
       let nowArr = this.deleteArray(this.list, index)
-      console.log('arr', nowArr)
     },
     // 删除数组下标为inx的项
     deleteArray (arr, inx) {
@@ -78,6 +88,7 @@ export default {
         "refEntity": {},
         "refEntityId": 0,
         "refPropertyId": 0,
+        "refProperty": null,
         "remark": "",
         "restriction": "",
         "values": ""
@@ -92,28 +103,30 @@ export default {
     },
     // 增加子节点按钮
     addItemObject (index) {
-      console.log('子节点index', index)
       var aa = this.addArrayItem(this.list, index)
-      console.log('aa', aa)
     },
     // 在固定位置后增加复杂类型的子项
     addArrayItem (arr, index) {
-      let item = {
-        identifier: '',        // 变量名
-        value: '',             // 模拟数据
-        remark: '',            // 备注
-        dataType: '',
-        dataTypeId: 0,
-        id: '',
-        refEntityId: 0,
-        restriction: '',
-        values: '',
-        action: 0,
-        extra: null
-      }
+      // let item = {
+      //   id: '',
+      //   identifier: '',        // 变量名
+      //   value: '',             // 模拟数据
+      //   remark: '',            // 备注
+      //   dataType: '',
+      //   dataTypeId: 0,
+      //   refEntityId: 0,
+      //   restriction: '',
+      //   refProperty: null,
+      //   values: '',
+      //   action: 0,
+      //   extra: null
+      // }
       let nowIndex = index + 1
       arr[nowIndex] = index
-      return arr.splice(nowIndex, 0, item)
+      return arr.splice(nowIndex, 0, this.item)
+    },
+    changeItem (item, index) {
+      this.list.splice(index, 1, item)
     }
   },
   components: {
@@ -123,7 +136,6 @@ export default {
     list: {
       handler: function (newVal, oldVal) {
         this.$emit('input', this.list)
-        console.log('999999', this.list)
       },
       deep: true
     }

@@ -77,7 +77,6 @@ export default {
         if (valid) {
           this.submitAjax()
         } else {
-          console.log('error submit!!')
           return false
         }
       })

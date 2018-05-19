@@ -61,7 +61,6 @@ export default {
   },
   created () {
     this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
-    console.log('------------', this.objectData)
   },
   computed: {
     ...mapState('detail', [

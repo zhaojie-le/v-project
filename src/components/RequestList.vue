@@ -33,7 +33,6 @@ export default {
       let parame = {name: ''}
       let callback = (data) => {
         if (data.code === 0) {
-          console.log('ll', data.data.clusterList)
           lstorage.set('clusterList', data.data.clusterList)
         }
       }

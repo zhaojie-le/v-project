@@ -62,16 +62,14 @@ export default {
   },
   data () {
     return {
-      list: null
+      list: null,
+      page: 1
     }
   },
   computed: {
     ...mapState('list', [
       'allListNum'
     ])
-  },
-  created () {
-    console.log('list', this.objectList)
   },
   methods: {
     ...mapActions('detail', [

@@ -85,7 +85,6 @@ export default {
           }
           this.newObject({parame, callback})
         } else {
-          console.log('error submit!!');
           return false;
         }
       })

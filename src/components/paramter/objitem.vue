@@ -3,13 +3,13 @@
   <el-row type="flex" justify="space-around" class="row-item-bg">
     <el-col :span="5">
       <div class="grid-content">
-        <el-input size="mini" placeholder="名称" v-model="item.identifier"></el-input>
+        <el-input size="mini" placeholder="名称" v-model="item.identifier" :disabled="!edit"></el-input>
       </div>
     </el-col>
     <el-col :span="5">
       <div class="grid-content">
       <!-- <el-input size="mini" placeholder="类型" v-model="item.dataType"></el-input> -->
-        <el-select  v-model="item.dataType" placeholder="选择字段类型" filterable size="mini" style="width: 100%" v-if="dataTypeList">
+        <el-select  v-model="item.dataType" placeholder="选择字段类型" filterable size="mini" style="width: 100%" v-if="dataTypeList" :disabled="!edit">
           <el-option
             :key="item.name"
             :label="item.name"
@@ -22,14 +22,21 @@
     <el-col :span="5">
       <div class="grid-content">
         <!-- 正常参数 -->
-        <el-input size="mini" placeholder="mock规则" v-model="item.restriction" v-if="item.dataType !== 'object'"></el-input>
+        <el-input size="mini" placeholder="mock规则" v-model="item.restriction" v-if="item.dataType !== 'object'" :disabled="!edit"></el-input>
         <!-- 关联对象 -->
-        <el-select  v-model="item.refEntityId" placeholder="关联对象" filterable size="mini" style="width: 94%" v-if="item.dataType === 'object' && clusterList">
+        <el-select
+          v-model="item.refEntityId"
+          placeholder="关联对象"
+          filterable
+          size="mini"
+          style="width: 94%"
+          v-if="objData && item.dataType === 'object'" :disabled="!edit"
+        >
           <el-option
             :key="item.id"
             :label="item.name"
             :value="item.id"
-            v-for="item in clusterList">
+            v-for="item in objData.list">
           </el-option>
         </el-select>
         <el-tooltip effect="dark" content="新建对象" placement="bottom-start" v-show="item.dataType === 'object' && edit" >
@@ -39,13 +46,10 @@
     </el-col>
     <el-col :span="5">
       <div class="grid-content">
-        <el-input size="mini" placeholder="备注" v-model="item.remark"></el-input>
+        <el-input size="mini" placeholder="备注" v-model="item.remark" :disabled="!edit"></el-input>
       </div>
     </el-col>
-    <el-col :span="1" style="line-height: 28px" v-show="edit">
-      <!-- 删除节点 -->
-      <i class="el-icon-remove-outline" style="margin-right: 10px" @click="deleteClick(list, item, index)"></i>
-    </el-col>
+    <!--   -->
   </el-row>
 </div>
 </template>
@@ -66,8 +70,9 @@ export default {
       'dataTypeList'
     ]),
     ...mapState('list', [
-      'clusterList'
-    ])
+      'clusterList',
+      'objData'
+    ]),
   },
   methods: {
   },

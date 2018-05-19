@@ -92,7 +92,6 @@ export default {
         this.requestMes.requestUrl = str
       } else {
         str = '/' + str
-        console.log(11)
       }
       this.requestMes.requestUrl = str
     },

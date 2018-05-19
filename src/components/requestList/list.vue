@@ -44,6 +44,7 @@
       :current-page="page"
       class="pagination-box"
       @current-change="currentChange"
+      v-if="pageData"
       >
     </el-pagination>
   </div>
@@ -54,6 +55,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
   data () {
     return {
+      page: 1
     }
   },
   computed: {

@@ -42,7 +42,6 @@ export default {
       window.location.href = 'https://static.daojia.com/assets/other/mock-platform/out/index02.html'
     },
     handleSelect (key, keyPath) {
-      console.log(key, keyPath)
       if (key === '3') {
         this.backLogin()
       }

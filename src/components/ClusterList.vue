@@ -65,7 +65,6 @@ export default {
     getCluster () {
       let parame = {}
       let callback = (data) => {
-        console.log('cluster', data)
         if (data.code === 0) {
           this.list = data.data.clusterList
         }

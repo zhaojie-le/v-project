@@ -101,7 +101,6 @@ export default {
           this.edit = !this.edit
         }
       }
-      console.log('parame------------', parame)
       this.editRequest({parame, callback})
     }
   },
@@ -113,7 +112,6 @@ export default {
   watch: {
     requestMes: {
       handler: function (newVal, oldVal) {
-        console.log('=============', this.requestMes)
       },
       deep: true
     }

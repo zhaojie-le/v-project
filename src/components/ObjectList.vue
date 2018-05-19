@@ -29,7 +29,6 @@ export default {
   },
   created () {
     this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
-    console.log('objjjj', this.infoData)
     this.getObject()
   },
   methods: {
