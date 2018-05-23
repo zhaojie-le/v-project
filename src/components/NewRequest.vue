@@ -62,9 +62,6 @@ export default {
     this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
   },
   methods: {
-    ...mapActions('detail', [
-      'changeShowStatus'      // 重置展示列表或对象参数
-    ]),
     ...mapActions('create', [
       'newRequest'
     ]),

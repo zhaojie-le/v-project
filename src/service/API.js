@@ -29,5 +29,7 @@ module.exports = {
   // 新建集群
   NEWCLUSTER: hoss + '/cluster/add',
   // 集群列表
-  CLUSTERLIST: hoss + '/cluster/list'
+  CLUSTERLIST: hoss + '/cluster/list',
+
+  PATH: hoss
 }

@@ -16,15 +16,15 @@
       </r-message>
       <r-paramter
         :edit="edit"
-        :plist="requestMes.requestParameterList"
-        v-if="requestMes"
+        :plist="reqParames"
+        v-if="reqParames"
         v-model="requestParameterList"
         >
       </r-paramter>
       <r-response
         :edit="edit"
-        :rlist="requestMes.responseParameterList"
-        v-if="requestMes"
+        :rlist="reqResponse"
+        v-if="reqResponse"
         v-model="responseParameterList"
         >
       </r-response>
@@ -58,21 +58,18 @@ export default {
       clusterList: null,
       nowMes: this.requestMes,
       requestParameterList: null,
-      responseParameterList: null
+      responseParameterList: null,
+      reqParames: null,
+      reqResponse: null
     }
   },
   created () {
     this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
     this.nowMes = this.requestMes
-    if (this.requestMes) {
-      this.requestParameterList = this.requestMes.requestParameterList
-      this.responseParameterList = this.requestMes.responseParameterList
-    }
   },
   computed: {
     ...mapState('detail', [
-      'requestMes',                   // 接口详情，请求方式等
-      'requestEdit'         // 接口编辑－数据参数
+      'requestMes'                   // 接口详情，请求方式等
     ]),
     changeRemark () {
       if (!this.requestMes.remark) {
@@ -93,7 +90,9 @@ export default {
       this.editAjax()
     },
     editAjax () {
-      let parame = Object.assign(this.requestMes, {requestParameterList: this.requestParameterList}, {responseParameterList: this.responseParameterList})
+      let parame = Object.assign(this.requestMes,
+        {requestParameterList: this.requestParameterList ? this.requestParameterList : this.reqParames},
+        {responseParameterList: this.responseParameterList ? this.responseParameterList : this.reqResponse})
       let callback = (data) => {
         if (data.code !== 0) {
           Message.error(data.message)
@@ -112,9 +111,12 @@ export default {
   watch: {
     requestMes: {
       handler: function (newVal, oldVal) {
+        this.reqParames = this.requestMes.requestParameterList
+        this.reqResponse = this.requestMes.responseParameterList
       },
       deep: true
-    }
+    },
+
   }
 }
 </script>

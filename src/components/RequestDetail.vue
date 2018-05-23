@@ -28,6 +28,7 @@ export default {
     this.id = this.$route.params.id || lstorage.get('id')
     this.getRequestDetail(this.id)
     lstorage.set('id', this.id)
+    console.log('~~~~~~id~~~~~', this.id)
   },
   computed: {
     ...mapState('detail', [
@@ -36,8 +37,7 @@ export default {
   },
   methods: {
     ...mapActions('detail', [
-      'getRequest',             // 获取项目接口信息
-      'getRequestMes'          // 获取接口全部数据
+      'getRequest'             // 获取接口信息
     ]),
     /**
      * 获取接口详情数据
@@ -45,15 +45,14 @@ export default {
      */
     getRequestDetail (id) {
       let parame = {
-        id: id
+        id: id,
+        number: new Date()
       }
       let callback = (data) => {
         if (data) {
           if (data.code !== 0) {
             // 报错信息，toast提示
             this.$message.error(data.message)
-          } else {
-            this.getRequestMes(data)
           }
         }
       }

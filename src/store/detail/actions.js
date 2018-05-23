@@ -6,10 +6,6 @@ export default {
   saveRequestEdit ({commit}, val) {
     commit('saveRequestEdit', val)
   },
-  // 获取全部接口数据
-  getRequestMes ({commit}, val) {
-    commit('getRequestMes', val)
-  },
   // 重置对象数据
   resetObjectP ({commit}, val) {
     commit('resetObjectP', val)

@@ -44,15 +44,17 @@
       <el-form-item label="cookie">
         <el-input v-model="requestMes.cookie" :disabled="!edit" type="textarea" :rows="2"></el-input>
       </el-form-item>
-      <el-form-item label="备注">
+      <el-form-item label="接口备注">
         <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="2"></el-input>
+      </el-form-item>
+      <el-form-item label="mock链接" v-if="requestMes.clusterId && requestMes.requestUrl">
+        <p>{{mockPath}}/api/mock/{{requestMes.clusterId}}{{requestMes.requestUrl}}</p>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
-// import { lstorage } from '../../../utils/storage'
-// import { mapActions, mapState } from 'vuex'
+import API from '../../../service/API'
 export default {
   props: {
     requestMes: {
@@ -72,7 +74,7 @@ export default {
   },
   data () {
     return {
-      mockPath: '',                 // mock链接的域名
+      mockPath: API.PATH,                 // mock链接的域名
       requestId: '',                 // 接口的id
       requestType: 'get',
       requestWay: 'ajax',
@@ -80,7 +82,6 @@ export default {
     }
   },
   created () {
-    this.mockPath = window.json2fe && window.json2fe.requestPath
   },
   methods: {
     // 限制输入路径的规范
