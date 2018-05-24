@@ -32,9 +32,12 @@
           <el-input
             type="textarea"
             :rows="2"
-            placeholder="如：{'code':0,'data':{},'message':''}"
+            placeholder=""
             v-model="form.responseTemplate"
             ></el-input>
+        </el-form-item>
+        <el-form-item label="模版说明">
+          <p style="font-size: 12px;color: red">集群模版代表集群下接口默认返回的外层统一结构，其中只能有一个字段是范型，用{}表示，如默认模版中的data字段，状态码为number类型，状态信息为string类型</p>
         </el-form-item>
       </el-form>
       <!-- <response :is-generic="1" v-model="responseTemplate"></response> -->
@@ -44,7 +47,11 @@
 </template>
 
 <script>
-// import Response from './paramter/index'
+var obj = {
+          "code":0,
+          "data":{},
+          "message":''
+        }
 import { mapActions } from 'vuex'
 export default {
   data () {
@@ -55,7 +62,7 @@ export default {
         name: '',
         header: '',
         cookie: '',
-        responseTemplate: ''
+        responseTemplate: JSON.stringify(obj)
       },
       responseTemplate: null,
       rules: {
