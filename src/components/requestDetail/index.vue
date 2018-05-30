@@ -98,6 +98,7 @@ export default {
           Message.error(data.message)
         } else {
           this.edit = !this.edit
+          Message.success('保存成功')
         }
       }
       this.editRequest({parame, callback})

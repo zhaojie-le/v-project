@@ -11,13 +11,15 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import { lstorage } from '../utils/storage.js'
 import Search from '../components/requestList/search'
 import List from '../components/requestList/list'
-import { mapState, mapActions } from 'vuex'
+
 export default {
   created () {
     this.clusterListAjax()
+    this.changePage(1)
   },
   computed: {
     ...mapState('list', [
@@ -27,6 +29,7 @@ export default {
   methods: {
     ...mapActions('list', [
       'getInfo',
+      'changePage',
       'getClusterList'
     ]),
     clusterListAjax () {

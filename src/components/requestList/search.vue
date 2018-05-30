@@ -69,7 +69,7 @@ export default {
     requestList () {
       let page = {
         page: this.page,
-        pageNum: this.pageNum
+        pageSize: this.pageNum
       }
       let parame = Object.assign({}, this.form, page)
       let callback = (data) => {

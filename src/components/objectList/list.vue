@@ -1,9 +1,9 @@
 <template>
-  <div class="content-body">
+  <div class="content-body" v-if="objData">
     <!-- 列表项 -->
     <!-- @current-change="handleCurrentChange" -->
     <el-table
-      :data="objectData.list"
+      :data="objData.list"
       stripe
       style="width: 100%">
       <el-table-column
@@ -29,7 +29,7 @@
           <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
-      <el-table-column type="expand">
+      <!-- <el-table-column type="expand">
         <template slot-scope="props" v-if="props.row.propertyList">
           <el-form label-position="left" inline class="demo-table-expand" label="内部属性">
             <el-form-item v-for="(item, index) in props.row.propertyList" :key="index">
@@ -37,13 +37,13 @@
             </el-form-item>
           </el-form>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     <el-pagination
       background
       layout="prev, pager, next"
-      :total="objectData.pagination.rowCount"
-      :page-size="20"
+      :total="objData.pagination.rowCount"
+      :page-size="10"
       :current-page="page"
       class="pagination-box"
       @current-change="currentChange"
@@ -52,23 +52,19 @@
   </div>
 </template>
 <script>
-import { Message, MessageBox } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
+import { Message, MessageBox } from 'element-ui'
+
 export default {
-  props: {
-    objectData: {
-      type: Object
-    }
-  },
   data () {
     return {
-      list: null,
-      page: 1
+      list: null
     }
   },
   computed: {
     ...mapState('list', [
-      'allListNum'
+      'page',
+      'objData'
     ])
   },
   methods: {
@@ -93,7 +89,7 @@ export default {
     getList (num) {
       let page = {
         page: num,
-        pageSize: 20
+        pageSize: 10
       }
       let parame = Object.assign({}, this.form, page)
       let callback = (data) => {
@@ -140,14 +136,6 @@ export default {
   components: {
     Message,
     MessageBox
-  },
-  watch: {
-    objectData: {
-      handler: function (newVal, oldVal) {
-        this.list = this.objectData.list
-      },
-      deep: true
-    }
   }
 }
 </script>

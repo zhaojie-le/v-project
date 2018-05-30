@@ -64,7 +64,7 @@ export default {
     getObjectList () {
       let page = {
         page: this.page,
-        pageNum: this.pageNum
+        pageSize: this.pageNum
       }
       let parame = Object.assign({}, this.form, page)
       let callback = (data) => {
@@ -87,6 +87,7 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+      this.changePage(1)
       this.getObjectList()
     }
   },

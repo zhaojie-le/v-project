@@ -1,4 +1,4 @@
-
+import { lstorage } from '../../utils/storage'
 export default {
   // 获取初始信息
   getInfo (state, val) {
@@ -22,6 +22,7 @@ export default {
   // 获取集群列表
   clusterList (state, val) {
     state.clusterList = val.data.clusterList
+    lstorage.set('clusterList', state.clusterList)
   }
 }
 

@@ -11,7 +11,7 @@
         <el-menu-item index="ser"><router-link :to="'clulist'">集群列表页</router-link></el-menu-item>
         <el-menu-item index="list"><router-link :to="'list'">接口列表页</router-link></el-menu-item>
         <el-menu-item index="object"><router-link :to="'object'">对象列表页</router-link></el-menu-item>
-        <el-menu-item index="2"><a href="http://static.djtest.cn/assets/other/mock-platform/out/index03.html" target="_blank">使用文档</a></el-menu-item>
+        <!-- <el-menu-item index="2"><a href="http://static.djtest.cn/assets/other/mock-platform/out/index03.html" target="_blank">使用文档</a></el-menu-item> -->
     </el-menu>
   </el-header>
 </template>

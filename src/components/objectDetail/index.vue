@@ -78,6 +78,7 @@ export default {
       let callback = (data) => {
         if (data.code === 0) {
           // success
+          Message.success('保存成功')
         } else {
           Message.error(data.message)
         }

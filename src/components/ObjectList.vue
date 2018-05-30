@@ -6,19 +6,19 @@
       <el-button type="primary" size="small" style="float: right"><router-link :to="'newobject'">新建对象</router-link></el-button>
     </el-breadcrumb>
     <search :list="clusterList" v-if="clusterList"></search>
-    <object-list :object-data="objData" v-if="objData"></object-list>
+    <object-list></object-list>
   </el-main>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import { lstorage } from '../utils/storage'
 import Search from '../components/objectList/search'
-import ObjectList from '../components/objectList/objectList'
-import { mapState, mapActions } from 'vuex'
+import ObjectList from '../components/objectList/list'
+
 export default {
   data () {
     return {
-      infoData: null,
       clusterList: null
     }
   },
@@ -30,11 +30,13 @@ export default {
   created () {
     this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
     this.getObject()
+    this.changePage(1)
   },
   methods: {
     ...mapActions('list', [
       'getInfo',
-      'objectList'
+      'objectList',
+      'changePage'
     ]),
     getObject () {
       let parame = {}

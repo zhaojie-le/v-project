@@ -74,7 +74,8 @@ export default {
   },
   methods: {
     ...mapActions('list', [
-      'getInfo'
+      'getInfo',
+      'getClusterList'
     ]),
     ...mapActions('create', [
       'newCluster'
@@ -92,11 +93,21 @@ export default {
       let parame = this.form
       let callback = (data) => {
         if (data.code === 0) {
+          this.clusterListAjax()
           // 提交成功-回到集群列表页
           this.$router.push({name: 'clulist'})
         }
       }
       this.newCluster({parame, callback})
+    },
+    clusterListAjax () {
+      let parame = {name: ''}
+      let callback = (data) => {
+        if (data.code === 0) {
+          lstorage.set('clusterList', data.data.clusterList)
+        }
+      }
+      this.getClusterList({parame, callback})
     }
   },
   components: {
