@@ -40,7 +40,7 @@
       background
       layout="prev, pager, next"
       :total="pageData.rowCount"
-      :page-size="20"
+      :page-size="10"
       :current-page="page"
       class="pagination-box"
       @current-change="currentChange"

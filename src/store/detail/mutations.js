@@ -10,8 +10,6 @@ export default {
     state.requestEdit = val.data
     state.reqParames = val.data.requestParameterList
     state.reqResponse = val.data.responseParameterList
-    console.log('0000000', state.reqParames)
-    console.log('1111111', state.reqResponse)
   },
   // 初始对象列表
   objectListInfo (state, val) {

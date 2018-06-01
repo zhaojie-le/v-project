@@ -5,7 +5,7 @@
     <!-- <template> -->
       <el-button type="primary" size="medium" style="float: right" v-if="!edit" @click="editEvent">编辑</el-button>
       <el-button type="success" size="medium" style="float: right" v-if="edit" @click="saveEvent">保存</el-button>
-      <el-form label-width="90px" size="mini" style="width: 800px; padding: 0px 20px;">
+      <el-form label-width="90px" size="mini" style="width: 800px;">
         <el-form-item label="对象名称">
           <el-input v-model="objectData.name" :disabled="!edit"></el-input>
         </el-form-item>
@@ -79,6 +79,8 @@ export default {
         if (data.code === 0) {
           // success
           Message.success('保存成功')
+          // 跳列表页
+          this.$router.push({name: 'object'})
         } else {
           Message.error(data.message)
         }
@@ -113,10 +115,12 @@ export default {
     color: #525a66;
   }
   .table-box{
-    padding-top: 50px;
+    padding-top: 30px;
     p{
-      font-size: 14px;
-      margin-left: 20px;
+      font-size: 16px;
+      line-height: 40px;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
   }
 </style>

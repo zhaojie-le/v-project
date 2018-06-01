@@ -47,6 +47,7 @@ export default {
   },
   created () {
     this.requestList()
+    this.changePage(1)
   },
   computed: {
     ...mapState('list', [
@@ -93,6 +94,7 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
       this.requestList()
+      this.changePage(1)
     }
   },
   components: {

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quick-guide | MOCK</title>
+  <script src="scripts/prettify/prettify.js"></script>
+  <script src="scripts/prettify/lang-css.js"></script>
+  <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+</head>
+<body>
+  <nav class="lnb" id="lnb">
+    <div class="logo" style="width: 125px; height: 125px">
+      <img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/djlogo.png" width="100%" height="100%">
+    </div>
+    <div class="title">
+      <h1>
+        <a href="index03.html" class="link">MOCK</a>
+      </h1>
+      <span class="version">v1.0.0</span>
+    </div>
+    <ol class="lnb-tab">
+      <li id="examples-tab">
+        <a href="index03.html">
+          <h4>Guides</h4>
+        </a>
+      </li>
+    </ol>
+    <div class="lnb-examples hidden">
+      <ul>
+        <li>
+          <a href="tutorial-Quick-guide03.html">Quick-guide</a>
+          <button type="button" class="hidden toggle-subnav btn btn-link">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          <div class="hidden" id="Quick-guide_sub"></div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="resizer"></div>
+
+  <div class="main" id="main">
+    <section>
+      <header>
+        <h2>Quick-guide</h2>
+      </header>
+      <article class="readme">
+        <h1 id="quick-guide">Quick guide</h1>
+        <p>用户快速指引</p>
+        <ul>
+          <li>
+            <a href="#mock-1">接口操作</a>
+            <ul>
+              <li>
+                <a href="#mock-1-1">接口列表</a>
+              </li>
+              <li>
+                <a href="#mock-1-2">创建接口</a>
+              </li>
+              <li>
+                <a href="#mock-1-3">创建对象数据</a>
+              </li>
+              <li>
+                <a href="#mock-1-4">创建对象</a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#mock-2">接口编辑</a>
+            <ul>
+              <li>
+                <a href="#mock-2-1">接口删除</a>
+              </li>
+              <li>
+                <a href="#mock-2-2">数据编辑</a>
+                <ul>
+                  <li>
+                    <a href="#mock-2-2-1">接口相关信息</a>
+                  </li>
+                  <li>
+                    <a href="#mock-2-2-2">接口请求参数</a>
+                  </li>
+                  <li>
+                    <a href="#mock-2-2-3">接口响应数据</a>
+                  </li>
+                  <li>
+                    <a href="#mock-2-2-4">接口mock数据</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#mock-3">接口搜索</a>
+          </li>
+          <li>
+            <a href="#mock-4">接口mock功能</a>
+          </li>
+        </ul>
+        <h2 id="mock-1">创建mock文档</h2>
+        <h3 id="mock-1-1">登录</h3>
+        <p>MOCK平台为到家内部应用平台，使用中需要登录公司内网，接入inpass系统使用个人inpass账号密码登录</p>
+        <h3 id="mock-1-2">创建接口</h3>
+        <p>登录mock平台后，进入
+          <code>列表页</code>，点击右上角
+          <code>新建接口</code>按钮，进入
+          <code>新建接口</code>页面，选择接口所属集群名，选填所属项目名称，点击
+          <code>下一步</code>按钮后，进入新建接口的
+          <code>接口详情页</code>
+        </p>
+        <p><img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/new.png" alt="mcok"></p>
+        <h3 id="mock-1-4">创建对象</h3>
+        <ul>
+          <li>进入接口详情页左侧有<code>创建对象</code>按钮</li>
+          <li>右侧展示对象内部具体的字段编辑列表</li>
+          <li>当展示对象的具体数据时，左侧上方面包屑上多一个<code>接口详情</code>的切换，点击回到展示接口详情数据</li>
+          <p><img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/object.png" alt="mcok"></p>
+        </ul>
+        <!-- <h4 id="mock-2-1">接口删除</h4>
+        <p>进入项目详情页时，若已有接口数据，默认展示第一个接口数据，左侧接口列表点击到当前接口时，接口名称右侧有删除的图标，点击该图标，删除相应的接口
+          <img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/jiekou.png" alt="接口操作">
+        </p> -->
+        <h2 id="mock-3">接口搜索</h2>
+        <p>列表页中，提供<code>接口所属集群名</code>,<code>接口所属项目</code>,<code>接口名称</code>三种搜索项
+        </p>
+        <h4 id="-">如下图所示</h4>
+        <p>
+          <img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/list01.png" alt="mcok">
+        </p>
+        <h3 id="mock-2-2">接口数据编辑</h3>
+        <p>接口详情中的数据可编辑，无权限控制</p>
+        <h4 id="mock-2-2-1">接口相关信息</h4>
+        <ul>
+          <li>接口的请求方式：
+            <code>get</code>
+            <code>post</code>
+          </li>
+          <li>接口的请求类型：
+            <code>ajax</code>
+            <code>jsonp</code>
+          </li>
+          <li>接口的回调函数：只有请求类型选择
+            <code>jsonp</code>的时候填写</li>
+          <li>接口的请求路径：以
+            <code>／</code>开头，不允许输入汉字</li>
+          <li>接口的所属集群：由RD提供接口所在的集群名</li>
+          <li>接口的mock地址：接口的url及返回格式填写完成后，提供的一个在线模拟接口连接</li>
+        </ul>
+        <h4 id="mock-2-2-2">接口请求参数</h4>
+        <ul>
+          <li>接口请求参数列表，用来记录参数的名称，类型，及相关备注字段，该请求参数列表可以为空</li>
+          <li>请求参数中若是定义为<code>object</code>类型，且名称和对象列表中对象，点击该对象名称可直接显示对象详情数据</li>
+        </ul>
+        <h4 id="mock-2-2-3">接口响应数据</h4>
+        <ul>
+          <li>定义的接口返回的json格式及模拟数据，填写时必须按照正确的json格式输入，否则保存不成功，该接口格式在没有选择mock数据时，默认为mock接口返回的数据</li>
+        </ul>
+        <h4 id="mock-2-2-4">接口mock数据</h4>
+        <ul>
+          <li>接口的mock数据是接口响应数据的一种扩展，针对一种响应格式，可以定义多种不同的数据，选中的当前数据为模拟mock接口返回的响应数据，根据选择不同的数据来模拟不同场景的下的接口返回数据</li>
+          <li>若定义的mock数据，没有默认选中状态，则mock接口返回的是默认定义的响应数据</li>
+          <li>定义的mock数据在编辑状态下，提供可编辑，可删除功能</li>
+            <h4 id="-">如下图所示</h4>
+            <img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/mock.png" alt="mcok">
+          </li>
+        </ul>
+
+        <h2 id="mock-4">接口mock功能</h2>
+        <p>当接口信息填写了路径，所属集群，响应json格式后，提供的模拟mock链接返回选中状态的mock数据或定义的json格式，前者优先作为返回数据</p>
+      </article>
+
+    </section>
+
+
+
+  </div>
+
+  <!-- <footer>
+    <img class="logo" src="http://inpass.daojia-inc.com/images/djlogo.png" style="width: 125px; height: 125px">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer> -->
+  <script>
+    prettyPrint();
+
+  </script>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/tui-doc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+
+  <script>
+    showLnbExamples();
+
+  </script>
+
+</body>
+
+</html>

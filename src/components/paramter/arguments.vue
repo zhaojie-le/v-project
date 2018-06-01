@@ -1,10 +1,16 @@
 <template>
   <div class="table-wrap">
-    <items :list="list" v-model="list" :edit="edit" :entity="entity" @changeItem="changeItem"></items>
+    <el-row type="flex" justify="space-around" style="background: #f1f2f6">
+      <el-col :span="5" v-for="(item, index) in tableTitle" :key="index">
+        <p style="line-height: 35px; margin-left: 13px;margin-bottom: 5px" >{{item.title}}</p>
+      </el-col>
+    </el-row>
+    <items :list="list" v-model="list" :edit="edit" :entity="entity" @changeItem="changeItem" :count="nowCount"></items>
     <el-button size="mini" @click="addParamter" style="margin-top: 10px" v-if="edit">添加参数</el-button>
   </div>
 </template>
 <script>
+var tableTitle = [{title: '变量名'},{title: '变量类型'},{title:'mock规则'},{title:'备注'}]
 import Items from './item'
 import { mapActions, mapState } from 'vuex'
 export default {
@@ -53,7 +59,9 @@ export default {
         values: '',
         action: 0,
         extra: null
-      }
+      },
+      nowCount: 1,
+      tableTitle: tableTitle
     }
   },
   computed: {
@@ -144,7 +152,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   .table-wrap{
-    margin: 20px;
+    margin: 0 20px 20px 20px;
   }
   .row-bg {
     padding: 5px 0;

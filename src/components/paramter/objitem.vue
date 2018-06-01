@@ -3,7 +3,7 @@
   <el-row type="flex" justify="space-around" class="row-item-bg">
     <el-col :span="5">
       <div class="grid-content">
-        <el-input size="mini" placeholder="名称" v-model="item.identifier" :disabled="!edit"></el-input>
+        <el-input size="mini" placeholder="名称" v-model="item.identifier" :disabled="!edit" :style="'width:'+ (110 - count * 5) +'%;'" style="float: right"></el-input>
       </div>
     </el-col>
     <el-col :span="5">
@@ -63,6 +63,10 @@ export default {
     edit: {
       type: Boolean,
       default: false
+    },
+    count: {
+      type: Number,
+      default: 0
     }
   },
   computed: {

@@ -28,7 +28,6 @@ export default {
     this.id = this.$route.params.id || lstorage.get('id')
     this.getRequestDetail(this.id)
     lstorage.set('id', this.id)
-    console.log('~~~~~~id~~~~~', this.id)
   },
   computed: {
     ...mapState('detail', [

@@ -1,7 +1,13 @@
 <template>
   <div class="content-item">
     <p class="title-head">返回参数</p>
-    <arguments :list="responseParameterList" v-if="responseParameterList" :edit="edit" v-model="responseParameterList"></arguments>
+    <arguments
+      :edit="edit"
+      :entity="true"
+      :list="responseParameterList"
+      v-if="responseParameterList"
+      v-model="responseParameterList"
+    ></arguments>
   </div>
 </template>
 <script>

@@ -99,6 +99,8 @@ export default {
         } else {
           this.edit = !this.edit
           Message.success('保存成功')
+          // 跳列表页
+          this.$router.push({name: 'list'})
         }
       }
       this.editRequest({parame, callback})

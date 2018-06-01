@@ -53,6 +53,8 @@ var obj = {
           "message":''
         }
 import { mapActions } from 'vuex'
+import { Message } from 'element-ui'
+import { lstorage } from '../utils/storage'
 export default {
   data () {
     return {
@@ -96,6 +98,8 @@ export default {
           this.clusterListAjax()
           // 提交成功-回到集群列表页
           this.$router.push({name: 'clulist'})
+        } else {
+          Message.error(data.message)
         }
       }
       this.newCluster({parame, callback})

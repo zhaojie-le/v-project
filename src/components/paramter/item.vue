@@ -6,7 +6,7 @@
           <el-row type="flex" justify="space-around" :class="[isItem ? 'row-item-bg':'row-bg']">
             <el-col :span="5">
               <div class="grid-content">
-                <el-input size="mini" placeholder="名称" v-model="item.identifier" :disabled="!edit"></el-input>
+                <el-input size="mini" placeholder="名称" v-model="item.identifier" :disabled="!edit" :style="'width:'+ (110 - nowCount * 5) +'%;'" style="float: right"></el-input>
               </div>
             </el-col>
             <el-col :span="5">
@@ -92,12 +92,12 @@
         </div>
         <!-- 复杂类型 -->
         <template v-if="item.refEntity">
-          <items :list="item.refEntity.propertyList" :is-item="true" v-if="item.refEntity.propertyList"></items>
+          <items :list="item.refEntity.propertyList" :is-item="true" v-if="item.refEntity.propertyList" :count="nowCount"></items>
         </template>
         <!-- 简单类型 -->
         <template v-if="item.refProperty">
           <!-- <items :list="item.refProperty" :is-item="true" :edit="edit"></items> -->
-          <obj-item :item="item.refProperty" :edit="edit&&item.dataType === 'array'"></obj-item>
+          <obj-item :item="item.refProperty" :edit="edit&&item.dataType === 'array'" :count="nowCount+1"></obj-item>
         </template>
       </div>
     </div>
@@ -105,6 +105,7 @@
   </div>
 </template>
 <script>
+
 import { Message } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import NewObjectDialog from '../newObjectDialog/index'
@@ -132,6 +133,10 @@ export default {
     entity: {  // 是否是新建实体，新建实体时只是简单类型
       type: Boolean,
       default: false
+    },
+    count: {
+      type: Number,
+      default: 1
     }
   },
   data () {
@@ -153,12 +158,17 @@ export default {
           // "propertyList": []
         }
       },
-      showObjDialog: false
+      showObjDialog: false,
+      nowCount: 0
     }
   },
   created () {
     this.getObject()
     this.dataTypeAjax()
+    if (this.count) {
+      this.nowCount = this.count + 1
+    }
+
   },
   computed: {
     ...mapState('list', [
