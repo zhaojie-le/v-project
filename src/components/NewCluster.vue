@@ -81,7 +81,6 @@ export default {
   },
   methods: {
     ...mapActions('list', [
-      'getInfo',
       'getClusterList'
     ]),
     ...mapActions('create', [
