@@ -42,7 +42,8 @@
         <el-input v-model="requestMes.header" :disabled="!edit" type="textarea" :rows="2"></el-input>
       </el-form-item>
       <el-form-item label="cookie">
-        <el-input v-model="requestMes.cookie" :disabled="!edit" type="textarea" :rows="2"></el-input>
+        <el-input v-model="requestMes.cookie" :disabled="!edit" type="textarea" :rows="2" placeholder="key1:value1,key2:value2"></el-input>
+        <!-- <input-edit :obj="requestMes.cookie" :edit="edit"></input-edit> -->
       </el-form-item>
       <el-form-item label="接口备注">
         <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="2"></el-input>
@@ -55,6 +56,7 @@
 </template>
 <script>
 import API from '../../../service/API'
+import InputEdit from '../../inputEdit.vue/index'
 export default {
   props: {
     requestMes: {
@@ -193,6 +195,9 @@ export default {
       },
       deep: true
     }
+  },
+  components: {
+    InputEdit
   }
 }
 </script>

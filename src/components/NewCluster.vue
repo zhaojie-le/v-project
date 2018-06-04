@@ -52,7 +52,7 @@ var obj = {
           "data":{},
           "message":''
         }
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import { Message } from 'element-ui'
 import { lstorage } from '../utils/storage'
 export default {
@@ -74,6 +74,11 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('detail', [
+      'dataTypeList'
+    ])
+  },
   methods: {
     ...mapActions('list', [
       'getInfo',
@@ -81,6 +86,9 @@ export default {
     ]),
     ...mapActions('create', [
       'newCluster'
+    ]),
+    ...mapActions('detail', [
+      'getDataType'
     ]),
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
