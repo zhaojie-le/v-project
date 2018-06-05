@@ -1,6 +1,6 @@
 // var hoss = 'http://yapi.demo.qunar.com/mock/7178'
-// var hoss = 'http://mock.djtest.cn'
-var hoss = 'http://localhost:3000'
+var hoss = 'http://mock.djtest.cn'
+// var hoss = 'http://localhost:3000'
 
 module.exports = {
   // 页面初始信息
