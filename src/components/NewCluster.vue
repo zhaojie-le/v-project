@@ -34,12 +34,17 @@
             :rows="2"
             placeholder=""
             v-model="form.responseTemplate"
+            :disabled="true"
             ></el-input>
         </el-form-item>
-        <el-form-item label="模版说明">
-          <p style="font-size: 12px;color: red">集群模版代表集群下接口默认返回的外层统一结构，其中只能有一个字段是范型，用{}表示，如默认模版中的data字段，状态码为number类型，状态信息为string类型</p>
+        <el-form-item label="模版编辑">
+          <template-edit
+            :data-type="dataTypeList"
+            v-model="form.responseTemplate"
+          ></template-edit>
         </el-form-item>
       </el-form>
+
       <!-- <response :is-generic="1" v-model="responseTemplate"></response> -->
       <el-button type="primary" size="medium" style="float: right"  @click="submitForm('form')">立即创建</el-button>
     </div>
@@ -47,14 +52,15 @@
 </template>
 
 <script>
-var obj = {
-          "code":0,
-          "data":{},
-          "message":''
-        }
-import { mapActions, mapState } from 'vuex'
+// var obj = {
+//           "code":0,
+//           "data":{},
+//           "message":''
+//         }
 import { Message } from 'element-ui'
+import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../utils/storage'
+import TemplateEdit from '../components/newCluster/template'
 export default {
   data () {
     return {
@@ -64,7 +70,8 @@ export default {
         name: '',
         header: '',
         cookie: '',
-        responseTemplate: JSON.stringify(obj)
+        responseTemplate: ''
+        // responseTemplate: JSON.stringify(obj)
       },
       responseTemplate: null,
       rules: {
@@ -73,6 +80,9 @@ export default {
         ]
       }
     }
+  },
+  created () {
+    this.dataTypeAjax()
   },
   computed: {
     ...mapState('detail', [
@@ -119,10 +129,21 @@ export default {
         }
       }
       this.getClusterList({parame, callback})
+    },
+    dataTypeAjax () {
+      let parame = {
+        "isGeneric":1
+      }
+      let callback = (data) =>{
+        if (data.code !==0){
+          Message.error(data.message)
+        }
+      }
+      this.getDataType({parame, callback})
     }
   },
   components: {
-    // Response
+    TemplateEdit
   }
 }
 </script>

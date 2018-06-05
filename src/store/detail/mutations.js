@@ -28,7 +28,6 @@ export default {
   // 重置对象参数数组
   resetObjectP (state, val) {
     state.objectP = val
-    console.log('stateObjectP', state.objectP)
   }
 }
 
