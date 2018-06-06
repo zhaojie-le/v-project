@@ -35,14 +35,14 @@
         label="集群响应模版"
         >
       </el-table-column>
-      <!-- <el-table-column
+      <el-table-column
         prop=""
         label="操作">
         <template slot-scope="scope">
           <el-button @click="handleCurrentChange(scope.row)" type="text" size="small">查看</el-button>
-          <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button>
+          <!-- <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button> -->
         </template>
-      </el-table-column> -->
+      </el-table-column>
     </el-table>
   </el-main>
 </template>
@@ -70,6 +70,13 @@ export default {
         }
       }
       this.getClusterList({parame, callback})
+    },
+    toDetail (item) {
+      // 跳转编辑集群页面
+      this.$router.push({name: 'cluster', params: { id: item.id,form:'list' }})
+    },
+    handleCurrentChange (val) {
+      this.toDetail(val)
     }
   }
 }

@@ -11,7 +11,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="对象名称" prop="name">
+      <el-form-item label="实体名称" prop="name">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
       <el-form-item>

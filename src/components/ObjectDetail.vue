@@ -2,7 +2,7 @@
   <el-main>
     <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom: 20px">
         <el-breadcrumb-item :to="{ path: '/object' }">MOCK平台</el-breadcrumb-item>
-        <el-breadcrumb-item><span>对象详情页</span></el-breadcrumb-item>
+        <el-breadcrumb-item><span>实体详情页</span></el-breadcrumb-item>
       </el-breadcrumb>
     <el-container>
       <el-main style="padding: 20px 50px">

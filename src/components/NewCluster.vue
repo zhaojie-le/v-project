@@ -2,9 +2,10 @@
   <el-main style="min-height: 700px">
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">MOCK平台</el-breadcrumb-item>
-      <el-breadcrumb-item>新建集群</el-breadcrumb-item>
+      <el-breadcrumb-item>{{title}}</el-breadcrumb-item>
     </el-breadcrumb>
-    <div class="content-box">
+    <cluster-content></cluster-content>
+    <!-- <div class="content-box">
       <el-form :model="form" ref="form" label-width="90px" size="mini" :rules="rules">
         <el-form-item label="集群名称" prop="name">
           <el-input v-model="form.name"></el-input>
@@ -44,106 +45,34 @@
           ></template-edit>
         </el-form-item>
       </el-form>
-
-      <!-- <response :is-generic="1" v-model="responseTemplate"></response> -->
       <el-button type="primary" size="medium" style="float: right"  @click="submitForm('form')">立即创建</el-button>
-    </div>
+    </div> -->
   </el-main>
 </template>
-
 <script>
-// var obj = {
-//           "code":0,
-//           "data":{},
-//           "message":''
-//         }
-import { Message } from 'element-ui'
-import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../utils/storage'
-import TemplateEdit from '../components/newCluster/template'
+import ClusterContent from '../components/clusterEdit/content'
 export default {
   data () {
     return {
-      infoData: null,
-      form: {
-        host: '',
-        name: '',
-        header: '',
-        cookie: '',
-        responseTemplate: ''
-        // responseTemplate: JSON.stringify(obj)
-      },
-      responseTemplate: null,
-      rules: {
-        name: [
-          { required: true, message: '请输入集群名称', trigger: 'change' }
-        ]
-      }
+      title:'新建集群',
+      form: 'new'
     }
   },
   created () {
-    this.dataTypeAjax()
-  },
-  computed: {
-    ...mapState('detail', [
-      'dataTypeList'
-    ])
-  },
-  methods: {
-    ...mapActions('list', [
-      'getClusterList'
-    ]),
-    ...mapActions('create', [
-      'newCluster'
-    ]),
-    ...mapActions('detail', [
-      'getDataType'
-    ]),
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.submitAjax()
-        } else {
-          return false
-        }
-      })
-    },
-    submitAjax () {
-      let parame = this.form
-      let callback = (data) => {
-        if (data.code === 0) {
-          this.clusterListAjax()
-          // 提交成功-回到集群列表页
-          this.$router.push({name: 'clulist'})
-        } else {
-          Message.error(data.message)
-        }
-      }
-      this.newCluster({parame, callback})
-    },
-    clusterListAjax () {
-      let parame = {name: ''}
-      let callback = (data) => {
-        if (data.code === 0) {
-          lstorage.set('clusterList', data.data.clusterList)
-        }
-      }
-      this.getClusterList({parame, callback})
-    },
-    dataTypeAjax () {
-      let parame = {
-        "isGeneric":1
-      }
-      let callback = (data) =>{
-        if (data.code !==0){
-          Message.error(data.message)
-        }
-      }
-      this.getDataType({parame, callback})
+    this.form = this.$route.params.form || lstorage.get('form')
+    lstorage.set('form', this.form)
+    if (this.form === 'list') {
+      this.title = '集群详情'
     }
   },
+  methods: {
+  },
   components: {
-    TemplateEdit
+    ClusterContent
+  },
+  destroyed () {
+    lstorage.set('form', '')
   }
 }
 </script>

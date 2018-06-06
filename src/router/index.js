@@ -6,7 +6,7 @@ import RequestDetail from '@/components/RequestDetail'
 import ObjectDetail from '@/components/ObjectDetail'
 import New from '@/components/NewRequest'
 import NewObject from '@/components/NewObject'
-import ServerCluster from '@/components/NewCluster'
+import NewCluster from '@/components/NewCluster'
 import ClusterList from '@/components/ClusterList'
 
 Vue.use(Router)
@@ -46,7 +46,7 @@ const router = new Router({
     {
       path: '/cluster',
       name: 'cluster',
-      component: ServerCluster
+      component: NewCluster
     },
     {
       path: '/clulist',

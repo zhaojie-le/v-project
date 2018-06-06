@@ -20,6 +20,26 @@ export default {
       callback && callback(data)
     }
   },
+
+  // 获取集群详情
+  async getCluster ({ dispatch, commit }, { parame, callback }) {
+    let url = API.CLUSTER
+    let method = 'GET'
+    let data = await dispatch('fetchData', { url, method, parame }, { root: true })
+    if (data) {
+      callback && callback(data)
+    }
+  },
+  // 集群编辑保存
+  async editCluster ({ dispatch, commit }, { parame, callback }) {
+    let url = API.EDITCLUSTER
+    let method = 'POST'
+    let data = await dispatch('fetchData', { url, method, parame }, { root: true })
+    if (data) {
+      callback && callback(data)
+    }
+  },
+
   // 获取接口数据
   async getRequest ({ dispatch, commit }, { parame, callback }) {
     let url = API.REQUEST

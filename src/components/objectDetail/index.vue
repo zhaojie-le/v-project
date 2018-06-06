@@ -6,11 +6,11 @@
       <el-button type="primary" size="medium" style="float: right" v-if="!edit" @click="editEvent">编辑</el-button>
       <el-button type="success" size="medium" style="float: right" v-if="edit" @click="saveEvent">保存</el-button>
       <el-form label-width="90px" size="mini" style="width: 800px;">
-        <el-form-item label="对象名称">
+        <el-form-item label="实体名称">
           <el-input v-model="objectData.name" :disabled="!edit"></el-input>
         </el-form-item>
         <el-form-item label="所属集群" v-if="clusterList" prop="clusterId">
-          <el-select  v-model="objectData.clusterId" placeholder="对象所属集群" filterable size="mini" style="width: 100%" :disabled="!edit">
+          <el-select  v-model="objectData.clusterId" placeholder="实体所属集群" filterable size="mini" style="width: 100%" :disabled="!edit">
             <el-option
               :key="item.id"
               :label="item.name"
@@ -19,7 +19,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="对象说明">
+        <el-form-item label="实体说明">
           <el-input v-model="objectData.remark" type="textarea" :rows="2" :disabled="!edit"></el-input>
         </el-form-item>
       </el-form>

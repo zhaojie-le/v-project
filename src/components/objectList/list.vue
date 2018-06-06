@@ -8,7 +8,7 @@
       style="width: 100%">
       <el-table-column
         prop="name"
-        label="对象名称"
+        label="实体名称"
         >
       </el-table-column>
       <el-table-column
