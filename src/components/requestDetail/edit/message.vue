@@ -39,11 +39,12 @@
         </el-select>
       </el-form-item>
       <el-form-item label="header">
-        <el-input v-model="requestMes.header" :disabled="!edit" type="textarea" :rows="2"></el-input>
+        <el-input v-model="requestMes.header" :disabled="!edit" type="textarea" :rows="2" v-if="!edit"></el-input>
+        <input-edit :obj-str="requestMes.header" :edit="edit" v-model="requestMes.header" v-else></input-edit>
       </el-form-item>
       <el-form-item label="cookie">
-        <el-input v-model="requestMes.cookie" :disabled="!edit" type="textarea" :rows="2" placeholder="key1:value1,key2:value2"></el-input>
-        <!-- <input-edit :obj="requestMes.cookie" :edit="edit"></input-edit> -->
+        <el-input v-model="requestMes.cookie" :disabled="!edit" type="textarea" :rows="2" placeholder="" v-if="!edit"></el-input>
+        <input-edit :obj-str="requestMes.cookie" :edit="edit" v-model="requestMes.cookie" v-else></input-edit>
       </el-form-item>
       <el-form-item label="接口备注">
         <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="2"></el-input>
@@ -56,7 +57,7 @@
 </template>
 <script>
 import API from '../../../service/API'
-import InputEdit from '../../inputEdit.vue/index'
+import InputEdit from './inputEdit'
 export default {
   props: {
     requestMes: {
