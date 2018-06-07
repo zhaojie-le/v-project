@@ -1,6 +1,6 @@
 
-// var hoss = 'http://localhost:3000'
-var hoss = 'http://mock-server.djtest.cn'
+var hoss = 'http://localhost:3000'
+// var hoss = 'http://mock-server.djtest.cn'
 
 module.exports = {
   // 页面初始信息
@@ -34,7 +34,7 @@ module.exports = {
   // 集群详情
   CLUSTER: hoss + '/cluster/get',
   // 集群编辑
-  EDITCLUSTER: hoss +'cluster/update',
+  EDITCLUSTER: hoss +'/cluster/update',
 
   PATH: hoss
 }

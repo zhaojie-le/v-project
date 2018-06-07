@@ -1,11 +1,13 @@
 <template>
     <div class="content-box">
-      <el-form :model="form" ref="form" label-width="90px" size="mini" :rules="rules">
+      <el-button type="primary" size="medium" class="btn" v-if="from === 'list' && !edit" @click="editEvent">编辑</el-button>
+      <el-button type="success" size="medium" class="btn" v-if="from === 'list' && edit" @click="saveEvent">保存</el-button>
+      <el-form :model="form" ref="form" label-width="90px" size="mini" :rules="rules" style="margin-top: 30px;">
         <el-form-item label="集群名称" prop="name">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.name" :disabled="!edit"></el-input>
         </el-form-item>
         <el-form-item label="集群域名" prop="host">
-          <el-input v-model="form.host"></el-input>
+          <el-input v-model="form.host" :disabled="!edit"></el-input>
         </el-form-item>
         <el-form-item label="cookie" prop="cookie">
           <el-input
@@ -13,6 +15,7 @@
             :rows="2"
             placeholder="请输入cookie内容"
             v-model="form.cookie"
+            :disabled="!edit"
             ></el-input>
         </el-form-item>
         <el-form-item label="header" prop="header">
@@ -21,6 +24,7 @@
             :rows="2"
             placeholder="请输入header内容"
             v-model="form.header"
+            :disabled="!edit"
             ></el-input>
         </el-form-item>
         <el-form-item label="集群模版" prop="responseTemplate">
@@ -34,13 +38,20 @@
         </el-form-item>
         <el-form-item label="模版编辑">
           <template-edit
+            :edit="edit"
             :data-type="dataTypeList"
             v-model="form.responseTemplate"
             :object-string="form.responseTemplate"
           ></template-edit>
         </el-form-item>
       </el-form>
-      <el-button type="primary" size="medium" style="float: right"  @click="submitForm('form')">立即创建</el-button>
+      <el-button
+        v-if="from === 'new'"
+        type="primary" 
+        size="medium" 
+        style="float: right"  
+        @click="submitForm('form')"
+      >立即创建</el-button>
     </div>
 </template>
 
@@ -51,7 +62,7 @@ import { lstorage } from '../../utils/storage'
 import TemplateEdit from './template'
 export default {
   props: {
-    form: {
+    from: {
       type: String
     }
   },
@@ -71,11 +82,17 @@ export default {
         name: [
           { required: true, message: '请输入集群名称', trigger: 'change' }
         ]
-      }
+      },
+      edit: false
     }
   },
   created () {
     this.dataTypeAjax()
+    if (this.from === 'new') {
+      this.edit = true
+    } else {
+      this.getClusterAjax()
+    }
   },
   computed: {
     ...mapState('detail', [
@@ -90,7 +107,9 @@ export default {
       'newCluster'
     ]),
     ...mapActions('detail', [
-      'getDataType'
+      'getDataType',
+      'getCluster',
+      'editCluster'
     ]),
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
@@ -142,6 +161,47 @@ export default {
         }
       }
       this.getDataType({parame, callback})
+    },
+    editEvent () {
+      this.edit = !this.edit
+    },
+    saveEvent () {
+      this.editClusterAjax()
+      this.edit = !this.edit
+    },
+    getClusterAjax () {
+      let parame = {
+        id: lstorage.get('clusterId') || 0
+      }
+      let callback = (data) => {
+        if (data.code !== 0) {
+          Message.error(data.message)
+        } else {
+          this.form = data.data
+        }
+      }
+      this.getCluster({parame, callback})
+    },
+    editClusterAjax () {
+      let parame = this.form
+      let callback = (data) => {
+        if (data.code !==0){
+          Message.error(data.message)
+        } else {
+          this.$router.push({name: 'clulist'})
+        }
+      }
+      if (this.checkResponseTemplate() && this.checkoutName()){
+        this.editCluster({parame, callback})
+      }
+    },
+    checkoutName () {
+      if (this.form.name) {
+        return true
+      } else {
+        Message.error('集群名称不能为空')
+        return false
+      }
     }
   },
   components: {
@@ -151,7 +211,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content-box{
-  padding: 40px 50px;
+  padding: 20px 50px;
+}
+.btn{
+  float: right;margin-top: -20px;
 }
 </style>
 

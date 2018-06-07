@@ -21,23 +21,6 @@
                   size="mini"
                   style="width: 100%"
                 >
-                <!-- <div v-if="entity">
-                  <el-option
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.name"
-                    :disabled="item.name === 'array'"
-                    v-for="item in dataTypeList">
-                  </el-option>
-                </div>
-                <div v-else>
-                  <el-option
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.name"
-                    v-for="item in dataTypeList">
-                  </el-option>
-                </div> -->
                 <div>
                   <el-option
                     :key="item.name"
@@ -51,8 +34,33 @@
             </el-col>
             <el-col :span="5">
               <div class="grid-content">
-                <!-- 正常参数 -->
-                <el-input size="mini" placeholder="mock规则" v-model="item.restriction" v-if="item.dataType !== 'object'" :disabled="!edit"></el-input>
+                <!-- 正常参数 -->                
+                <el-tooltip placement="top">
+                  <div slot="content" v-if="item.dataType === 'number'">
+                    +1: 数值默认+1<br/>
+                    min-max: 生成一个min-max 间的整数<br/>
+                  </div>
+                  <div slot="content" v-if="item.dataType === 'string'">
+                    count: 重复count次字符串<br/>
+                    min-max: 重复min-max次字符串<br/>
+                  </div>
+                  <div slot="content" v-if="item.dataType === 'boolean'">
+                    1: true,false各1/2的概率<br/>
+                    min-max: true 的概率为min / (min + max)<br/>
+                  </div>
+                  <div slot="content" v-if="item.dataType === 'array'">
+                    count: 重复count次属性值<br/>
+                    min-max: 重复min-max次属性值<br/>
+                  </div>
+                  <div slot="content"><a href="https://github.com/nuysoft/Mock/wiki/Syntax-Specification" style="color: #fff">更多mock规则</a></div>
+                  <el-input 
+                    size="mini" 
+                    placeholder="1-5" 
+                    v-model="item.restriction" 
+                    v-if="item.dataType !== 'object'" 
+                    :disabled="!edit"
+                  ></el-input>
+                </el-tooltip>
               <!-- 关联对象 -->
                 <el-select
                   v-model="item.refEntityId"

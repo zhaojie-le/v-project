@@ -4,7 +4,7 @@
       <el-breadcrumb-item :to="{ path: '/' }">MOCK平台</el-breadcrumb-item>
       <el-breadcrumb-item>{{title}}</el-breadcrumb-item>
     </el-breadcrumb>
-    <cluster-content></cluster-content>
+    <cluster-content :from="from"></cluster-content>
     <!-- <div class="content-box">
       <el-form :model="form" ref="form" label-width="90px" size="mini" :rules="rules">
         <el-form-item label="集群名称" prop="name">
@@ -56,23 +56,29 @@ export default {
   data () {
     return {
       title:'新建集群',
-      form: 'new'
+      from: 'new',
+      clusterId: 0
     }
   },
   created () {
-    this.form = this.$route.params.form || lstorage.get('form')
-    lstorage.set('form', this.form)
-    if (this.form === 'list') {
-      this.title = '集群详情'
-    }
+    this.getInfoMes()
   },
   methods: {
+    getInfoMes () {
+      this.from = this.$route.params.from || lstorage.get('from')
+      this.clusterId = this.$route.params.id || lstorage.get('clusterId')
+      lstorage.set('from', this.from)
+      lstorage.set('clusterId', this.clusterId)
+      if (this.from === 'list') {
+        this.title = '集群详情'
+      }
+    }
   },
   components: {
     ClusterContent
   },
   destroyed () {
-    lstorage.set('form', '')
+    lstorage.set('from', '')
   }
 }
 </script>

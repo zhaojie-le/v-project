@@ -101,7 +101,6 @@ export default {
   watch: {
     objectData: {
       handler: function (newVal, oldVal) {
-        console.log('sss-------', this.objectData)
       },
       deep: true
     }

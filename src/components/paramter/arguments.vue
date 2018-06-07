@@ -107,7 +107,7 @@ export default {
     // 数组增加行
     addParamter () {
       let nowArr = this.addArray(this.list)
-      console.log('nowArr', nowArr)
+      return nowArr
     },
     // 增加子节点按钮
     addItemObject (index) {

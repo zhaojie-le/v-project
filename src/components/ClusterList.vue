@@ -3,7 +3,7 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">MOCK平台</el-breadcrumb-item>
       <el-breadcrumb-item>集群列表页</el-breadcrumb-item>
-      <el-button type="primary" size="small" style="float: right"><router-link :to="'cluster'">新建集群</router-link></el-button>
+      <el-button type="primary" size="small" style="float: right"><router-link :to="{ name: 'cluster', params: { from: 'new' }}">新建集群</router-link></el-button>
     </el-breadcrumb>
     <el-table
       :data="list"
@@ -73,7 +73,7 @@ export default {
     },
     toDetail (item) {
       // 跳转编辑集群页面
-      this.$router.push({name: 'cluster', params: { id: item.id,form:'list' }})
+      this.$router.push({name: 'cluster', params: { id: item.id,from:'list' }})
     },
     handleCurrentChange (val) {
       this.toDetail(val)
