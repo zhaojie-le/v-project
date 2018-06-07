@@ -47,9 +47,9 @@
       </el-form>
       <el-button
         v-if="from === 'new'"
-        type="primary" 
-        size="medium" 
-        style="float: right"  
+        type="primary"
+        size="medium"
+        style="float: right"
         @click="submitForm('form')"
       >立即创建</el-button>
     </div>
@@ -167,7 +167,6 @@ export default {
     },
     saveEvent () {
       this.editClusterAjax()
-      this.edit = !this.edit
     },
     getClusterAjax () {
       let parame = {
@@ -188,6 +187,7 @@ export default {
         if (data.code !==0){
           Message.error(data.message)
         } else {
+          this.edit = !this.edit
           this.$router.push({name: 'clulist'})
         }
       }

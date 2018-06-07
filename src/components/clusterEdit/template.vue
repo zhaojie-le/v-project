@@ -68,12 +68,12 @@ export default {
       }
     }
   },
-  created () {  
+  created () {
     if (this.objectString) {
       this.dataArr = this.objStrToArray(this.objectString)
     }
     this.objStr = this.arrayToObject(this.dataArr)
-    this.$emit('input', this.objStr) 
+    this.$emit('input', this.objStr)
   },
   methods: {
     deleteClick (list, item, index) {
