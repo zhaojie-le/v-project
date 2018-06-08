@@ -57,7 +57,7 @@
 </template>
 <script>
 import API from '../../../service/API'
-import InputEdit from './inputEdit'
+import InputEdit from '../../inputEdit.vue/inputEdit'
 export default {
   props: {
     requestMes: {

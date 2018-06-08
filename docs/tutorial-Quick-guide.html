@@ -55,67 +55,66 @@
         <p>用户快速指引</p>
         <ul>
           <li>
-            <a href="#mock-1">接口操作</a>
+            <a href="#mock-1">集群相关</a>
             <ul>
               <li>
-                <a href="#mock-1-1">接口列表</a>
+                <a href="#mock-1-1">集群列表</a>
               </li>
               <li>
-                <a href="#mock-1-2">创建接口</a>
+                <a href="#mock-1-2">新建集群</a>
               </li>
               <li>
-                <a href="#mock-1-3">创建对象数据</a>
-              </li>
-              <li>
-                <a href="#mock-1-4">创建对象</a>
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            <a href="#mock-2">接口编辑</a>
-            <ul>
-              <li>
-                <a href="#mock-2-1">接口删除</a>
-              </li>
-              <li>
-                <a href="#mock-2-2">数据编辑</a>
-                <ul>
-                  <li>
-                    <a href="#mock-2-2-1">接口相关信息</a>
-                  </li>
-                  <li>
-                    <a href="#mock-2-2-2">接口请求参数</a>
-                  </li>
-                  <li>
-                    <a href="#mock-2-2-3">接口响应数据</a>
-                  </li>
-                  <li>
-                    <a href="#mock-2-2-4">接口mock数据</a>
-                  </li>
-                </ul>
+                <a href="#mock-1-3">集群编辑</a>
               </li>
             </ul>
           </li>
           <li>
-            <a href="#mock-3">接口搜索</a>
+            <a href="#mock-2">接口操作</a>
+            <ul>
+              <li>
+                <a href="#mock-2-1">接口列表</a>
+              </li>
+              <li>
+                <a href="#mock-2-2">创建接口</a>
+              </li>
+              <li>
+                <a href="#mock-2-3">编辑接口数据</a>
+              </li>
+              <li>
+                <a href="#mock-2-4">mock接口功能</a>
+              </li>
+            </ul>
           </li>
           <li>
-            <a href="#mock-4">接口mock功能</a>
+            <a href="#mock-3">实体相关</a>
+            <ul>
+              <li>
+                <a href="#mock-3-1">实体列表</a>
+              </li>
+              <li>
+                <a href="#mock-2-2">创建实体</a>
+              </li>
+              <li>
+                <a href="#mock-2-3">编辑实体数据</a>
+              </li>
+            </ul>
           </li>
         </ul>
-        <h2 id="mock-1">创建mock文档</h2>
-        <h3 id="mock-1-1">登录</h3>
-        <p>MOCK平台为到家内部应用平台，使用中需要登录公司内网，接入inpass系统使用个人inpass账号密码登录</p>
-        <h3 id="mock-1-2">创建接口</h3>
-        <p>登录mock平台后，进入
-          <code>列表页</code>，点击右上角
-          <code>新建接口</code>按钮，进入
-          <code>新建接口</code>页面，选择接口所属集群名，选填所属项目名称，点击
-          <code>下一步</code>按钮后，进入新建接口的
-          <code>接口详情页</code>
+        <h2 id="mock-1">集群相关</h2>
+        <h4 id="mock-1-1">集群列表</h4>
+        <p>进入
+          <code>集群列表页</code>，点击右上角
+          <code>新建集群</code>按钮，进入
+          <code>新建集群</code>页面
         </p>
-        <p><img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/new.png" alt="mcok"></p>
+        <h4 id="mock-1-2">新建集群</h4>
+        <p><img src="./img/cluster_list.jpg" alt="mcok"></p>
+        <p><code>新建集群页面</code>同<code>集群详情页</code>类似，包含集群的相关信息填写</p>
+        <p>已经建好的集群不允许删除，不要创建无意义的集群</p>
+        <h4 id="mock-1-3">集群编辑</h4>
+        <p><img src="./img/cluster_edit.jpg" alt="mcok"></p>
+        <p><code>注意:</code>创建集群时，集群模版参数必须添加，系统会默认一套作为接口返回的外层统一数据结构，可自行修改，其中选择的<code>generic</code>类型属性值是为了mock参数中将编辑的对象统一赋值</p>
+
         <h3 id="mock-1-4">创建对象</h3>
         <ul>
           <li>进入接口详情页左侧有<code>创建对象</code>按钮</li>

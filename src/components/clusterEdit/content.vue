@@ -9,15 +9,6 @@
         <el-form-item label="集群域名" prop="host">
           <el-input v-model="form.host" :disabled="!edit"></el-input>
         </el-form-item>
-        <el-form-item label="cookie" prop="cookie">
-          <el-input
-            type="textarea"
-            :rows="2"
-            placeholder="请输入cookie内容"
-            v-model="form.cookie"
-            :disabled="!edit"
-            ></el-input>
-        </el-form-item>
         <el-form-item label="header" prop="header">
           <el-input
             type="textarea"
@@ -25,8 +16,22 @@
             placeholder="请输入header内容"
             v-model="form.header"
             :disabled="!edit"
+            v-if="!edit"
             ></el-input>
+            <input-edit :obj-str="form.header" :edit="edit" v-model="form.header" v-else></input-edit>
         </el-form-item>
+        <el-form-item label="cookie" prop="cookie">
+          <el-input
+            type="textarea"
+            :rows="2"
+            placeholder="请输入cookie内容"
+            v-model="form.cookie"
+            :disabled="!edit"
+            v-if="!edit"
+            ></el-input>
+            <input-edit :obj-str="form.cookie" :edit="edit" v-model="form.cookie" v-else></input-edit>
+        </el-form-item>
+
         <el-form-item label="集群模版" prop="responseTemplate">
           <el-input
             type="textarea"
@@ -60,6 +65,7 @@ import { Message } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../../utils/storage'
 import TemplateEdit from './template'
+import InputEdit from '../inputEdit.vue/inputEdit'
 export default {
   props: {
     from: {
@@ -205,6 +211,7 @@ export default {
     }
   },
   components: {
+    InputEdit,
     TemplateEdit
   }
 }
