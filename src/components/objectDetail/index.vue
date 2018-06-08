@@ -41,6 +41,7 @@ import { Message } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../../utils/storage'
 import Arguments from '../paramter/arguments'
+import ArrChange from '../../utils/arrayChange'
 export default {
   props: {
     requestid: {
@@ -74,7 +75,7 @@ export default {
     ]),
     editObjectAjax () {
       let parame = this.objectData
-      parame.propertyList = this.objectP
+      parame.propertyList = ArrChange.arrayRefEntityToNumber(this.objectP)
       let callback = (data) => {
         if (data.code === 0) {
           // success
@@ -101,6 +102,7 @@ export default {
   watch: {
     objectData: {
       handler: function (newVal, oldVal) {
+        this.objectData.propertyList = ArrChange.arrayRefEntityToStr(this.objectData.propertyList)
       },
       deep: true
     }

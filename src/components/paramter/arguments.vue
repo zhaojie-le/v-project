@@ -25,7 +25,7 @@ export default {
           "id": "",
           "identifier": "",
           "refEntity": {},
-          "refEntityId": 0,
+          "refEntityId": '',
           "refPropertyId": 0,
           "refProperty": {},
           "remark": "",

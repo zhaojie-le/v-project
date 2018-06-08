@@ -165,7 +165,7 @@ export default {
         "extra": "",
         "id": "",
         "identifier": "",
-        "refEntityId": 0,
+        "refEntityId": '',
         "refPropertyId": 0,
         "remark": "",
         "restriction": "",

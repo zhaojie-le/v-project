@@ -42,6 +42,7 @@ import { lstorage } from '../../utils/storage'
 import RMessage from './edit/message'
 import RParamter from './edit/paramter'
 import RResponse from './edit/response'
+import ArrChange from '../../utils/arrayChange'
 export default {
   props: {
     requestid: {
@@ -90,6 +91,8 @@ export default {
       this.editAjax()
     },
     editAjax () {
+      this.requestParameterList = ArrChange.arrayRefEntityToNumber(this.requestParameterList)
+      this.responseParameterList = ArrChange.arrayRefEntityToNumber(this.responseParameterList)
       let parame = Object.assign(this.requestMes,
         {requestParameterList: this.requestParameterList ? this.requestParameterList : this.reqParames},
         {responseParameterList: this.responseParameterList ? this.responseParameterList : this.reqResponse})
@@ -114,8 +117,11 @@ export default {
   watch: {
     requestMes: {
       handler: function (newVal, oldVal) {
-        this.reqParames = this.requestMes.requestParameterList
-        this.reqResponse = this.requestMes.responseParameterList
+        // this.reqParames = this.requestMes.requestParameterList
+        // this.reqResponse = this.requestMes.responseParameterList
+
+        this.reqParames = ArrChange.arrayRefEntityToStr(this.requestMes.requestParameterList)
+        this.reqResponse = ArrChange.arrayRefEntityToStr(this.requestMes.responseParameterList)
       },
       deep: true
     },
