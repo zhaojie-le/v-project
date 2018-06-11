@@ -78,6 +78,7 @@ export default {
       parame.propertyList = ArrChange.arrayRefEntityToNumber(this.objectP)
       let callback = (data) => {
         if (data.code === 0) {
+          this.edit = !this.edit
           // success
           Message.success('保存成功')
           // 跳列表页
@@ -92,7 +93,6 @@ export default {
       this.edit = !this.edit
     },
     saveEvent () {
-      this.edit = !this.edit
       this.editObjectAjax()
     }
   },
