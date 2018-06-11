@@ -63,7 +63,11 @@ export default {
           obj[item.key] = item.val
         }
       }
-      str = JSON.stringify(obj)
+      if (Object.keys(obj).length == 0){
+        str = ''
+      } else {
+        str = JSON.stringify(obj)
+      }
       return str
     },
     deleteClick (list, item, index) {
