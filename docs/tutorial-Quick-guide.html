@@ -69,7 +69,7 @@
             </ul>
           </li>
           <li>
-            <a href="#mock-2">接口操作</a>
+            <a href="#mock-2">接口相关</a>
             <ul>
               <li>
                 <a href="#mock-2-1">接口列表</a>
@@ -78,10 +78,10 @@
                 <a href="#mock-2-2">创建接口</a>
               </li>
               <li>
-                <a href="#mock-2-3">编辑接口数据</a>
+                <a href="#mock-2-3">接口编辑</a>
               </li>
               <li>
-                <a href="#mock-2-4">mock接口功能</a>
+                <a href="#mock-2-4">接口mock功能</a>
               </li>
             </ul>
           </li>
@@ -92,15 +92,16 @@
                 <a href="#mock-3-1">实体列表</a>
               </li>
               <li>
-                <a href="#mock-2-2">创建实体</a>
+                <a href="#mock-3-2">创建实体</a>
               </li>
               <li>
-                <a href="#mock-2-3">编辑实体数据</a>
+                <a href="#mock-3-3">编辑实体数据</a>
               </li>
             </ul>
           </li>
+          <li><a href="#mock-4">常用mock规则</a></li>
         </ul>
-        <h2 id="mock-1">集群相关</h2>
+        <h3 id="mock-1">集群相关</h2>
         <h4 id="mock-1-1">集群列表</h4>
         <p>进入
           <code>集群列表页</code>，点击右上角
@@ -115,64 +116,94 @@
         <p><img src="./img/cluster_edit.jpg" alt="mcok"></p>
         <p><code>注意:</code>创建集群时，集群模版参数必须添加，系统会默认一套作为接口返回的外层统一数据结构，可自行修改，其中选择的<code>generic</code>类型属性值是为了mock参数中将编辑的对象统一赋值</p>
 
-        <h3 id="mock-1-4">创建对象</h3>
-        <ul>
-          <li>进入接口详情页左侧有<code>创建对象</code>按钮</li>
-          <li>右侧展示对象内部具体的字段编辑列表</li>
-          <li>当展示对象的具体数据时，左侧上方面包屑上多一个<code>接口详情</code>的切换，点击回到展示接口详情数据</li>
-          <p><img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/object.png" alt="mcok"></p>
-        </ul>
-        <!-- <h4 id="mock-2-1">接口删除</h4>
-        <p>进入项目详情页时，若已有接口数据，默认展示第一个接口数据，左侧接口列表点击到当前接口时，接口名称右侧有删除的图标，点击该图标，删除相应的接口
-          <img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/jiekou.png" alt="接口操作">
-        </p> -->
-        <h2 id="mock-3">接口搜索</h2>
-        <p>列表页中，提供<code>接口所属集群名</code>,<code>接口所属项目</code>,<code>接口名称</code>三种搜索项
+        <h3 id="mock-2">接口相关</h2>
+        <h4 id="mock-2-1">接口列表</h4>
+        <p>进入
+          <code>接口列表页</code>，点击右上角
+          <code>新建接口</code>按钮，进入
+          <code>新建接口</code>页面
         </p>
-        <h4 id="-">如下图所示</h4>
-        <p>
-          <img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/list01.png" alt="mcok">
-        </p>
-        <h3 id="mock-2-2">接口数据编辑</h3>
-        <p>接口详情中的数据可编辑，无权限控制</p>
-        <h4 id="mock-2-2-1">接口相关信息</h4>
+        <p>列表页中，提供<code>接口所属集群名</code>,<code>接口所属项目</code>,<code>接口名称</code>三种搜索项</p>
+        <p><img src="./img/request_list.jpg" alt="mcok"></p>
+        <h4 id="mock-2-2">新建接口</h4>
+        <p>必填项：<code>所属集群</code>,<code>接口名称</code></p>
+        <p><img src="./img/request_new.jpg" alt="mcok"></p>
+        <h4 id="mock-2-3">接口编辑</h4>
+        <p id="mock-2-2-1">接口相关信息</p>
         <ul>
-          <li>接口的请求方式：
-            <code>get</code>
-            <code>post</code>
-          </li>
-          <li>接口的请求类型：
-            <code>ajax</code>
-            <code>jsonp</code>
-          </li>
-          <li>接口的回调函数：只有请求类型选择
-            <code>jsonp</code>的时候填写</li>
           <li>接口的请求路径：以
             <code>／</code>开头，不允许输入汉字</li>
-          <li>接口的所属集群：由RD提供接口所在的集群名</li>
+          <li>接口的所属集群：选择已创建好的集群</li>
           <li>接口的mock地址：接口的url及返回格式填写完成后，提供的一个在线模拟接口连接</li>
         </ul>
-        <h4 id="mock-2-2-2">接口请求参数</h4>
+
+        <li>接口信息</li>
+        <p><img src="./img/request_mes.jpg" alt="mcok"></p>
+        <li>参数编辑</li>
+        <p><code>注意:</code>参数编辑中不需要再编辑外层的code等参数，关联集群中已经定义过了，接口会通用关联集群下的接口返回模版，此时定义的返回参数会包装成对象形式赋给集群模版中类型为generic的属性</p>
+        <p id="mock-2-2-2">接口请求参数</p>
         <ul>
           <li>接口请求参数列表，用来记录参数的名称，类型，及相关备注字段，该请求参数列表可以为空</li>
-          <li>请求参数中若是定义为<code>object</code>类型，且名称和对象列表中对象，点击该对象名称可直接显示对象详情数据</li>
+          <li>请求参数中若是定义为<code>object</code>类型，需要提前定义需要关联的实体列表</li>
         </ul>
-        <h4 id="mock-2-2-3">接口响应数据</h4>
+        <p id="mock-2-2-3">接口响应数据</p>
         <ul>
-          <li>定义的接口返回的json格式及模拟数据，填写时必须按照正确的json格式输入，否则保存不成功，该接口格式在没有选择mock数据时，默认为mock接口返回的数据</li>
+          <li>响应参数列表中，涉及到对象结构，都需要提前定义实体，这主要是为了复用实体，参数中只需要关联相关实体即可</li>
         </ul>
-        <h4 id="mock-2-2-4">接口mock数据</h4>
-        <ul>
-          <li>接口的mock数据是接口响应数据的一种扩展，针对一种响应格式，可以定义多种不同的数据，选中的当前数据为模拟mock接口返回的响应数据，根据选择不同的数据来模拟不同场景的下的接口返回数据</li>
-          <li>若定义的mock数据，没有默认选中状态，则mock接口返回的是默认定义的响应数据</li>
-          <li>定义的mock数据在编辑状态下，提供可编辑，可删除功能</li>
-            <h4 id="-">如下图所示</h4>
-            <img src="https://static.daojia.com/assets/other/mock-platform/makdown-imgs/mock.png" alt="mcok">
-          </li>
-        </ul>
+        <p><img src="./img/request_edit.jpg" alt="mcok"></p>
+        <h4 id="mock-2-4">接口mock功能</h4>
+        <p>当接口信息中的路径增加后，并定义了返回参数，此时接口信息中的<code>mock链接</code>会提供模拟接口，返回接口中定义好的返回数据</p>
 
-        <h2 id="mock-4">接口mock功能</h2>
-        <p>当接口信息填写了路径，所属集群，响应json格式后，提供的模拟mock链接返回选中状态的mock数据或定义的json格式，前者优先作为返回数据</p>
+        <h3 id="mock-3">实体相关</h2>
+        <h4 id="mock-3-1">实体列表</h4>
+        <p><img src="./img/entity_list.jpg" alt="mcok"></p>
+        <p>进入
+          <code>实体列表页</code>，点击右上角
+          <code>新建实体</code>按钮，进入
+          <code>新建实体</code>页面
+        </p>
+        <h4 id="mock-3-2">新建实体</h4>
+        <p>选择实体所在的集群，输入实体名称，同一个集群下，名称不能重复</p>
+        <p><img src="./img/entity_new.jpg" alt="mcok"></p>
+        <h4 id="mock-3-3">实体编辑</h4>
+        <p>实体列表，点击<code>查看</code>进入实体详情页，可编辑相关参数</p>
+        <p><img src="./img/entity_detail.jpg" alt="mcok"></p>
+
+        <h4 id="mock-4">常用mock规则</h4>
+
+          <p>mock.js规则三部分组成：属性名／生成规则／属性值==> 'name|rule': value</P>
+            <p>生成规则的七种形式：</p>
+
+            <li>'name|min-max': value            范围为闭区间</li>
+            <li>'name|count': value</li>
+            <li>'name|min-max.dmin-dmax': value</li>
+            <li>'name|min-max.dcount': value</li>
+            <li>'name|count.dmin-dmax': value</li>
+            <li>'name|count.dcount': value</li>
+            <li>'name|+step': value</li>
+            <p>字符串String：</p>
+
+            <li>'name|min-max': string    重复string,长度处于min-max之间</li>
+            <li>'name|count': string      重复string,长度为count</li>
+            <p>数字Number：</p>
+
+            <li>'name|+1': number                  number自动+1</li>
+            <li>'name|min-max': number             随机生成处于min-max之间的整数</li>
+
+            <li>'name|min-max.dmin-dmax': number   浮点数生成范围，前面是整数部分，后面是小数部分</li>
+
+            <p>布尔Boolean:</p>
+            <li>'name|1': boolean         各自1/2的true或false</li>
+            <p>对象Object：</p>
+
+            <li>'name|count': object                 随机返回对象中的count个属性</li>
+            <li>'name|min-max': object            随机返回对象中的min-max个属性</li>
+            <p>数组Array：</p>
+
+            <li>'name|count': array                  重复array count次，生成一个新数组</li>
+            <li>'name|min-max': array             重复array ,生成一个长度min-max间的新数组</li>
+
+            <a href="https://github.com/nuysoft/Mock/wiki/Syntax-Specification">查看更多</a>
       </article>
 
     </section>

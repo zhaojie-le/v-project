@@ -73,7 +73,7 @@
               <!-- 关联对象 -->
                 <el-select
                   v-model="item.refEntityId"
-                  placeholder="关联对象"
+                  placeholder="关联实体"
                   filterable
                   size="mini"
                   style="width: 94%"

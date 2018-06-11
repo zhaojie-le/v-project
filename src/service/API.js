@@ -1,6 +1,6 @@
 
-// var hoss = 'http://localhost:3000'
-var hoss = 'http://mock-server.djtest.cn'
+var hoss = 'http://localhost:3000'
+// var hoss = 'http://mock-server.djtest.cn'
 
 module.exports = {
   // 页面初始信息
