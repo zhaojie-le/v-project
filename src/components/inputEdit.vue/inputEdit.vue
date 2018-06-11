@@ -10,10 +10,12 @@
     <el-col :span="1">
       <i class="el-icon-remove-outline" style="margin-left: 20px" @click="deleteClick(list, item, index)"></i>
     </el-col>
-    <el-col :span="1">
+    <!-- <el-col :span="1">
       <i class="el-icon-circle-plus-outline" style="margin-left: 20px" @click="addItem(list)"></i>
-    </el-col>
+    </el-col> -->
   </el-row>
+   <i class="el-icon-circle-plus-outline" style="margin-left: 20px" @click="addItem(list)"></i>
+
 </div>
 </template>
 <script>
@@ -57,7 +59,9 @@ export default {
       let obj = {}
       for (let i=0; i<arr.length; i++) {
         let item = arr[i]
-        obj[item.key] = item.val
+        if(item.key) {
+          obj[item.key] = item.val
+        }
       }
       str = JSON.stringify(obj)
       return str
@@ -78,6 +82,7 @@ export default {
     list: {
       handler: function () {
         let resStr = this.ArrayToObjStr(this.list)
+        console.log('strrrr', resStr)
         this.$emit('input', resStr)
       },
       deep: true

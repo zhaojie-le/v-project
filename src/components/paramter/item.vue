@@ -79,6 +79,7 @@
                   style="width: 94%"
                   :disabled="!edit"
                   v-if="objData && item.dataType === 'object'"
+                  @change="selectChange(item)"
                 >
                   <el-option
                     :key="item.id"
@@ -261,6 +262,9 @@ export default {
     addItemEvent (item, index) {
       item = Object.assign({},item, {refProperty: this.additem})
       this.$emit('changeItem', item, index)
+    },
+    selectChange(item) {
+      item.refEntity = {}
     }
   },
   components: {
