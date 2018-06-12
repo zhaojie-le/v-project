@@ -85,6 +85,7 @@
                     :key="item.id"
                     :label="item.name"
                     :value="item.id"
+                    :disabled="entityId === item.id"
                     v-for="item in objData.list">
                   </el-option>
                 </el-select>
@@ -125,6 +126,7 @@
 <script>
 
 import { Message } from 'element-ui'
+import { lstorage } from '../../utils/storage'
 import { mapActions, mapState } from 'vuex'
 import NewObjectDialog from '../newObjectDialog/index'
 import ObjItem from './objitem'
@@ -177,7 +179,8 @@ export default {
         }
       },
       showObjDialog: false,
-      nowCount: 0
+      nowCount: 0,
+      entityId: 0
     }
   },
   created () {
@@ -186,7 +189,7 @@ export default {
     if (this.count) {
       this.nowCount = this.count + 1
     }
-
+    this.entityId = lstorage.get('id') ? lstorage.get('id') : 0
   },
   computed: {
     ...mapState('list', [

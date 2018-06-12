@@ -34,7 +34,7 @@ export default {
   },
   created () {
     this.userName = lstorage.get('infoData') ? lstorage.get('infoData').userName : ''
-    this.url = API.DOCSPATH + '/docs/index.html'
+    this.url = window.location.origin + '/docs/index.html'
   },
   methods: {
     toGuide () {
@@ -52,6 +52,7 @@ export default {
   left: 0;
   top: 0;
   z-index: 1000;
-  margin-bottom: 60px;
+  padding-left: 10px;
+  // margin-bottom: 60px;
 }
 </style>

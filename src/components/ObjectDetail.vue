@@ -47,7 +47,7 @@ export default {
       }
       let callback = (data) => {
         if (data && data.code !== 0) {
-          this.$message.error(data.message)
+          Message.error(data.message)
         }
       }
       this.objectDetail({parame, callback})

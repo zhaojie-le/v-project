@@ -36,7 +36,5 @@ module.exports = {
   // 集群编辑
   EDITCLUSTER: hoss +'/cluster/update',
 
-  PATH: hoss,
-
-  DOCSPATH: 'http://mock.djtest.cn'
+  PATH: hoss
 }
