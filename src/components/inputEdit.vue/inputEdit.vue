@@ -86,7 +86,6 @@ export default {
     list: {
       handler: function () {
         let resStr = this.ArrayToObjStr(this.list)
-        console.log('strrrr', resStr)
         this.$emit('input', resStr)
       },
       deep: true
