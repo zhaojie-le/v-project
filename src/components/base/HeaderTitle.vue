@@ -4,18 +4,18 @@
       :default-active="page"
       class="el-menu-demo"
       mode="horizontal"
-      @select="handleSelect"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
         <el-menu-item index="ser"><router-link :to="'clulist'">集群列表页</router-link></el-menu-item>
         <el-menu-item index="list"><router-link :to="'list'">接口列表页</router-link></el-menu-item>
         <el-menu-item index="object"><router-link :to="'object'">实体列表页</router-link></el-menu-item>
-        <!-- <el-menu-item index="2"><a href="http://static.djtest.cn/assets/other/mock-platform/out/index03.html" target="_blank">使用文档</a></el-menu-item> -->
+        <el-menu-item index="2"><a :href="url" target="_blank">使用文档</a></el-menu-item>
     </el-menu>
   </el-header>
 </template>
 <script>
+import API from '../../service/API'
 import { lstorage } from '../../utils/storage'
 export default {
   props: {
@@ -28,23 +28,17 @@ export default {
   },
   data () {
     return {
-      userName: ''
+      userName: '',
+      url:''
     }
   },
   created () {
     this.userName = lstorage.get('infoData') ? lstorage.get('infoData').userName : ''
+    this.url = API.DOCSPATH + '/docs/index.html'
   },
   methods: {
-    backLogin () {
-      window.location.href = '/loginout'
-    },
     toGuide () {
       window.location.href = 'https://static.daojia.com/assets/other/mock-platform/out/index02.html'
-    },
-    handleSelect (key, keyPath) {
-      if (key === '3') {
-        this.backLogin()
-      }
     }
   },
   components: {
