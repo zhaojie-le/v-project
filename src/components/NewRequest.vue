@@ -28,7 +28,7 @@
         <el-input v-model="form.projectName" placeholder="选填项"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit('form')" style="width: 420px">下一步</el-button>
+        <el-button type="primary" @click="onSubmit('form')" style="width: 410px">下一步</el-button>
       </el-form-item>
     </el-form>
   </el-main>
