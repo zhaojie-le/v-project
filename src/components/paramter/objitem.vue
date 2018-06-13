@@ -37,6 +37,8 @@
             :label="item.name"
             :value="item.id"
             v-for="item in objData.list">
+            <span style="float: left">{{ item.name }}</span>
+            <span style="float: right; color: #8492a6; font-size: 13px">{{ item.clusterName }}</span>
           </el-option>
         </el-select>
         <el-tooltip effect="dark" content="新建对象" placement="bottom-start" v-show="item.dataType === 'object' && edit" >

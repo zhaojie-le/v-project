@@ -3,8 +3,8 @@
   <div class="content-box">
     <!-- 接口头部信息展示 -->
     <template>
-      <el-button type="primary" size="medium" style="float: right" v-if="!edit" @click="editEvent">编辑</el-button>
-      <el-button type="success" size="medium" style="float: right" v-if="edit" @click="saveEvent">保存</el-button>
+      <el-button type="primary" size="medium" class="btn" v-if="!edit" @click="editEvent">编辑</el-button>
+      <el-button type="success" size="medium" class="btn" v-if="edit" @click="saveEvent">保存</el-button>
       <r-message
         :edit="edit"
         :request-mes="requestMes"
@@ -136,6 +136,9 @@ export default {
     font-size: 13px;
     color: #525a66;
   }
-
+  .btn{
+    float: right;
+    margin-right: 18px;
+  }
 </style>
 
