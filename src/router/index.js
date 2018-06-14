@@ -8,6 +8,7 @@ import New from '@/components/NewRequest'
 import NewObject from '@/components/NewObject'
 import NewCluster from '@/components/NewCluster'
 import ClusterList from '@/components/ClusterList'
+import RequestAll from '@/components/RequestAll'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ const router = new Router({
       path: '/clulist',
       name: 'clulist',
       component: ClusterList
+    },
+    {
+      path: '/reqall',
+      name: 'reqall',
+      component: RequestAll
     },
     {
       path: '*',

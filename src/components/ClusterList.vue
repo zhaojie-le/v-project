@@ -39,8 +39,9 @@
         prop=""
         label="操作">
         <template slot-scope="scope">
-          <el-button @click="handleCurrentChange(scope.row)" type="text" size="small">查看</el-button>
-          <!-- <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button> -->
+          <el-button @click="clusterClick(scope.row)" type="text" size="small">集群</el-button>
+          <el-button @click="requestClick(scope.row)" type="text" size="small">接口</el-button>
+          <el-button @click="entityClick(scope.row)" type="text" size="small">实体</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -71,12 +72,14 @@ export default {
       }
       this.getClusterList({parame, callback})
     },
-    toDetail (item) {
-      // 跳转编辑集群页面
+    clusterClick (item) {
       this.$router.push({name: 'cluster', params: { id: item.id,from:'list' }})
     },
-    handleCurrentChange (val) {
-      this.toDetail(val)
+    requestClick (item) {
+      this.$router.push({name: 'reqall', params: { id: item.id,from:'list' }})
+    },
+    entityClick (item) {
+
     }
   }
 }
