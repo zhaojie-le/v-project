@@ -50,6 +50,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { lstorage } from '../utils/storage'
 export default {
   data () {
     return {
@@ -73,13 +74,16 @@ export default {
       this.getClusterList({parame, callback})
     },
     clusterClick (item) {
+      lstorage.set('clusterId', item.id)
       this.$router.push({name: 'cluster', params: { id: item.id,from:'list' }})
     },
     requestClick (item) {
+      lstorage.set('clusterId', item.id)
       this.$router.push({name: 'reqall', params: { id: item.id,from:'list' }})
     },
     entityClick (item) {
-
+      lstorage.set('clusterId', item.id)
+      this.$router.push({name: 'entall', params: { id: item.id,from:'list' }})
     }
   }
 }

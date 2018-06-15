@@ -2,13 +2,13 @@
   <el-main>
     <el-container>
       <el-aside width="250px" style="border-right: 1px solid rgb(241, 245, 247);">
-        <el-button size="small" type="primary" @click="NewClick">新建接口</el-button>
+        <el-button size="small" type="primary" @click="NewClick">新建实体</el-button>
         <el-row :gutter="20" style="line-height: 32px;margin-top: 20px;">
           <el-col :span="17">
             <el-input
               size="mini"
-              placeholder="接口名称"
-              v-model="requestName">
+              placeholder="实体名称"
+              v-model="name">
             </el-input>
           </el-col>
           <el-col :span="2">
@@ -23,20 +23,20 @@
           <li
             :class="{select: inx === index}"
             :key="index"
-            v-for="(item, index) in requestList"
+            v-for="(item, index) in objData"
             @click="changeReuqest(item,index)"
           >{{item.name}}</li>
         </ul>
-        <ul v-show="!requestList">没有数据</ul>
+        <ul v-show="!objData">没有数据</ul>
       </el-aside>
       <el-main style="padding: 0 20px">
         <!-- 接口详情模块 -->
-        <request-content :requestid="parseInt(id)"></request-content>
+        <entity-content :object-data="objectData"></entity-content>
       </el-main>
     </el-container>
     <dialog-new
       :id="id"
-      :genre="'request'"
+      :genre="'entity'"
       :show="newDialogShow"
       v-if="newDialogShow"
       @closed="closeDialog"
@@ -48,45 +48,46 @@ import { Message } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../utils/storage'
 import DialogNew from './requestDetail/dialogNew'
-import RequestContent from '../components/requestDetail/index'
+import EntityContent from '../components/objectDetail/index'
 export default {
   data () {
     return {
-      clusterId: 0,             // 集群id
-      requestName: '',
+      id: 0,             // 集群id
+      name: '',
       inx: 0,
       newDialogShow: false
     }
   },
   created () {
     this.id = this.$route.params.id || lstorage.get('id')
-    this.clusterId = lstorage.get('clusterId') || this.$route.params.id
     // this.getRequestDetail(this.id)
+    lstorage.set('id', this.id)
     this.getList()
   },
   computed: {
     ...mapState('list', [
-      'requestList'           // 项目列表
+      'objData'               // 列表
     ]),
     ...mapState('detail', [
-      'requestid'             // 接口id
+      'objectData'               // 列表
     ])
+
   },
   methods: {
     ...mapActions('list', [
-      'getRequestList'
+      'objectList'
     ]),
     ...mapActions('detail', [
-      'getRequest'             // 获取接口信息
+      'objectDetail'             // 获取接口信息
     ]),
     ...mapActions('create', [
-      'newRequest'
+      'newObject'
     ]),
     /**
-     * 获取接口详情数据
+     * 获取详情数据
      * @param {number} id
      */
-    getRequestDetail (id) {
+    getDetail (id) {
       let parame = {
         id: id,
         number: new Date()
@@ -99,12 +100,12 @@ export default {
           }
         }
       }
-      this.getRequest({parame, callback})
+      this.objectDetail({parame, callback})
     },
     getList () {
       let parame = {
-        name: this.requestName,
-        clusterId: this.clusterId
+        name: this.name,
+        clusterId: this.id
       }
       let callback = (data) => {
         if (data.code !== 0) {
@@ -114,21 +115,35 @@ export default {
           if (list.length > 0){
             this.inx = 0
             let item = list[0]
-            this.getRequestDetail(item.id)
+            this.getDetail(item.id)
           }
         }
       }
-      this.getRequestList({parame, callback})
+      this.objectList({parame, callback})
     },
-    changeReuqest(item,index){
+    submitNewAjax () {
+      let parame = this.form
+      let callback = (data) => {
+        if (data) {
+          if (data.code === 0) {
+            let id = data.data.id
+            this.$router.push({name: 'detail', params: { id: id }})
+          } else {
+            Message.warning(data.message)
+          }
+        }
+      }
+      this.newRequest({parame, callback})
+    },
+    changeReuqest (item,index) {
       this.inx = index
-      this.getRequestDetail(item.id)
+      this.getDetail(item.id)
     },
     searchEvent () {
       this.getList()
     },
     emptyEvent () {
-      this.requestName = ''
+      this.name = ''
       this.getList()
     },
     NewClick () {
@@ -142,7 +157,7 @@ export default {
   },
   components: {
     DialogNew,
-    RequestContent
+    EntityContent
   }
 }
 </script>

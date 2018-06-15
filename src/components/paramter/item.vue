@@ -182,7 +182,8 @@ export default {
       },
       showObjDialog: false,
       nowCount: 0,
-      entityId: 0
+      entityId: 0,
+      clusterId: 0
     }
   },
   created () {
@@ -239,8 +240,7 @@ export default {
     // 获取对象列表
     getObject () {
       let parame = {
-        page: 1,
-        pageSize: 20
+        clusterId: lstorage.get('clusterId')
       }
       let callback = (data) => {
         if (data.code !==0){
