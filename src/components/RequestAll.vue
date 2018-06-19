@@ -1,9 +1,9 @@
 <template>
-  <el-main>
+  <el-main style="min-height: 800px">
     <el-container>
-      <el-aside width="250px" style="border-right: 1px solid rgb(241, 245, 247);">
+      <el-aside width="250px" class="aside">
         <el-button size="small" type="primary" @click="NewClick">新建接口</el-button>
-        <el-row :gutter="20" style="line-height: 32px;margin-top: 20px;">
+        <el-row :gutter="20" style="line-height: 32px;margin-top: 20px;" v-show="requestList&&requestList.length > 0">
           <el-col :span="17">
             <el-input
               size="mini"
@@ -25,13 +25,16 @@
             :key="index"
             v-for="(item, index) in requestList"
             @click="changeReuqest(item,index)"
-          >{{item.name}}</li>
+          >
+            <i class="el-icon-delete" style="margin-right: 10px" @click="handleDeleteClick(item)"></i>
+            {{item.name}}
+          </li>
         </ul>
-        <ul v-show="!requestList">没有数据</ul>
       </el-aside>
       <el-main style="padding: 0 20px">
         <!-- 接口详情模块 -->
-        <request-content :requestid="parseInt(id)"></request-content>
+        <img class="nodata" v-show="requestList&&requestList.length === 0"  src="../../static/imgs/zanwushuju.png"/>
+        <request-content :requestid="parseInt(id)" v-show="requestList&&requestList.length > 0"></request-content>
       </el-main>
     </el-container>
     <dialog-new
@@ -44,7 +47,7 @@
   </el-main>
 </template>
 <script>
-import { Message } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../utils/storage'
 import DialogNew from './requestDetail/dialogNew'
@@ -77,7 +80,8 @@ export default {
       'getRequestList'
     ]),
     ...mapActions('detail', [
-      'getRequest'             // 获取接口信息
+      'getRequest',             // 获取接口信息
+      'deleteRequest'
     ]),
     ...mapActions('create', [
       'newRequest'
@@ -138,6 +142,36 @@ export default {
     closeDialog () {
       this.newDialogShow = false
       this.getList()
+    },
+    // 删除
+    handleDeleteClick (item) {
+      this.openMessage(item.id)
+    },
+    // 删除接口请求
+    deleteEvent (id) {
+      let parame = {
+        id: id
+      }
+      let callback = (data) => {
+        if (data.code !== 0) {
+          Message.warning(data.msg)
+        } else {
+          // 重新请求列表数据
+          this.getList()
+        }
+      }
+      this.deleteRequest({parame, callback})
+    },
+    openMessage (id) {
+      MessageBox.confirm('此操作将永久删除该接口, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 删除接口
+        this.deleteEvent(id)
+      }).catch(() => {
+      })
     }
   },
   components: {
@@ -153,6 +187,9 @@ export default {
   li{
     cursor:pointer;
     line-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .select{
     color: #409EFF
@@ -160,5 +197,14 @@ export default {
 }
 .icon{
   cursor:pointer;
+}
+.aside{
+  border-right: 1px solid rgb(241, 245, 247);
+  overflow: hidden;
+}
+.nodata{
+  display: block;
+  width: 200px;
+  margin: 0 auto;
 }
 </style>

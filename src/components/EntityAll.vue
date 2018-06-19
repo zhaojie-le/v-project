@@ -3,7 +3,7 @@
     <el-container>
       <el-aside width="250px" style="border-right: 1px solid rgb(241, 245, 247);">
         <el-button size="small" type="primary" @click="NewClick">新建实体</el-button>
-        <el-row :gutter="20" style="line-height: 32px;margin-top: 20px;">
+        <el-row :gutter="20" style="line-height: 32px;margin-top: 20px;" v-show="objData&&objData.length > 0">
           <el-col :span="17">
             <el-input
               size="mini"
@@ -25,13 +25,16 @@
             :key="index"
             v-for="(item, index) in objData"
             @click="changeReuqest(item,index)"
-          >{{item.name}}</li>
+          >
+            <i class="el-icon-delete" style="margin-right: 10px" @click="handleDeleteClick(item)"></i>
+            {{item.name}}
+          </li>
         </ul>
-        <ul v-show="!objData">没有数据</ul>
       </el-aside>
       <el-main style="padding: 0 20px">
+        <img class="nodata" v-show="objData&&objData.length === 0"  src="../../static/imgs/zanwushuju.png"/>
         <!-- 接口详情模块 -->
-        <entity-content :object-data="objectData"></entity-content>
+        <entity-content :object-data="objectData" v-show="objData&&objData.length > 0"></entity-content>
       </el-main>
     </el-container>
     <dialog-new
@@ -44,7 +47,7 @@
   </el-main>
 </template>
 <script>
-import { Message } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../utils/storage'
 import DialogNew from './requestDetail/dialogNew'
@@ -78,7 +81,8 @@ export default {
       'objectList'
     ]),
     ...mapActions('detail', [
-      'objectDetail'             // 获取接口信息
+      'objectDetail',            // 获取接口信息
+      'deleteObject'
     ]),
     ...mapActions('create', [
       'newObject'
@@ -153,6 +157,35 @@ export default {
     closeDialog () {
       this.newDialogShow = false
       this.getList()
+    },
+    // 删除
+    handleDeleteClick (item) {
+      this.openMessage(item.id)
+    },
+    deleteEvent (id) {
+      let parame = {
+        id: id
+      }
+      let callback = (data) => {
+        if (data.code !== 0) {
+          Message.warning(data.msg)
+        } else {
+          // 重新请求
+          this.getList()
+        }
+      }
+      this.deleteObject({parame, callback})
+    },
+    openMessage (id) {
+      MessageBox.confirm('此操作将永久删除该实体, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 删除接口
+        this.deleteEvent(id)
+      }).catch(() => {
+      })
     }
   },
   components: {
@@ -168,6 +201,9 @@ export default {
   li{
     cursor:pointer;
     line-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .select{
     color: #409EFF
@@ -175,5 +211,14 @@ export default {
 }
 .icon{
   cursor:pointer;
+}
+.aside{
+  border-right: 1px solid rgb(241, 245, 247);
+  overflow: hidden;
+}
+.nodata{
+  display: block;
+  width: 200px;
+  margin: 0 auto;
 }
 </style>

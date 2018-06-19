@@ -18,6 +18,7 @@ export default {
   },
   objectListInfo (state, val) {
     state.objData = val.data.list
+    console.log('objData', state.objData)
   },
   // 获取集群列表
   clusterList (state, val) {
