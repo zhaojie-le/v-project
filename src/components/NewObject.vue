@@ -93,7 +93,7 @@ export default {
             let id = data.data.id
             this.$router.push({name: 'objdel', params: { id: id }})
           } else {
-            Message.warning(data.msg)
+            Message.warning(data.message)
           }
         }
       }
