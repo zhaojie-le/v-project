@@ -33,12 +33,12 @@ export default {
     }
   },
   created () {
-    this.userName = lstorage.get('infoData') ? lstorage.get('infoData').userName : ''
-    this.url = window.location.origin + '/docs/index.html'
+    // this.userName = lstorage.get('infoData') ? lstorage.get('infoData').userName : ''
+    this.url = 'https://static.daojia.com/assets/other/mock-platform/dist/docs/index.html'
   },
   methods: {
     toGuide () {
-      window.location.href = 'https://static.daojia.com/assets/other/mock-platform/out/index02.html'
+      window.location.href = 'https://static.daojia.com/assets/other/mock-platform/dist/docs/index.html'
     }
   },
   components: {
