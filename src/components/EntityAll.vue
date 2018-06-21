@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <el-main style="min-height: 800px">
     <el-container>
       <el-aside width="250px" style="border-right: 1px solid rgb(241, 245, 247);">
         <el-button size="small" type="primary" @click="NewClick">新建实体</el-button>
