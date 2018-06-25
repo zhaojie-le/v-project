@@ -112,7 +112,7 @@
           </el-row>
         </div>
         <!-- 复杂类型 -->
-        <template v-if="item.refEntity && !edit">
+        <template v-if="item.dataType !== 'array'&&item.refEntity && !edit">
           <items :list="item.refEntity.propertyList" :is-item="true" v-if="item.refEntity.propertyList" :count="nowCount"></items>
         </template>
         <!-- 简单类型 -->

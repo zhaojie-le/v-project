@@ -3,7 +3,7 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">MOCK平台</el-breadcrumb-item>
       <el-breadcrumb-item>列表页</el-breadcrumb-item>
-      <el-button type="primary" size="small" style="float: right"><router-link :to="'new'">新建接口</router-link></el-button>
+      <el-button type="primary" size="small" style="float: right" @click="newClick">新建接口</el-button>
     </el-breadcrumb>
     <search :list="clusterList" v-if="clusterList"></search>
     <list></list>
@@ -40,6 +40,9 @@ export default {
         }
       }
       this.getClusterList({parame, callback})
+    },
+    newClick () {
+      this.$router.push({name: 'new'})
     }
   },
   components: {

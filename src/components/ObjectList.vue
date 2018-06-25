@@ -3,7 +3,8 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">MOCK平台</el-breadcrumb-item>
       <el-breadcrumb-item>实体列表页</el-breadcrumb-item>
-      <el-button type="primary" size="small" style="float: right"><router-link :to="'newobject'">新建实体</router-link></el-button>
+      <!-- <el-button type="primary" size="small" style="float: right"><router-link :to="'newobject'">新建实体</router-link></el-button> -->
+      <el-button type="primary" size="small" style="float: right" @click="newClick">新建实体</el-button>
     </el-breadcrumb>
     <search :list="clusterList" v-if="clusterList"></search>
     <object-list></object-list>
@@ -47,6 +48,9 @@ export default {
         }
       }
       this.objectList({parame, callback})
+    },
+    newClick () {
+      this.$router.push({name: 'newobject'})
     }
   },
   components: {
