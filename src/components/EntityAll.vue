@@ -1,6 +1,10 @@
 <template>
   <el-main style="min-height: 800px">
-    <el-container>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">MOCK平台</el-breadcrumb-item>
+      <el-breadcrumb-item>实体列表详情页</el-breadcrumb-item>
+    </el-breadcrumb>
+    <el-container style="margin-top: 20px">
       <el-aside width="250px" style="border-right: 1px solid rgb(241, 245, 247);">
         <el-button size="small" type="primary" @click="NewClick">新建实体</el-button>
         <el-row :gutter="20" style="line-height: 32px;margin-top: 20px;" v-show="objData&&objData.length > 0">
