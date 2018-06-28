@@ -32,6 +32,7 @@
           v-if="objectData.propertyList"
           v-model="objectData.propertyList"
         ></arguments>
+        <p style="color: red" class="tip">注意：实体关联时，自身参数不能关联自身; 多个实体，不能形成闭环关联，如A中参数关联B，B中参数又关联A</p>
       </div>
     </div>
   </div>
@@ -121,6 +122,12 @@ export default {
       line-height: 40px;
       font-weight: bold;
       margin-bottom: 10px;
+    }
+    .tip {
+      color: red;
+      font-size: 12px;
+      font-weight: 100;
+      margin-left: 20px;
     }
   }
   .btn{
