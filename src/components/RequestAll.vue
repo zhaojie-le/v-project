@@ -37,7 +37,7 @@
       </el-aside>
       <el-main style="padding: 0 20px">
         <!-- 接口详情模块 -->
-        <img class="nodata" v-show="requestList&&requestList.length === 0"  src="../../static/imgs/zanwushuju.png"/>
+        <img class="nodata" v-show="requestList&&requestList.length === 0"  src="http://static.daojia.com/assets/other/mock-platform/imgs/zanwushuju.png"/>
         <request-content :requestid="parseInt(id)" v-show="requestList&&requestList.length > 0"></request-content>
       </el-main>
     </el-container>

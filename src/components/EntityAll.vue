@@ -36,7 +36,7 @@
         </ul>
       </el-aside>
       <el-main style="padding: 0 20px">
-        <img class="nodata" v-show="objData&&objData.length === 0"  src="../../static/imgs/zanwushuju.png"/>
+        <img class="nodata" v-show="objData&&objData.length === 0"  src="http://static.daojia.com/assets/other/mock-platform/imgs/zanwushuju.png"/>
         <!-- 接口详情模块 -->
         <entity-content :object-data="objectData" v-show="objData&&objData.length > 0"></entity-content>
       </el-main>
