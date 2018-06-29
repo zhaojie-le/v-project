@@ -7,7 +7,7 @@
     <el-container style="margin-top: 20px;">
       <el-aside width="250px" class="aside">
         <el-button size="small" type="primary" @click="NewClick">新建接口</el-button>
-        <el-row :gutter="20" style="line-height: 32px;margin-top: 20px;" v-show="requestList&&requestList.length > 0">
+        <el-row :gutter="20" style="line-height: 32px;margin-top: 20px;">
           <el-col :span="17">
             <el-input
               size="mini"
