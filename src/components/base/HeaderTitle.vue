@@ -51,11 +51,8 @@ export default {
         this.$router.push({name: 'clulist'})
       }
       if (index === 1) {
-        window.open('http://mock.djtest.cn/docs/index.html')
+        window.open('http://static.daojia.com/assets/other/mock-platform/dist/docs/index.html')
       }
-    },
-    toGuide () {
-      window.location.href = 'https://static.daojia.com/assets/other/mock-platform/out/index02.html'
     }
   },
   components: {
