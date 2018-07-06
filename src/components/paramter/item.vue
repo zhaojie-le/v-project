@@ -165,7 +165,7 @@ export default {
     return {
       // type: type,
       additem: {
-        "dataType": "",
+        "dataType": "string",
         "dataTypeId": 0,
         "extra": "",
         "id": "",

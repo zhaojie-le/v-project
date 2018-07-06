@@ -19,7 +19,7 @@ export default {
       type: Array,
       default: function () {
         return [{
-          "dataType": "",
+          "dataType": "string",
           "dataTypeId": 0,
           "extra": "",
           "id": "",
@@ -88,7 +88,7 @@ export default {
     // 数组后增加一项
     addArray (arr) {
       let item = {
-        "dataType": "",
+        "dataType": "string",
         "dataTypeId": 0,
         "extra": "",
         "id": "",
