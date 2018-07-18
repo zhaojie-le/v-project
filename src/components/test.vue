@@ -9,14 +9,14 @@
   </div>
 </template>
 <script>
-// const socket = io('http://localhost:3000/',{
-//   path: '/test',
-//   reconnection:false,
-//   // autoConnect:false,
-//   forceNew: true
-// });
+const socket = io(API.PATH,{
+  path: '/test',
+  reconnection:false,
+  // autoConnect:false,
+  forceNew: true
+});
 import API from '../service/API'
-const socket = io(API.PATH);
+// const socket = io(API.PATH);
 export default {
   data () {
     return {
