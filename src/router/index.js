@@ -10,7 +10,7 @@ import NewCluster from '@/components/NewCluster'
 import ClusterList from '@/components/ClusterList'
 import RequestAll from '@/components/RequestAll'
 import EntityAll from '@/components/EntityAll'
-import TestCom from '@/components/Test'
+import TestCom from '@/components/test'
 
 Vue.use(Router)
 
