@@ -32,7 +32,6 @@
         <p class="title-head">接口说明</p>
         <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="3" style="width: 970px; margin-left: 31px;"></el-input>
       </div> -->
-      <test-request></test-request>
     </template>
   </div>
 </template>
@@ -44,7 +43,7 @@ import RMessage from './edit/message'
 import RParamter from './edit/paramter'
 import RResponse from './edit/response'
 import ArrChange from '../../utils/arrayChange'
-import TestRequest from './edit/testRequest'
+// import TestRequest from './edit/testRequest'
 export default {
   props: {
     requestid: {
@@ -122,8 +121,7 @@ export default {
   components: {
     RMessage,
     RParamter,
-    RResponse,
-    TestRequest
+    RResponse
   },
   watch: {
     requestMes: {

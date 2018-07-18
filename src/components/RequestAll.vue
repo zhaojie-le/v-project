@@ -56,6 +56,16 @@ import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../utils/storage'
 import DialogNew from './requestDetail/dialogNew'
 import RequestContent from '../components/requestDetail/index'
+
+// import io from 'socket.io-client';
+
+const socket = io('http://localhost:8080/',{
+  path: '/test',
+  reconnection:false,
+  // autoConnect:false,
+  forceNew: true
+});
+// var socket = io('http://localhost:8080');
 export default {
   data () {
     return {
@@ -68,8 +78,14 @@ export default {
   created () {
     this.id = this.$route.params.id || lstorage.get('id')
     this.clusterId = lstorage.get('clusterId') || this.$route.params.id
-    // this.getRequestDetail(this.id)
     this.getList()
+    // socket.on('msg', function (data){
+    //   console.log(data);
+    //   socket.emit('other', { my: 'data' }); // emit an event to the socket
+    // });
+    // socket.on('disconnect', () => {
+    //   socket.open();
+    // });
   },
   computed: {
     ...mapState('list', [
@@ -90,6 +106,13 @@ export default {
     ...mapActions('create', [
       'newRequest'
     ]),
+    socketFun (id) {
+      socket.on('open', function (id){
+        console.log('已连接')
+        socket.emit('msg', id); // emit an event to the socket
+        console.log(data)
+      });
+    },
     /**
      * 获取接口详情数据
      * @param {number} id
