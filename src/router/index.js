@@ -10,7 +10,6 @@ import NewCluster from '@/components/NewCluster'
 import ClusterList from '@/components/ClusterList'
 import RequestAll from '@/components/RequestAll'
 import EntityAll from '@/components/EntityAll'
-import TestCom from '@/components/test'
 
 Vue.use(Router)
 
@@ -67,18 +66,9 @@ const router = new Router({
       component: EntityAll
     },
     {
-      path: '/test',
-      name: 'test',
-      component: TestCom
-    },
-    {
       path: '*',
-      redirect: '/test'
+      redirect: '/clulist'
     }
-    // {
-    //   path: '*',
-    //   redirect: '/clulist'
-    // }
   ]
 })
 export default router

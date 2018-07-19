@@ -21,7 +21,7 @@ function arrayRefEntityToStr (arr) {
   function arrayRefEntityToNumber (arr) {
     if (!arr) return [];
     for(let i=0; i<arr.length; i++){
-    let item = arr[i]
+      let item = arr[i]
       if(item.dataType === 'object' && item.refEntityId === ''){
         item.refEntityId = 0
       }

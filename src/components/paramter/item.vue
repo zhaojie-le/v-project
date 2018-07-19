@@ -109,6 +109,17 @@
                 <i class="el-icon-circle-plus-outline" @click="addItemEvent(item,index)"></i>
               </el-tooltip>
             </el-col>
+            <!-- 必须选项 -->
+            <el-col :span="1" style="line-height: 28px">
+              <el-switch
+                v-model="item.required"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+                :width=27
+                active-value="1"
+                inactive-value="0">
+              </el-switch>
+            </el-col>
           </el-row>
         </div>
         <!-- 复杂类型 -->
@@ -165,18 +176,19 @@ export default {
     return {
       // type: type,
       additem: {
-        "dataType": "string",
-        "dataTypeId": 0,
-        "extra": "",
-        "id": "",
-        "identifier": "",
-        "refEntityId": '',
-        "refPropertyId": 0,
-        "remark": "",
-        "restriction": "",
-        "values": "",
-        "refProperty": {},
-        "refEntity": {
+        dataType: "string",
+        dataTypeId: 0,
+        extra: "",
+        id: "",
+        identifier: "",
+        refEntityId: '',
+        refPropertyId: 0,
+        remark: "",
+        restriction: "",
+        values: "",
+        required:1,
+        refProperty: {},
+        refEntity: {
           // "propertyList": []
         }
       },
