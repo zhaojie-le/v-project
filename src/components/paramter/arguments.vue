@@ -89,21 +89,22 @@ export default {
     },
     // 数组后增加一项
     addArray (arr) {
-      // let item = {
-      //   "dataType": "string",
-      //   "dataTypeId": 0,
-      //   "extra": "",
-      //   "id": "",
-      //   "identifier": "",
-      //   "refEntity": {},
-      //   "refEntityId": 0,
-      //   "refPropertyId": 0,
-      //   "refProperty": null,
-      //   "remark": "",
-      //   "restriction": "",
-      //   "values": ""
-      // }
-      let nowArr = arr.push(this.item)
+      let item = {
+        "dataType": "string",
+        "dataTypeId": 0,
+        "extra": "",
+        "id": "",
+        "identifier": "",
+        "refEntity": {},
+        "refEntityId": 0,
+        "refPropertyId": 0,
+        "refProperty": null,
+        "remark": "",
+        "restriction": "",
+        "values": "",
+        "required":'1'
+      }
+      let nowArr = arr.push(item)
       return nowArr
     },
     // 数组增加行
