@@ -161,39 +161,39 @@
         <li id="mock-3-1">页面左侧展示实体列表</li>
         <li id="mock-3-3">页面右侧展示实体详情信息，可编辑</li>
 
-        <h4 id="mock-4">常用mock规则</h4>
+        <h4 id="mock-4">平台字段mock规则</h4>
 
-          <p>mock.js规则三部分组成：属性名／生成规则／属性值==> 'name|rule': value</P>
+          <p>mock.js规则三部分组成：生成规则|默认值==> rule|value</P>
             <p>生成规则的七种形式：</p>
 
-            <li>'name|min-max': value            范围为闭区间</li>
-            <li>'name|count': value</li>
-            <li>'name|min-max.dmin-dmax': value</li>
-            <li>'name|min-max.dcount': value</li>
-            <li>'name|count.dmin-dmax': value</li>
-            <li>'name|count.dcount': value</li>
-            <li>'name|+step': value</li>
+            <li>'min-max|value'         范围为闭区间</li>
+            <li>'count|value' </li>
+            <li>'min-max.dmin-dmax|value'</li>
+            <li>'min-max.dcount|value'</li>
+            <li>'count.dmin-dmax|value'</li>
+            <li>'count.dcount'|value'</li>
+            <li>'+step'|value'</li>
             <p>字符串String：</p>
 
-            <li>'name|min-max': string    重复string,长度处于min-max之间</li>
-            <li>'name|count': string      重复string,长度为count</li>
+            <li>'min-max|value'           重复value,长度处于min-max之间</li>
+            <li>'count|value'             重复value,长度为count</li>
             <p>数字Number：</p>
 
-            <li>'name|+1': number                  number自动+1</li>
-            <li>'name|min-max': number             随机生成处于min-max之间的整数</li>
+            <li>'+1|value'                value自动+1</li>
+            <li>'min-max|value'           随机生成处于min-max之间的整数</li>
 
             <li>'name|min-max.dmin-dmax': number   浮点数生成范围，前面是整数部分，后面是小数部分</li>
 
             <p>布尔Boolean:</p>
-            <li>'name|1': boolean         各自1/2的true或false</li>
+            <li>'1': boolean              各自1/2的true或false</li>
             <p>对象Object：</p>
 
-            <li>'name|count': object                 随机返回对象中的count个属性</li>
-            <li>'name|min-max': object            随机返回对象中的min-max个属性</li>
+            <li>'count': object           随机返回对象中的count个属性</li>
+            <li>'min-max': object         随机返回对象中的min-max个属性</li>
             <p>数组Array：</p>
 
-            <li>'name|count': array                  重复array count次，生成一个新数组</li>
-            <li>'name|min-max': array             重复array ,生成一个长度min-max间的新数组</li>
+            <li>'count': array            重复array count次，生成一个新数组</li>
+            <li>'min-max': array          重复array ,生成一个长度min-max间的新数组</li>
 
             <a href="https://github.com/nuysoft/Mock/wiki/Syntax-Specification">查看更多</a>
       </article>
