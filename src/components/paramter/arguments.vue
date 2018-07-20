@@ -1,7 +1,7 @@
 <template>
   <div class="table-wrap">
     <el-row type="flex" justify="space-around" style="background: #f1f2f6">
-      <el-col :span="5" v-for="(item, index) in tableTitle" :key="index" :class="[index === 4 ? 'last':'']">
+      <el-col :span="5" v-for="(item, index) in tableTitle" :key="index" :class="[index === 4 ? 'last':'',index===4&&edit?'edit-last':'']">
         <p style="line-height: 35px; margin-left: 13px;margin-bottom: 5px" >{{item.title}}</p>
       </el-col>
     </el-row>
@@ -31,7 +31,7 @@ export default {
           remark: "",
           restriction: "",
           values: "",
-          required:1
+          required:'1'
         }]
       }
     },
@@ -60,7 +60,7 @@ export default {
         values: '',
         action: 0,
         extra: null,
-        required:1
+        required:'1'
       },
       nowCount: 1,
       tableTitle: tableTitle
@@ -169,7 +169,10 @@ export default {
     }
   }
   .last{
-    width: 59px;
+    width: 60px;
+  }
+  .edit-last{
+    width: 110px;
   }
 
 </style>

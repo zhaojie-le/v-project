@@ -38,11 +38,11 @@
                 <el-tooltip placement="top" v-if="edit">
                   <div slot="content" v-if="item.dataType === 'number'">
                     +1: 数值默认+1<br/>
-                    min-max: 生成一个min-max 间的整数<br/>
+                    min-max|value: 生成一个min-max 间的整数,value为默认值<br/>
                   </div>
                   <div slot="content" v-if="item.dataType === 'string'">
                     count: 重复count次字符串<br/>
-                    min-max: 重复min-max次字符串<br/>
+                    min-max|value: 重复min-max次字符串,value为默认值<br/>
                   </div>
                   <div slot="content" v-if="item.dataType === 'boolean'">
                     1: true,false各1/2的概率<br/>
@@ -55,7 +55,7 @@
                   <div slot="content"><a href="https://github.com/nuysoft/Mock/wiki/Syntax-Specification" style="color: #fff">更多mock规则</a></div>
                   <el-input
                     size="mini"
-                    placeholder="1-5"
+                    placeholder="1-3|value"
                     v-model="item.restriction"
                     v-if="item.dataType !== 'object'"
                     :disabled="!edit"
@@ -64,7 +64,7 @@
                 <div v-else>
                   <el-input
                     size="mini"
-                    placeholder="1-5"
+                    placeholder="1-3|value"
                     v-model="item.restriction"
                     v-if="item.dataType !== 'object'"
                     :disabled="!edit"
@@ -101,17 +101,10 @@
                 <el-input size="mini" placeholder="备注" v-model="item.remark" :disabled="!edit"></el-input>
               </div>
             </el-col>
-            <el-col :span="1" style="line-height: 28px" v-show="edit">
-              <!-- 删除节点 -->
-              <i class="el-icon-remove-outline" style="margin-right: 10px" @click="deleteClick(list, item, index)"></i>
-              <!-- 复杂数据增加子节点按钮 -->
-              <el-tooltip effect="dark" content="添加子节点" placement="bottom-start" v-show="item.dataType === 'array'" >
-                <i class="el-icon-circle-plus-outline" @click="addItemEvent(item,index)"></i>
-              </el-tooltip>
-            </el-col>
             <!-- 必须选项 -->
             <el-col :span="1" style="line-height: 28px">
               <el-switch
+                :disabled="!edit"
                 v-model="item.required"
                 active-color="#13ce66"
                 inactive-color="#ff4949"
@@ -120,6 +113,15 @@
                 inactive-value="0">
               </el-switch>
             </el-col>
+            <el-col :span="1" style="line-height: 28px" v-show="edit">
+              <!-- 删除节点 -->
+              <i class="el-icon-remove-outline" style="margin-right: 10px" @click="deleteClick(list, item, index)"></i>
+              <!-- 复杂数据增加子节点按钮 -->
+              <el-tooltip effect="dark" content="添加子节点" placement="bottom-start" v-show="item.dataType === 'array'" >
+                <i class="el-icon-circle-plus-outline" @click="addItemEvent(item,index)"></i>
+              </el-tooltip>
+            </el-col>
+
           </el-row>
         </div>
         <!-- 复杂类型 -->
@@ -186,7 +188,7 @@ export default {
         remark: "",
         restriction: "",
         values: "",
-        required:1,
+        required:'1',
         refProperty: {},
         refEntity: {
           // "propertyList": []

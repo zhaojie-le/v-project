@@ -29,13 +29,14 @@
         >
       </r-response>
       <!-- <div class="content-item">
-        <p class="title-head">接口说明</p>
-        <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="3" style="width: 970px; margin-left: 31px;"></el-input>
+        <p class="title-head">mock接口数据</p>
+        <div>{{mockResponse}}</div>
       </div> -->
     </template>
   </div>
 </template>
 <script>
+import API from '../../service/API'
 import { Message } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../../utils/storage'
@@ -43,6 +44,7 @@ import RMessage from './edit/message'
 import RParamter from './edit/paramter'
 import RResponse from './edit/response'
 import ArrChange from '../../utils/arrayChange'
+import formatJson from '../../utils/formatJson'
 // import TestRequest from './edit/testRequest'
 export default {
   props: {
@@ -62,7 +64,8 @@ export default {
       requestParameterList: null,
       responseParameterList: null,
       reqParamesTransform: null,
-      reqResponseTransform: null
+      reqResponseTransform: null,
+      mockResponse: null
     }
   },
   created () {
@@ -116,6 +119,20 @@ export default {
         }
       }
       this.editRequest({parame, callback})
+    },
+    getMock (){
+      let that = this
+      let url = API.PATH+'/api/mock/'+ this.requestMes.clusterId + this.requestMes.requestUrl
+      console.log('url',url)
+      this.$axios.get(url)
+        .then(function (response) {
+          console.log(response);
+          that.mockResponse = formatJson(JSON.stringify(response.data))
+          console.log('mockResponse',this.mockResponse)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   },
   components: {
