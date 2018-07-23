@@ -1,11 +1,11 @@
 <template>
   <!-- 接口详情 -->
-  <div class="content-box" v-if="objectData">
+  <div class="content-all">
+    <el-button type="primary" size="small" class="btn" v-if="!edit" @click="editEvent">实体编辑</el-button>
+    <el-button type="success" size="small" class="btn" v-if="edit" @click="saveEvent">实体保存</el-button>
+    <div class="content-box" v-if="objectData">
     <!-- 接口头部信息展示 -->
-    <!-- <template> -->
-      <el-button type="primary" size="medium" class="btn" v-if="!edit" @click="editEvent">编辑</el-button>
-      <el-button type="success" size="medium" class="btn" v-if="edit" @click="saveEvent">保存</el-button>
-      <el-form label-width="90px" size="mini" style="width: 800px;">
+      <el-form label-width="90px" size="mini" style="margin-right: 20px">
         <el-form-item label="实体名称">
           <el-input v-model="objectData.name" :disabled="!edit"></el-input>
         </el-form-item>
@@ -32,8 +32,9 @@
           v-if="objectData.propertyList"
           v-model="objectData.propertyList"
         ></arguments>
+        <p style="color: red" class="tip">注意：实体关联时，自身参数不能关联自身; 多个实体，不能形成闭环关联，如A中参数关联B，B中参数又关联A</p>
       </div>
-    <!-- </template> -->
+    </div>
   </div>
 </template>
 <script>
@@ -44,12 +45,6 @@ import Arguments from '../paramter/arguments'
 import ArrChange from '../../utils/arrayChange'
 export default {
   props: {
-    requestid: {
-      type: Number
-    },
-    isDetail: {
-      type: Number
-    }
     // objectData: {
     //   type: Object
     // }
@@ -57,7 +52,8 @@ export default {
   data () {
     return {
       edit: false,
-      clusterList: null
+      clusterList: null,
+      propertyList: null
     }
   },
   created () {
@@ -65,8 +61,7 @@ export default {
   },
   computed: {
     ...mapState('detail', [
-      'objectData',
-      'objectP'
+      'objectData'
     ])
   },
   methods: {
@@ -75,14 +70,14 @@ export default {
     ]),
     editObjectAjax () {
       let parame = this.objectData
-      parame.propertyList = ArrChange.arrayRefEntityToNumber(this.objectP)
+      parame.propertyList = ArrChange.arrayRefEntityToNumber(this.objectData.propertyList)
       let callback = (data) => {
         if (data.code === 0) {
           this.edit = !this.edit
           // success
           Message.success('保存成功')
           // 跳列表页
-          this.$router.push({name: 'object'})
+          // this.$router.push({name: 'object'})
         } else {
           Message.error(data.message)
         }
@@ -109,11 +104,16 @@ export default {
   }
 }
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
+  .content-all{
+    position: relative;
+    padding-top: 50px;
+  }
   .content-box{
     min-height: 600px;
     font-size: 13px;
     color: #525a66;
+    // margin-top: 50px
   }
   .table-box{
     padding-top: 30px;
@@ -123,10 +123,19 @@ export default {
       font-weight: bold;
       margin-bottom: 10px;
     }
+    .tip {
+      color: red;
+      font-size: 12px;
+      font-weight: 100;
+      margin-left: 20px;
+    }
   }
   .btn{
-    float: right;
+    // float: right;
     margin-right: 18px;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 </style>
 

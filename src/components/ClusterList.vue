@@ -3,7 +3,7 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">MOCK平台</el-breadcrumb-item>
       <el-breadcrumb-item>集群列表页</el-breadcrumb-item>
-      <!-- <el-button type="primary" size="small" style="float: right"><router-link :to="{ name: 'cluster', params: { from: 'new' }}">新建集群</router-link></el-button> -->
+      <!-- <el-button type="primary" size="small" style="float: right" @click="newClick"><router-link :to="{ name: 'cluster', params: { from: 'new' }}">新建集群</router-link></el-button> -->
       <el-button type="primary" size="small" style="float: right" @click="newClick">新建集群</el-button>
     </el-breadcrumb>
     <el-table
@@ -40,8 +40,9 @@
         prop=""
         label="操作">
         <template slot-scope="scope">
-          <el-button @click="handleCurrentChange(scope.row)" type="text" size="small">查看</el-button>
-          <!-- <el-button @click="handleDeleteClick(scope.row)" type="text" size="small">删除</el-button> -->
+          <el-button @click="clusterClick(scope.row)" type="text" size="small">集群</el-button>
+          <el-button @click="requestClick(scope.row)" type="text" size="small">接口</el-button>
+          <el-button @click="entityClick(scope.row)" type="text" size="small">实体</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -50,6 +51,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { lstorage } from '../utils/storage'
 export default {
   data () {
     return {
@@ -72,15 +74,20 @@ export default {
       }
       this.getClusterList({parame, callback})
     },
-    toDetail (item) {
-      // 跳转编辑集群页面
-      this.$router.push({name: 'cluster', params: { id: item.id,from:'list' }})
-    },
-    handleCurrentChange (val) {
-      this.toDetail(val)
-    },
     newClick () {
       this.$router.push({ name: 'cluster', params: { from: 'new' }})
+    },
+    clusterClick (item) {
+      lstorage.set('clusterId', item.id)
+      this.$router.push({name: 'cluster', params: { id: item.id,from:'list' }})
+    },
+    requestClick (item) {
+      lstorage.set('clusterId', item.id)
+      this.$router.push({name: 'reqall', params: { id: item.id,from:'list' }})
+    },
+    entityClick (item) {
+      lstorage.set('clusterId', item.id)
+      this.$router.push({name: 'entall', params: { id: item.id,from:'list' }})
     }
   }
 }

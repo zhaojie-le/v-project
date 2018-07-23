@@ -3,8 +3,8 @@
   <div class="content-box">
     <!-- 接口头部信息展示 -->
     <template>
-      <el-button type="primary" size="medium" class="btn" v-if="!edit" @click="editEvent">编辑</el-button>
-      <el-button type="success" size="medium" class="btn" v-if="edit" @click="saveEvent">保存</el-button>
+      <el-button type="primary" size="small" class="btn" v-if="!edit" @click="editEvent">接口编辑</el-button>
+      <el-button type="success" size="small" class="btn" v-if="edit" @click="saveEvent">接口保存</el-button>
       <r-message
         :edit="edit"
         :request-mes="requestMes"
@@ -16,26 +16,27 @@
       </r-message>
       <r-paramter
         :edit="edit"
-        :plist="reqParames"
+        :plist="reqParamesTransform"
         v-if="reqParames"
         v-model="requestParameterList"
         >
       </r-paramter>
       <r-response
         :edit="edit"
-        :rlist="reqResponse"
+        :rlist="reqResponseTransform"
         v-if="reqResponse"
         v-model="responseParameterList"
         >
       </r-response>
       <!-- <div class="content-item">
-        <p class="title-head">接口说明</p>
-        <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="3" style="width: 970px; margin-left: 31px;"></el-input>
+        <p class="title-head">mock接口数据</p>
+        <div>{{mockResponse}}</div>
       </div> -->
     </template>
   </div>
 </template>
 <script>
+import API from '../../service/API'
 import { Message } from 'element-ui'
 import { mapActions, mapState } from 'vuex'
 import { lstorage } from '../../utils/storage'
@@ -43,6 +44,8 @@ import RMessage from './edit/message'
 import RParamter from './edit/paramter'
 import RResponse from './edit/response'
 import ArrChange from '../../utils/arrayChange'
+import formatJson from '../../utils/formatJson'
+// import TestRequest from './edit/testRequest'
 export default {
   props: {
     requestid: {
@@ -60,17 +63,26 @@ export default {
       nowMes: this.requestMes,
       requestParameterList: null,
       responseParameterList: null,
-      reqParames: null,
-      reqResponse: null
+      reqParamesTransform: null,
+      reqResponseTransform: null,
+      mockResponse: null
     }
   },
   created () {
     this.clusterList = lstorage.get('clusterList') ? lstorage.get('clusterList') : null
     this.nowMes = this.requestMes
+    if(this.reqParames){
+      this.reqParamesTransform = ArrChange.arrayRefEntityToStr(this.reqParames)
+    }
+    if(this.reqResponse) {
+      this.reqResponseTransform = ArrChange.arrayRefEntityToStr(this.reqResponse)
+    }
   },
   computed: {
     ...mapState('detail', [
-      'requestMes'                   // 接口详情，请求方式等
+      'requestMes',                   // 接口详情，请求方式等
+      'reqParames',
+      'reqResponse'
     ]),
     changeRemark () {
       if (!this.requestMes.remark) {
@@ -103,10 +115,24 @@ export default {
           this.edit = !this.edit
           Message.success('保存成功')
           // 跳列表页
-          this.$router.push({name: 'list'})
+          // this.$router.push({name: 'list'})
         }
       }
       this.editRequest({parame, callback})
+    },
+    getMock (){
+      let that = this
+      let url = API.PATH+'/api/mock/'+ this.requestMes.clusterId + this.requestMes.requestUrl
+      console.log('url',url)
+      this.$axios.get(url)
+        .then(function (response) {
+          console.log(response);
+          that.mockResponse = formatJson(JSON.stringify(response.data))
+          console.log('mockResponse',this.mockResponse)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   },
   components: {
@@ -117,15 +143,23 @@ export default {
   watch: {
     requestMes: {
       handler: function (newVal, oldVal) {
-        // this.reqParames = this.requestMes.requestParameterList
-        // this.reqResponse = this.requestMes.responseParameterList
-
-        this.reqParames = ArrChange.arrayRefEntityToStr(this.requestMes.requestParameterList)
-        this.reqResponse = ArrChange.arrayRefEntityToStr(this.requestMes.responseParameterList)
+        // this.reqParames = ArrChange.arrayRefEntityToStr(this.requestMes.requestParameterList)
+        // this.reqResponse = ArrChange.arrayRefEntityToStr(this.requestMes.responseParameterList)
       },
       deep: true
     },
-
+    reqParames: {
+      handler: function () {
+        this.reqParamesTransform = ArrChange.arrayRefEntityToStr(this.reqParames)
+      },
+      deep: true
+    },
+    reqResponse: {
+      handler: function () {
+        this.reqResponseTransform = ArrChange.arrayRefEntityToStr(this.reqResponse)
+      },
+      deep: true
+    }
   }
 }
 </script>

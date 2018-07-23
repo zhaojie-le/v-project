@@ -41,6 +41,12 @@ export default {
         this.$emit('input', this.responseParameterList)
       },
       deep: true
+    },
+    rlist: {
+      handler: function () {
+        this.responseParameterList = this.rlist
+      },
+      deep: true
     }
   }
 }

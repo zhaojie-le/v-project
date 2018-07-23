@@ -17,7 +17,7 @@ export default {
     state.page = val
   },
   objectListInfo (state, val) {
-    state.objData = val.data
+    state.objData = val.data.list
   },
   // 获取集群列表
   clusterList (state, val) {

@@ -22,8 +22,10 @@ import {
   Select,
   Option,
   Dialog,
+  Switch,
   Submenu,
   Tooltip,
+  Checkbox,
   FormItem,
   MenuItem,
   Container,
@@ -47,11 +49,13 @@ Vue.use(Aside)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Dialog)
+Vue.use(Switch)
 Vue.use(Button)
 Vue.use(Header)
 Vue.use(Footer)
 Vue.use(Submenu)
 Vue.use(Tooltip)
+Vue.use(Checkbox)
 Vue.use(FormItem)
 Vue.use(MenuItem)
 Vue.use(Container)

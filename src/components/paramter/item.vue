@@ -38,11 +38,11 @@
                 <el-tooltip placement="top" v-if="edit">
                   <div slot="content" v-if="item.dataType === 'number'">
                     +1: 数值默认+1<br/>
-                    min-max: 生成一个min-max 间的整数<br/>
+                    min-max|value: 生成一个min-max 间的整数,value为默认值<br/>
                   </div>
                   <div slot="content" v-if="item.dataType === 'string'">
                     count: 重复count次字符串<br/>
-                    min-max: 重复min-max次字符串<br/>
+                    min-max|value: 重复min-max次字符串,value为默认值<br/>
                   </div>
                   <div slot="content" v-if="item.dataType === 'boolean'">
                     1: true,false各1/2的概率<br/>
@@ -55,7 +55,7 @@
                   <div slot="content"><a href="https://github.com/nuysoft/Mock/wiki/Syntax-Specification" style="color: #fff">更多mock规则</a></div>
                   <el-input
                     size="mini"
-                    placeholder="1-5"
+                    placeholder="1-3|value"
                     v-model="item.restriction"
                     v-if="item.dataType !== 'object'"
                     :disabled="!edit"
@@ -64,7 +64,7 @@
                 <div v-else>
                   <el-input
                     size="mini"
-                    placeholder="1-5"
+                    placeholder="1-3|value"
                     v-model="item.restriction"
                     v-if="item.dataType !== 'object'"
                     :disabled="!edit"
@@ -86,9 +86,9 @@
                     :label="item.name"
                     :value="item.id"
                     :disabled="entityId === item.id"
-                    v-for="item in objData.list">
+                    v-for="item in objData">
                     <span style="float: left">{{ item.name }}</span>
-                    <span style="float: right; color: #8492a6; font-size: 13px">{{ item.clusterName }}</span>
+                    <!-- <span style="float: right; color: #8492a6; font-size: 13px">{{ item.clusterName }}</span> -->
                   </el-option>
                 </el-select>
                 <el-tooltip effect="dark" content="新建对象" placement="bottom-start" v-show="item.dataType === 'object' && edit" >
@@ -101,6 +101,18 @@
                 <el-input size="mini" placeholder="备注" v-model="item.remark" :disabled="!edit"></el-input>
               </div>
             </el-col>
+            <!-- 必须选项 -->
+            <el-col :span="1" style="line-height: 28px">
+              <el-switch
+                :disabled="!edit"
+                v-model="item.required"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+                :width=27
+                active-value="1"
+                inactive-value="0">
+              </el-switch>
+            </el-col>
             <el-col :span="1" style="line-height: 28px" v-show="edit">
               <!-- 删除节点 -->
               <i class="el-icon-remove-outline" style="margin-right: 10px" @click="deleteClick(list, item, index)"></i>
@@ -109,6 +121,7 @@
                 <i class="el-icon-circle-plus-outline" @click="addItemEvent(item,index)"></i>
               </el-tooltip>
             </el-col>
+
           </el-row>
         </div>
         <!-- 复杂类型 -->
@@ -116,7 +129,7 @@
           <items :list="item.refEntity.propertyList" :is-item="true" v-if="item.refEntity.propertyList" :count="nowCount"></items>
         </template>
         <!-- 简单类型 -->
-        <template v-if="item.refProperty">
+        <template v-if="item.refProperty&&item.dataType === 'array'">
           <!-- <items :list="item.refProperty" :is-item="true" :edit="edit"></items> -->
           <obj-item :item="item.refProperty" :edit="edit&&item.dataType === 'array'" :count="nowCount+1"></obj-item>
         </template>
@@ -165,24 +178,26 @@ export default {
     return {
       // type: type,
       additem: {
-        "dataType": "",
-        "dataTypeId": 0,
-        "extra": "",
-        "id": "",
-        "identifier": "",
-        "refEntityId": '',
-        "refPropertyId": 0,
-        "remark": "",
-        "restriction": "",
-        "values": "",
-        "refProperty": {},
-        "refEntity": {
+        dataType: "string",
+        dataTypeId: 0,
+        extra: "",
+        id: "",
+        identifier: "",
+        refEntityId: '',
+        refPropertyId: 0,
+        remark: "",
+        restriction: "",
+        values: "",
+        required:'1',
+        refProperty: {},
+        refEntity: {
           // "propertyList": []
         }
       },
       showObjDialog: false,
       nowCount: 0,
-      entityId: 0
+      entityId: 0,
+      clusterId: 0
     }
   },
   created () {
@@ -239,8 +254,7 @@ export default {
     // 获取对象列表
     getObject () {
       let parame = {
-        page: 1,
-        pageSize: 20
+        clusterId: lstorage.get('clusterId')
       }
       let callback = (data) => {
         if (data.code !==0){

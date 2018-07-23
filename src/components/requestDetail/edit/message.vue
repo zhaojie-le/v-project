@@ -38,6 +38,9 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="测试域名">
+        <el-input v-model="requestMes.testHost" @change="limitRequestUrl" placeholder="http://static.djtest.cn" :disabled="!edit"></el-input>
+      </el-form-item>
       <el-form-item label="接口备注">
         <el-input v-model="requestMes.remark" :disabled="!edit" type="textarea" :rows="2"></el-input>
       </el-form-item>

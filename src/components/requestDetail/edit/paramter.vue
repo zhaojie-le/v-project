@@ -37,6 +37,12 @@ export default {
         this.$emit('input', this.requestParameterList)
       },
       deep: true
+    },
+    plist: {
+      handler: function () {
+        this.requestParameterList = this.plist
+      },
+      deep: true
     }
   }
 }

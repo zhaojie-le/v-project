@@ -1,6 +1,4 @@
-/**
- * Created by zhengzk on 2017/3/31.
- */
+
 function setFunc (name, value) {
   var exp = new Date()
   exp.setTime(exp.getTime() + 8 * 60 * 60 * 1000)

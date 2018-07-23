@@ -1,7 +1,7 @@
 <template>
   <div class="table-wrap">
     <el-row type="flex" justify="space-around" style="background: #f1f2f6">
-      <el-col :span="5" v-for="(item, index) in tableTitle" :key="index">
+      <el-col :span="5" v-for="(item, index) in tableTitle" :key="index" :class="[index === 4 ? 'last':'',index===4&&edit?'edit-last':'']">
         <p style="line-height: 35px; margin-left: 13px;margin-bottom: 5px" >{{item.title}}</p>
       </el-col>
     </el-row>
@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-var tableTitle = [{title: '变量名'},{title: '变量类型'},{title:'mock规则'},{title:'备注'}]
+var tableTitle = [{title: '变量名'},{title: '变量类型'},{title:'mock规则'},{title:'备注'},{title:'必选'}]
 import Items from './item'
 import { mapActions, mapState } from 'vuex'
 export default {
@@ -19,18 +19,19 @@ export default {
       type: Array,
       default: function () {
         return [{
-          "dataType": "",
-          "dataTypeId": 0,
-          "extra": "",
-          "id": "",
-          "identifier": "",
-          "refEntity": {},
-          "refEntityId": '',
-          "refPropertyId": 0,
-          "refProperty": {},
-          "remark": "",
-          "restriction": "",
-          "values": ""
+          dataType: "string",
+          dataTypeId: 0,
+          extra: "",
+          id: "",
+          identifier: "",
+          refEntity: {},
+          refEntityId: '',
+          refPropertyId: 0,
+          refProperty: {},
+          remark: "",
+          restriction: "",
+          values: "",
+          required:'1'
         }]
       }
     },
@@ -58,7 +59,8 @@ export default {
         refProperty: null,
         values: '',
         action: 0,
-        extra: null
+        extra: null,
+        required:'1'
       },
       nowCount: 1,
       tableTitle: tableTitle
@@ -88,7 +90,7 @@ export default {
     // 数组后增加一项
     addArray (arr) {
       let item = {
-        "dataType": "",
+        "dataType": "string",
         "dataTypeId": 0,
         "extra": "",
         "id": "",
@@ -99,7 +101,8 @@ export default {
         "refProperty": null,
         "remark": "",
         "restriction": "",
-        "values": ""
+        "values": "",
+        "required":'1'
       }
       let nowArr = arr.push(item)
       return nowArr
@@ -165,6 +168,12 @@ export default {
     &:last-child {
       padding-bottom: 10px;
     }
+  }
+  .last{
+    width: 60px;
+  }
+  .edit-last{
+    width: 110px;
   }
 
 </style>
