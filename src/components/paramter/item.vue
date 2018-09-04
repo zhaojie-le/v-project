@@ -20,6 +20,7 @@
                   filterable
                   size="mini"
                   style="width: 100%"
+                  @change="dataTypeSelectChange(item)"
                 >
                 <div>
                   <el-option
@@ -284,6 +285,10 @@ export default {
     },
     selectChange(item) {
       item.refEntity = {}
+    },
+    dataTypeSelectChange (item) {
+      item.refEntity = {}
+      item.refEntityId = 0
     }
   },
   components: {
