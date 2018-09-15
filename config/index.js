@@ -43,7 +43,6 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    // assetsPublicPath: 'http://static.daojia.com/assets/other/mock-platform/dist',  // 线上打包路径
     assetsPublicPath: '/',  // 测试环境
 
     /**
